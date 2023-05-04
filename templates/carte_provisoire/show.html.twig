@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Carte provisoire - {{ carteProvisoire.nom }} {% endblock %}
+{% block body %}
+    <div class="container mt-4">
+    <div class="card border-primary h-100 mb-3 " >
+        <div class="card-header d-flex align-items-center"><h1 class=""> Carte provisoire </h1></div>
+        <div class="card-body">
+            <h4 class="card-title">{% if carteProvisoire.civilite %}  {{ carteProvisoire.civilite }} {% endif %} {% if carteProvisoire.nom %}  {{ carteProvisoire.nom }} {% endif %} {% if carteProvisoire.prenom %}  {{ carteProvisoire.prenom }} {% endif %}</h4>
+            
+            <p class="mt-4"><strong class="h5"> Domiciliation :  </strong> {{carteProvisoire.numeroAdresse}} {{carteProvisoire.adresse}}</p>
+      
+        <p class="mt-4"><strong class="h5"> Immatriculation du véhicule :  </strong> {{carteProvisoire.immatriculation}}  </p>
+        
+        <p class="mt-4"><strong class="h5"> Pièces justificatives :  </strong>
+            {% if carteProvisoire.carteGrise == 1 %}
+                <p class="mt-4 ml-4"><strong class="h5"> -> Carte grise : </strong> document fourni </p>
+            {% else %}
+                <p class="mt-4 ml-4"><strong class="h5"> -> Carte grise : </strong> document non fourni </p>
+            {% endif %} 
+            {% if carteProvisoire.justificatifMoins3Mois == 1 %}
+                <p class="mt-4 ml-4"><strong class="h5"> -> Justificatif de moins de 3 mois :  </strong> document fourni </p>
+            {% else %}
+                <p class="mt-4 ml-4"><strong class="h5"> -> Justificatif de moins de 3 mois : </strong> document non fourni </p>
+            {% endif %}            
+        </p>
+
+
+        {% if carteProvisoire.commentaires %}
+            <p class="mt-4"><strong class="h5"> Commentaires :  </strong> {{carteProvisoire.commentaires}} </p>
+        {% else %}
+            <p class="mt-4"><strong class="h5"> Commentaires : </strong> Non renseigné </p>
+        {% endif %}
+
+        {% if carteProvisoire.delivreePar %}
+            <p class="mt-4"><strong class="h5"> Délivrée par : </strong> {{carteProvisoire.delivreePar}} </p>
+        {% else %}
+            <p class="mt-4"><strong class="h5"> Délivrée par : </strong> Non renseigné </p>
+        {% endif %}
+
+        {% if carteProvisoire.dateCreation %}
+            <p class="mt-4"><strong class="h5"> Date de création : </strong> {{carteProvisoire.dateCreation|date("d/m/Y")}} </p>
+        {% else %}
+            <p class="mt-4"><strong class="h5"> Date de création : </strong> Non renseigné </p>
+        {% endif %}
+        </div>
+    </div>
+    </div>
+{% endblock %}

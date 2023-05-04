@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Justificatifs Résidents{% endblock %}
+
+{% block body %}
+<div class="my-5 text-center">
+    <h1 class="mb-4">Carte Résident</h1>
+</div>
+
+<div class="d-flex align-items-center justify-content-center gap-5" style = "margin-top: 15%; overflow: hidden;">
+    <div>
+        <a href="#" class="btn fs-5 px-4 py-3" style="background: linear-gradient(to top, #e6b980 0%, #eacda3 100%); border: none">Renouvellement Résident</a>
+    </div>
+    <div>
+        <a href="{{path('app_register_resident')}}" class="btn fs-5 px-4 py-3" style="background: linear-gradient(to top, #e6b980 0%, #eacda3 100%); border: none">Nouveau Résident</a>
+    </div>
+    <div>
+        <a href="#" class="btn fs-5 px-4 py-3" style="background: linear-gradient(to top, #e6b980 0%, #eacda3 100%); border: none">Suivi de dossier</a>
+    </div>
+</div>
+{% endblock %}

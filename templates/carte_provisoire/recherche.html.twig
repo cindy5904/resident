@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if carte %}
+    <table class="table table-hover mt-4">
+    <thead class="h-100 w-100">
+        <tr class="h-100 text-center">
+        <th scope="col" class="text-capitalize text-warning h5">Numéro</th>
+        <th scope="col" class="text-capitalize text-warning h5">Civilité</th>
+        <th scope="col" class="text-capitalize text-warning h5">Nom</th>
+        <th scope="col" class="text-capitalize text-warning h5">Prénom</th>
+        <th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
+        <th scope="col" class="text-capitalize text-warning h5">modifier</th>
+        </tr>
+    </thead>
+    <tbody class="h-100">
+        <tr class="table-success h-100 text-center align-items-center">
+        <th scope="row">{{carte.id}}</th>
+        <td>{{carte.civilite}}</td>
+        <td>{{carte.nom}}</td>
+        <td>{{carte.prenom}}</td>
+        <td>
+            <a href="{{ path("carte_provisoire.show", { id: carte.id }) }}" class="btn btn-info rounded">Afficher détails</a>
+        </td>
+        <td>
+            <a href="{{ path("carte_provisoire.edit", { id: carte.id }) }}" class="btn btn-warning rounded">Modifier</a>
+        </td>
+        </tr>
+        </form>
+    {% else %}
+        <h1>Carte Provisoire non trouvée</h1>
+        <p>Aucune carte provisoire correspondant à ce nom n'a été trouvée.</p>
+        <form action="{{ path('carte_provisoire.new') }}">
+            <button type="submit">Ajouter une nouvelle carte</button>
+        </form>
+        <form action="{{ path('carte_provisoire.index') }}">
+            <button type="submit">Annuler</button>
+        </form>
+    {% endif %}
+{% endblock %}
