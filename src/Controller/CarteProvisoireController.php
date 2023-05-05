@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Entity\CarteProvisoire;
 use App\Form\CarteProvisoireType;
 use App\Repository\CarteProvisoireRepository;
+use Doctrine\DBAL\Query\QueryBuilder as QueryQueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Config\KnpPaginatorConfig;
 
@@ -19,6 +22,7 @@ class CarteProvisoireController extends AbstractController
         #[Route('/carte-provisoire', name: 'carte_provisoire.index', methods: ["GET"])]
         public function index(CarteProvisoireRepository $repository, Request $request, PaginatorInterface $paginator): Response
         {
+
             $carteProvisoires = $paginator->paginate(
                 $repository->findAll(),
                 $request->query->getInt('page', 1),
@@ -37,6 +41,25 @@ class CarteProvisoireController extends AbstractController
             return $this->render('carte_provisoire/justif.html.twig');
         }
 
+        // public function onKernelController(ControllerEvent $event)
+        // {
+        //     $request = $event->getRequest();
+        //     // Si la route correspond à celle de l'index des cartes provisoires
+        //     if ($request->attributes->get('_route') === 'carte_provisoire.index') {
+        //         $queryBuilder = $this->getDoctrine()->getRepository(CarteProvisoire::class)->createQueryBuilder('c');
+
+        //         // Récupération du filtre sur le nom (si présent)
+        //         $nomFilter = $request->query->get('nomFilter');
+        //         if ($nomFilter) {
+        //             $queryBuilder->andWhere('c.nom LIKE :nomFilter')
+        //                 ->setParameter('nomFilter', '%' . $nomFilter . '%');
+        //         }
+
+        //         // Mise à jour de la requête
+        //         $request->query->set('nomFilter', $nomFilter);
+        //         $request->attributes->set('doctrine.orm.query_builder', $queryBuilder);
+        //     }
+        // }
        
 
 
@@ -105,5 +128,23 @@ class CarteProvisoireController extends AbstractController
         return $this->render('carte_provisoire/show.html.twig', [
             'carteProvisoire' => $carteProvisoire,
         ]);
+    }
+
+    #[Route('/carte-provisoire/search', name: 'carte_provisoire_search')]
+    public function rechercheCarte(Request $request, EntityManagerInterface $manager)
+    {
+    $nom = $request->query->get('nom');
+
+    $carteProvisoire = $manager->getRepository(CarteProvisoire::class)->findOneBy(['nom' => $nom]);
+
+    if (!$carteProvisoire) {
+        
+        return $this->redirectToRoute('carte_provisoire.new');
+    }
+
+    
+    return $this->render('carte_provisoire/searchName.html.twig', [
+        'carte' => $carteProvisoire,
+    ]);
     }
 }

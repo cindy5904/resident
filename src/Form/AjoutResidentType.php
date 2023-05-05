@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Residents;
+use Doctrine\DBAL\Types\DateType as TypesDateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -48,23 +49,26 @@ class AjoutResidentType extends AbstractType
             ->add('demandeCourrier')
             ->add('demandeInternet')
             ->add('voiePostale')
-            ->add('dateDeMiseEnIncomplet', DateType::class, [
+            ->add('dateDeMiseEnIncomplet',DateType::class, [
                 'widget' => 'single_text',
                 'html5' => false,
+                'format' => 'dd/MM/yyyy',
             'attr' => ['class' => 'js-datepicker'],
-            'empty_data' => null,
+            
             ])
             ->add('dateDeCompletude', DateType::class, [
                 'widget' => 'single_text',
                 'html5' => false,
+                'format' => 'dd/MM/yyyy',
             'attr' => ['class' => 'js-datepicker'],
-            'empty_data' => null,
+            
             ])
             ->add('dateDeReponseAdministre', DateType::class, [
                 'widget' => 'single_text',
                 'html5' => false,
+                'format' => 'dd/MM/yyyy',
             'attr' => ['class' => 'js-datepicker'],
-            'empty_data' => null,
+            
             ])
             // ->add('numero_Dossier')
             // ->add('dateEnvoiCarte')

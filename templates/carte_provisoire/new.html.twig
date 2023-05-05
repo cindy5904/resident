@@ -3,13 +3,23 @@
 {% block title %} Carte provisoire n° {% endblock %}
 
 {% block body %}
-<h1>Ajouter une nouvelle carte provisoire</h1>
-    
-    <form method="get" action="{{ path('carte_provisoire_recherche') }}">
-        <label for="nom">Nom:</label>
-        <input type="text" id="nom" name="nom">
-        <button type="submit">Rechercher</button>
-    </form>
+<div class="d-flex justify-content-between">
+    <div>
+        <a href="{{ path('carte_provisoire.index')}}"><button class="mt-4 btn rounded-lg text-lowercase btn-cp" style=""> Retour à la liste des cartes provisoires</button></a>
+    </div>
+
+    <div class="text-end mr-5">
+    <p class="mt-4" style="font-family: 'Poppins', sans-serif; color: #DC9F69;">Rechercher si une carte provisoire a déjà été délivrée</p>
+    <div class="d-flex justify-content-end" style="padding: 0">
+        <form method="get" action="{{ path('carte_provisoire_recherche') }}">
+            {# <label for="nom">Nom:</label> #}
+            <input class="rounded px-4 py-1 block" style="border: 2px solid #F5F4F3" type="text" id="nom" name="nom" placeholder="Entrez un nom...">
+            <button type="submit" class="rounded px-4 py-1 block" style="border: none; background-image: linear-gradient(to right top, #b1aa96, #b8af9f, #beb5a8, #c3bbb1, #c8c1ba); color: white">Rechercher</button>
+        </form>
+    </div> 
+        
+    </div>
+</div>
 
 <div class="container">
     <h1 class="mt-4"> Créer une nouvelle carte provisoire</h1>

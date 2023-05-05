@@ -57,7 +57,7 @@ class Residents
     #[ORM\Column(type: 'date', nullable: true)]
     private ?\DateTimeInterface $dateDeMiseEnIncomplet = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: 'date', nullable: true)]
     private ?\DateTimeInterface $dateDeCompletude = null;
 
     #[ORM\Column(type: 'date', nullable: true)]
