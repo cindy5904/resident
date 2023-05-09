@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recherche immatriculation{% endblock %}
+{% block title %}Recherche numéro carte{% endblock %}
 
 {% block body %}
-<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('app_changement_vehicule') }}">
+<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('app_numero_carte') }}">
     <div class="form-group">
-        <input class="form-control" type="text" name="immatriculation" value="{{ immatriculation }}" placeholder="Rechercher par nom">
+        <input class="form-control" type="text" name="numeroCarte" value="{{ numeroCarte }}" placeholder="Rechercher un numéro de carte">
     </div>
     <button class="btn btn-info" type="submit">Rechercher</button>
 </form>
 {% for resident in residents %}
     {% if resident %}
-        <h4 class='text-center mt-3 mb-5'>Résultat trouvé pour "{{ immatriculation }}" :</h4>
+        <h4 class='text-center mt-3 mb-5'>Résultat trouvé pour "{{ numeroCarte }}" :</h4>
         <table class="table table-hover mt-4">
         <thead class="h-100 w-100">
             <tr class="h-100 text-center">
             <th scope="col" class="text-capitalize text-warning h5">Numéro</th>
-            <th scope="col" class="text-capitalize text-warning h5">Immatriculation</th>
+            <th scope="col" class="text-capitalize text-warning h5">Numéro de Carte</th>
             <th scope="col" class="text-capitalize text-warning h5">Nom</th>
             <th scope="col" class="text-capitalize text-warning h5">Prénom</th>
             <th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
@@ -26,7 +26,7 @@
         <tbody class="h-100">
                 <tr class="table-light h-100 text-center align-items-center">
                     <th scope="row" class="align-middle">{{ resident.id }}</th>
-                    <td class="align-middle">{{ resident.immatriculation }}</td>
+                    <td class="align-middle">{{ resident.numeroCarte }}</td>
                     <td class="align-middle">{{ resident.nom }}</td>
                     <td class="align-middle">{{ resident.prenom }}</td>
                     <td>
@@ -40,13 +40,11 @@
         </table>
     {% elseif resident %}
         <div class='text-center mt-5'>
-            <p>Aucune immatriculation trouvé pour "{{ immatriculation }}".</p>
+            <p>Aucune carte trouvé pour ce numéro "{{ numeroCarte }}".</p>
             <a href="{{path('app_home')}}" class="btn btn-info">Revenir à la page d'accueil</a>
         </div>
         
     {% endif %}    
 {% endfor %}
 {% endblock %}
-
-
 

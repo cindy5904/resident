@@ -27,8 +27,8 @@ class Residents
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $numeroAdresse = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $numeroAppartement = null;
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $numeroAppartement = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $marqueVehicule = null;
@@ -149,12 +149,12 @@ class Residents
         return $this;
     }
 
-    public function getNumeroAppartement(): ?int
+    public function getNumeroAppartement(): ?string
     {
         return $this->numeroAppartement;
     }
 
-    public function setNumeroAppartement(?int $numeroAppartement): self
+    public function setNumeroAppartement(?string $numeroAppartement): self
     {
         $this->numeroAppartement = $numeroAppartement;
 

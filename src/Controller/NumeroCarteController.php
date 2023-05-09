@@ -9,19 +9,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ChangementVehiculeController extends AbstractController
+class NumeroCarteController extends AbstractController
 {
-    #[Route('/changement/vehicule', name: 'app_changement_vehicule')]
+    #[Route('/numero/carte', name: 'app_numero_carte')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $immatriculation = $request->query->get('immatriculation');
+        $numeroCarte = $request->query->get('numeroCarte');
 
         $repository = $entityManager->getRepository(Residents::class);
-        $residents = $repository->findBy(['immatriculation' => $immatriculation]);
+        $residents = $repository->findBy(['numeroCarte' => $numeroCarte]);
 
 
-        return $this->render('changement_vehicule/index.html.twig', [
-            'immatriculation' => $immatriculation,
+        return $this->render('numero_carte/index.html.twig', [
+            'numeroCarte' => $numeroCarte,
             'residents' => $residents,
         ]);
     }

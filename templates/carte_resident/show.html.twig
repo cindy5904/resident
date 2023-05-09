@@ -1,0 +1,109 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Résident - {% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-end" >
+        <a href="{{ path('app_carte_resident')}}"><button class="mt-2 btn btn-outline-info rounded-pill"> Retour à la liste des résidents</button></a>
+    </div>
+    <div class="card border-primary h-100 mb-3 mt-4" >
+        <div class="card-header d-flex align-items-center"><h1 class=""> Résident </h1></div>
+        <div class="card-body">
+            <h4 class="card-title">
+            {% if resident.civilite %}  
+                {{ resident.civilite }} 
+            {% endif %}
+            {% if resident.nom %} 
+                {{ resident.nom }}
+            {% endif %}
+            {% if resident.prenom %}
+                {{ resident.prenom }}
+            {% endif %}
+            </h4>
+            <p class="mt-4"><strong class="h5"> Domiciliation :  </strong> {{resident.numeroAdresse}} {{resident.adresse}} 
+            {% if resident.numeroAppartement %}
+                {{resident.numeroAppartement}}
+            {% endif %}</p>
+      
+            <h2 class="text-primary">Véhicule</h2>
+            <p class="mt-4"><strong class="h5"> Marque du véhicule :  </strong> {{resident.marqueVehicule}}  </p>
+            <p class="mt-4"><strong class="h5"> Modèle :  </strong> {{resident.modele}}  </p>
+            <p class="mt-4"><strong class="h5"> Immatriculation du véhicule :  </strong> {{resident.immatriculation}}  </p>
+            <p class="mt-4"><strong class="h5"> Type de véhicule vert :  </strong>
+            {% if resident.vehiculeVert %}  
+                {{ resident.vehiculeVert }}
+            {% else %}
+                Non renseigné
+            {% endif %}  
+            </p>
+
+            <h2 class="text-primary">Paiement</h2>
+            <p class="mt-4"><strong class="h5"> Montant :  </strong> {{resident.montant}} € </p>
+            <p class="mt-4"><strong class="h5"> Moyen de paiment :  </strong> {{resident.modeReglement}}  </p>
+        
+            <h2 class="text-primary">Informations dossier</h2>
+            <p class="mt-4"><strong class="h5"> Numéro de dossier :  </strong>
+            {% if resident.numeroDossier %} 
+                {{resident.numeroDossier}}
+            {% else %}
+                Non renseigné
+            {% endif %}
+            </p>
+            <p class="mt-4"><strong class="h5"> Numéro de carte :  </strong> 
+            {% if resident.numeroCarte %} 
+                {{resident.numeroCarte}}
+            {% else %}
+                Non renseigné
+            {% endif %}
+            </p>
+
+            {% if resident.carteSupprimee %}
+                <p class="mt-4"><strong class="h5"> Carte supprimée n° :  </strong> {{resident.carteSupprimee}}  </p>
+            {% endif %}
+            {% if resident.changementVehicule %}
+                <p class="mt-4"><strong class="h5"> Immatriculation de l'ancien véhicule :  </strong> {{resident.changementVehicule}}  </p>
+            {% endif %}
+            {% if resident.commentaires %}
+                <p class="mt-4"><strong class="h5"> Commentaires :  </strong> {{resident.commentaires}} </p>
+            {% else %}
+                <p class="mt-4"><strong class="h5"> Commentaires : </strong> Non renseigné </p>
+            {% endif %}
+
+            {% if resident.delivreePar %}
+                <p class="mt-4"><strong class="h5"> Délivrée par : </strong> {{resident.delivreePar}} </p>
+            {% else %}
+                <p class="mt-4"><strong class="h5"> Délivrée par : </strong> Non renseigné </p>
+            {% endif %}
+            {% if resident.dateCreation %}
+                <p class="mt-4"><strong class="h5"> Date de création : </strong> {{resident.dateCreation|date("d/m/Y")}} </p>
+            {% else %}
+                <p class="mt-4"><strong class="h5"> Date de création : </strong> Non renseigné </p>
+            {% endif %}
+
+            <h2 class="text-primary">Suivi dossier</h2>
+            <p class="mt-4"><strong class="h5"> Dates d'évolutions du dossier :  </strong>
+                {% if resident.dateDeMiseEnIncomplet %}
+                    <p class="mt-4 ml-4"><strong class="h5"> -> Date de mise en incomplet :  </strong> {{resident.dateDeMiseEnIncomplet|date("d/m/Y")}} </p>
+                {% endif %}
+                {% if resident.dateDeCompletude %}
+                    <p class="mt-4 ml-4"><strong class="h5"> -> Date de complétude : </strong> {{resident.dateDeCompletude|date("d/m/Y")}} </p>
+                {% endif %}
+                {% if resident.dateDeReponseAdministre %}
+                    <p class="mt-4 ml-4"><strong class="h5"> -> Date de réponse à l'administré : </strong> {{resident.dateDeReponseAdministre|date("d/m/Y")}} </p>
+                {% endif %}
+                {% if resident.dateEnvoiCarte %}
+                    <p class="mt-4 ml-4"><strong class="h5"> -> Date d'envoi de la carte : </strong> {{resident.dateEnvoiCarte|date("d/m/Y")}} </p>
+                {% endif %}
+            </p>
+            <p class="mt-4"><strong class="h5"> Pièces justificatives :  </strong>
+                {% if resident.attestationHonneur == 1 %}
+                    <p class="mt-4 ml-4"><strong class="h5"> -> Attestation sur l'honneur : </strong> document fourni </p>
+                {% else %}
+                    <p class="mt-4 ml-4"><strong class="h5"> -> Attestation sur l'honneur : </strong> document non fourni </p>
+                {% endif %}         
+            </p>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

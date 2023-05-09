@@ -15,4 +15,22 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+    
+    #[Route('/justif', name: 'app_justif')]
+    public function justif(): Response
+    {
+        return $this->render('home/justifResident.html.twig');
+    }
+
+    #[Route('/choix', name: 'app_choice')]
+    public function choice(): Response
+    {
+        return $this->render('home/choix.html.twig');
+    }
+
+    #[Route('/choix/resident', name: 'app_choix_resident')]
+    public function choiceResident(): Response
+    {
+        return $this->render('home/choixResident.html.twig');
+    }
 }

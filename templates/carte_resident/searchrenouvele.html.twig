@@ -1,8 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if carte %}
-    <table class="table table-hover mt-4">
+<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('app_resident_search') }}">
+  <div class="form-group">
+    <input class="form-control" type="text" name="search" value="{{ searchTerm }}" placeholder="Rechercher par nom">
+  </div>
+  <button class="btn btn-info" type="submit">Rechercher</button>
+</form>
+{% if resident %}
+    <h4 class='text-center mt-3 mb-5'>Résultat trouvé pour "{{ searchTerm }}" :</h4>
+     <table class="table table-hover mt-4">
     <thead class="h-100 w-100">
         <tr class="h-100 text-center">
         <th scope="col" class="text-capitalize text-warning h5">Numéro</th>
@@ -13,28 +20,27 @@
         <th scope="col" class="text-capitalize text-warning h5">modifier</th>
         </tr>
     </thead>
-    <tbody class="h-100">
-        <tr class="table-success h-100 text-center align-items-center">
-        <th scope="row">{{carte.id}}</th>
-        <td>{{carte.civilite}}</td>
-        <td>{{carte.nom}}</td>
-        <td>{{carte.prenom}}</td>
-        <td>
-            <a href="" class="btn btn-info rounded">Afficher détails</a>
-        </td>
-        <td>
-            <a href="" class="btn btn-warning rounded">Modifier</a>
-        </td>
-        </tr>
-        </form>
-    {% else %}
-        <h1>Carte Provisoire non trouvée</h1>
-        <p>Aucune carte provisoire correspondant à ce nom n'a été trouvée.</p>
-        <form action="{{ path('carte_provisoire.new') }}">
-            <button type="submit">Ajouter une nouvelle carte</button>
-        </form>
-        <form action="{{ path('carte_provisoire.index') }}">
-            <button type="submit">Annuler</button>
-        </form>
-    {% endif %}
+        <tbody class="h-100">
+            <tr class="table-light h-100 text-center align-items-center">
+                <th scope="row" class="align-middle">{{ resident.id }}</th>
+                <td class="align-middle">{{ resident.civilite }}</td>
+                <td class="align-middle">{{ resident.nom }}</td>
+                <td class="align-middle">{{ resident.prenom }}</td>
+                <td>
+                    <a href="{{ path("app_resident_show", { id: resident.id }) }}" class="btn btn-info rounded">Afficher détails</a>
+                </td>
+                <td>
+                    <a href="{{ path("app_resident_edit", { id: resident.id }) }}" class="btn btn-warning rounded">Renouveler</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% elseif searchTerm %}
+    <div class='text-center mt-5'>
+        <p>Aucun résident trouvé pour "{{ searchTerm }}".</p>
+        <a href="{{path('app_home')}}" class="btn btn-info">Revenir à la page d'accueil</a>
+    </div>
+    
+{% endif %}
+        
 {% endblock %}

@@ -39,6 +39,12 @@ class CarteProvisoireRepository extends ServiceEntityRepository
         }
     }
 
+    public function findById()
+    {
+        return $this->createQueryBuilder("c")
+                        ->orderBy("c.id", "DESC");
+    }
+
 //    /**
 //     * @return CarteProvisoire[] Returns an array of CarteProvisoire objects
 //     */

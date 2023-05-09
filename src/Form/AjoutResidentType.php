@@ -3,10 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Residents;
-use Doctrine\DBAL\Types\DateType as TypesDateType;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateType as TypeDateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,44 +32,64 @@ class AjoutResidentType extends AbstractType
             ->add('numeroAdresse')
             ->add('adresse')
             ->add('numeroAppartement', null, [
+                'required' => false, 
                 'attr' => ['placeholder' => 'Veuillez saisir le numéro d\'appartement si disponible'],
                 'constraints' => [
-                    new Assert\Regex([
-                        'pattern' => '/^\d+$/',
-                        'message' => 'Le numéro d\'appartement doit contenir uniquement des chiffres.'
+                    new Regex([
+                        'pattern' => '/^\d*$/', 
+                        'message' => 'Le numéro d\'appartement doit contenir uniquement des chiffres positifs.',
                     ]),
                 ],
             ])
             ->add('marqueVehicule')
             ->add('modele')
             ->add('immatriculation')
-            // ->add('commentaires')
+            ->add('commentaires')
             // ->add('dateCreation')
-            // ->add('Delivrance')
             ->add('montant')
             ->add('demandeCourrier')
             ->add('demandeInternet')
             ->add('voiePostale')
-            ->add('dateDeMiseEnIncomplet',DateType::class, [
-                'widget' => 'single_text',
+            ->add('dateDeMiseEnIncomplet', DateType::class, [
+                "attr" => [
+                    "class" => "js-datepicker rounded "
+                ],
+                "widget" => "single_text",
+                "format" => "dd/mm/yyyy",
                 'html5' => false,
-                'format' => 'dd/MM/yyyy',
-            'attr' => ['class' => 'js-datepicker'],
-            
+                'required' => false,
+                "label" => "Date de mise en incomplet",
+                "label_attr" => [
+                    "class" => "form-label mt-2 text-warning"
+                ]
             ])
             ->add('dateDeCompletude', DateType::class, [
-                'widget' => 'single_text',
+                "attr" => [
+                    "class" => "js-datepicker rounded",
+                    "valueDefault" => "00/00/0000"
+                ],
+                "widget" => "single_text",
+                "format" => "dd/mm/yyyy",
                 'html5' => false,
-                'format' => 'dd/MM/yyyy',
-            'attr' => ['class' => 'js-datepicker'],
-            
+                'required' => false,
+                // 'empty_data' => null,
+                "label" => "Date de complétude",
+                "label_attr" => [
+                    "class" => "form-label mt-2 text-warning"
+                ]
             ])
             ->add('dateDeReponseAdministre', DateType::class, [
-                'widget' => 'single_text',
+                "attr" => [
+                    "class" => "js-datepicker rounded"
+                ],
+                "widget" => "single_text",
+                "format" => "dd/mm/yyyy",
                 'html5' => false,
-                'format' => 'dd/MM/yyyy',
-            'attr' => ['class' => 'js-datepicker'],
-            
+                'required' => false,
+                "label" => "Date de réponse à l'administré",
+                "label_attr" => [
+                    "class" => "form-label mt-2 text-warning"
+                ]
             ])
             // ->add('numero_Dossier')
             // ->add('dateEnvoiCarte')
@@ -76,7 +97,7 @@ class AjoutResidentType extends AbstractType
             // ->add('carteSupprime')
             ->add('attestationHonneur', null)
             ->add('vehiculeVert')
-            // ->add('modeReglement')
+            ->add('modeReglement')
             ->add('delivreePar')
             ->add('submit', SubmitType::class, [
                 "attr" => [

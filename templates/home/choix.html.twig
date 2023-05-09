@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="row justify-content-center aligns-center" id="choix">
+    <div class="col-md-2">
+        <a class="btn rounded" href="{{ path('app_justif') }}">Carte Résident</a>
+    </div>
+    <div class="col-md-2">
+        <a class="btn rounded" href="{{ path('carte_provisoire') }}">Carte Provisoire</a>
+    </div>
+    <div class="col-md-2">
+        <a class="btn rounded" href="">Carte Travaux</a>
+    </div>
+</div>
+
+<div class="row justify-content-center" id="choix">
+    <div class="col-md-4">
+        <a class="btn rounded" href="{{ path('app_changement_vehicule') }}">Carte Changement de véhicule</a>
+    </div>
+    <div class="col-md-2">
+        <a class="btn rounded" href="{{ path('app_resident_regie') }}">Enregistrement Régie</a>
+    </div>
+    
+</div>
+
+<div class="row justify-content-center" id="choix">
+    <div class="col-md-4">
+        <a class="btn rounded" href="">Recherche par immatriculation</a>
+    </div>
+    <div class="col-md-4">
+        <a class="btn rounded" href="{{ path('app_numero_carte') }}">Recherche par numéro de carte</a>
+    </div>
+</div>
+
+{% endblock %}

@@ -39,6 +39,12 @@ class CarteTravauxRepository extends ServiceEntityRepository
         }
     }
 
+    public function findById()
+    {
+        return $this->createQueryBuilder("c")
+                        ->orderBy("c.id", "DESC");
+    }
+
 //    /**
 //     * @return CarteTravaux[] Returns an array of CarteTravaux objects
 //     */

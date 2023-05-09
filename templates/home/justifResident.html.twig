@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Justificatif Résident{% endblock %}
+
+{% block body %}
+<div class="my-5 text-center">
+    <h1 class="mb-4">Justificatifs Résidents</h1>
+</div>
+<div class='d-flex justify-content-center'>
+    <ul id="liste">
+        <li id="liste"><span style='font-size:30px; color: orange'>&#8594;</span> Carte grise <span>(adresse en zone bleue, si ce n'est pas le cas, faire une carte provisoire en attendant)</span></li>
+        <li id="liste"><span style='font-size:30px; color: orange'>&#8594;</span> Justificatifs de moins de 3 mois (EDF, GDF, Quittance, impôts, téléphone si fixe...)</li>
+        <li id="liste">
+            <p class="my-2"><span style='font-size:30px; color: orange'>&#8594;</span> Attestation assureur si co-conducteur du véhicule</p>
+            <p class="my-2">&emsp; &ensp;&nbsp;Attestation employeur si véhicule de fonction</p>
+            <p class="my-2">&emsp; &ensp;&nbsp;Si véhicule en leasing, fournir une attestation le prouvant.</p>
+        </li>
+    </ul>
+</div>
+<div class="d-flex text-center my-5 m-4 justify-content-center" id="gap">
+    <div>
+        <a href="{{path('app_choice')}}" id="bouton"class="btn px-5 py-2 rounded">Retour</a>
+    </div>
+    <div>
+        <a href="{{path('app_choix_resident')}}" id="bouton" class="btn px-5 py-2 rounded">Ok</a>
+    </div>
+</div>
+
+{% endblock %}

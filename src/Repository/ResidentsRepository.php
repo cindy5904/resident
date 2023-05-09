@@ -39,6 +39,12 @@ class ResidentsRepository extends ServiceEntityRepository
         }
     }
 
+    public function findById()
+    {
+        return $this->createQueryBuilder("c")
+                        ->orderBy("c.id", "DESC");
+    }
+
 //    /**
 //     * @return Residents[] Returns an array of Residents objects
 //     */
