@@ -14,16 +14,17 @@ class NumeroCarteController extends AbstractController
     #[Route('/numero/carte', name: 'app_numero_carte')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $numeroCarte = $request->query->get('numeroCarte');
-
+        $searchTerm = $request->query->get('numeroCarte');
         $repository = $entityManager->getRepository(Residents::class);
-        $residents = $repository->findBy(['numeroCarte' => $numeroCarte]);
+        $residents = $repository->findBy(['numeroCarte' => $searchTerm]);
 
 
         return $this->render('numero_carte/index.html.twig', [
-            'numeroCarte' => $numeroCarte,
+            'searchTerm' => $searchTerm,
             'residents' => $residents,
         ]);
     }
+
+
 }
 

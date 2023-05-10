@@ -9,14 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ChangementVehiculeController extends AbstractController
+class ImmatriculationController extends AbstractController
 {
-    #[Route('/changement/vehicule', name: 'app_changement_vehicule')]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/immatriculation', name: 'app_immatriculation')]
+    public function index(Request $request, EntityManagerInterface $manager): Response
     {
         $searchTerm = $request->query->get('immatriculation');
 
-        $repository = $entityManager->getRepository(Residents::class);
+        $repository = $manager->getRepository(Residents::class);
         $residents = $repository->findBy(['immatriculation' => $searchTerm]);
 
 
@@ -26,4 +26,3 @@ class ChangementVehiculeController extends AbstractController
         ]);
     }
 }
-

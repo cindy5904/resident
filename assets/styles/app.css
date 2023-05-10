@@ -53,7 +53,6 @@ li#liste {
 
 #choix a {
     text-decoration: none;
-    background-color: #FF7F50;
     color: white;
     padding: 15px 25px 15px 15px;
 }
@@ -63,4 +62,15 @@ li#liste {
     margin-bottom: 20px;
 }
 
+@media print {
+    .hidden-on-print {
+        display: none;
+    }
+    .hidden-border-on-print {
+        border: none !important;
+      }
+}
 
+#impression {
+    border: none;
+}

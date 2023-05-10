@@ -28,10 +28,25 @@ class CarteProvisoireController extends AbstractController
                 $request->query->getInt('page', 1),
                 10
         );
-
-            // $CarteProvisoires = $repository->findAll();
+        
+    
+            
             return $this->render('carte_provisoire/index.html.twig', [
-                'CarteProvisoires' => $carteProvisoires
+                'CarteProvisoires' => $carteProvisoires,
+                
+            ]);
+        }
+        #[Route('/carte-provisoire/recherche', name: 'carte_provisoire_recherche')]
+        public function rechercheCarteProvisoire(Request $request, EntityManagerInterface $manager, CarteProvisoireRepository $repository)
+        {
+            $searchTerm = $request->query->get('nom');
+            $repository = $manager->getRepository(CarteProvisoire::class);
+            $cartes = $repository->findBy(['nom' => $searchTerm]);
+
+
+            return $this->render('carte_provisoire/recherche.html.twig', [
+                'searchTerm' => $searchTerm,
+                'cartes' => $cartes,
             ]);
         }
 
@@ -82,23 +97,6 @@ class CarteProvisoireController extends AbstractController
         return $this->render("carte_provisoire/new.html.twig", [
             "form" => $form->createView()
         ]);
-    }
-    #[Route('/carte-provisoire/recherche', name: 'carte_provisoire_recherche')]
-    public function rechercheCarteProvisoire(Request $request, EntityManagerInterface $manager)
-    {
-    $nom = $request->query->get('nom');
-
-    $carteProvisoire = $manager->getRepository(CarteProvisoire::class)->findOneBy(['nom' => $nom]);
-
-    if (!$carteProvisoire) {
-        
-        return $this->redirectToRoute('carte_provisoire.new');
-    }
-
-    
-    return $this->render('carte_provisoire/recherche.html.twig', [
-        'carte' => $carteProvisoire,
-    ]);
     }
 
 

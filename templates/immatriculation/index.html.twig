@@ -1,22 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recherche numéro carte{% endblock %}
+{% block title %}Recherche par Immatriculation{% endblock %}
 
 {% block body %}
-<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('app_numero_carte') }}">
+<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('app_immatriculation') }}">
     <div class="form-group">
-        <input class="form-control" type="text" name="numeroCarte" value="{{ searchTerm }}" placeholder="Rechercher un numéro de carte">
+        <input class="form-control" type="text" name="immatriculation" value="{{ searchTerm }}" placeholder="Rechercher par immatriculation">
     </div>
     <button class="btn btn-info" type="submit">Rechercher</button>
 </form>
-
 {% if searchTerm is not empty %}
     {% if residents is not empty %}
         <h4 class='text-center mt-3 mb-5'>Résultat trouvé pour "{{ searchTerm }}" :</h4>
         <table class="table table-hover mt-4">
             <thead class="h-100 w-100">
                 <tr class="h-100 text-center">
-                    <th scope="col" class="text-capitalize text-warning h5">Numéro de Carte</th>
+                    <th scope="col" class="text-capitalize text-warning h5">Immatriculation</th>
                     <th scope="col" class="text-capitalize text-warning h5">Nom</th>
                     <th scope="col" class="text-capitalize text-warning h5">Prénom</th>
                     <th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
@@ -27,7 +26,7 @@
             <tbody class="h-100">
                 {% for resident in residents %}
                     <tr class="table-light h-100 text-center align-items-center">
-                        <td class="align-middle">{{ resident.numeroCarte }}</td>
+                        <td class="align-middle">{{ resident.immatriculation }}</td>
                         <td class="align-middle">{{ resident.nom }}</td>
                         <td class="align-middle">{{ resident.prenom }}</td>
                         <td>
@@ -45,15 +44,12 @@
         </table>
     {% else %}
         <div class='text-center mt-5'>
-            <p>Aucune carte trouvée pour le numéro"{{ searchTerm }}".</p>
-            <a href="{{ path('app_home') }}" class="btn btn-info">Revenir à la page d'accueil</a>
+            <p>Aucune immatriculation trouvée pour le numéro"{{ searchTerm }}".</p>
+            <a href="{{ path('app_choice') }}" class="btn btn-info">Revenir à la page d'accueil</a>
         </div>
     {% endif %}
 {% endif %}
-<div class="d-flex w-50 ml-5 mt-5">
-        <a href="{{ path('app_choice')}}"><button class="mt-4 btn btn-outline-info rounded"> Retour à l'accueil</button></a>
-    </div>
 
 
+   
 {% endblock %}
-

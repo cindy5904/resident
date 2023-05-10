@@ -10,18 +10,18 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RegieType extends AbstractType
+class RegisterRegieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Civilite', ChoiceType::class, [
-                'choices' => [
-                    'Monsieur' =>'Monsieur',
-                    'Madame' => 'Madame',
-                    'Mademoiselle' => 'Mademoiselle',
-                ]
-            ])
+        ->add('Civilite', ChoiceType::class, [
+            'choices' => [
+                'Monsieur' =>'Monsieur',
+                'Madame' => 'Madame',
+                'Mademoiselle' => 'Mademoiselle',
+            ]
+        ])
             ->add('nom')
             ->add('prenom')
             ->add('numeroAdresse')
@@ -30,48 +30,47 @@ class RegieType extends AbstractType
             ->add('modele')
             ->add('immatriculation')
             // ->add('commentaires')
-            // ->add('dateCreation')
+            ->add('dateCreation', DateType::class, [
+                     "attr" => [
+                         "class" => "js-datepicker rounded "
+                     ],
+                     "widget" => "single_text",
+                     "format" => "dd/mm/yyyy",
+                     'html5' => false,
+                     'required' => false,
+                     "label" => "Date de création",
+                     "label_attr" => [
+                         "class" => "form-label mt-2 text-warning"
+                     ]
+             ])
             // ->add('demandeCourrier')
             // ->add('demandeInternet')
             // ->add('voiePostale')
             // ->add('dateDeMiseEnIncomplet')
-            // ->add('dateDeCompletude', DateType::class, [
-            //     "attr" => [
-            //         'class' => 'js-datepicker rounded'
-            //     ],
-            //     'widget' => 'single_text',
-            //     'format' => 'dd/mm/yyyy',
-            //     'html5' => false,
-            //     'required' => false,
-            //     'label' => 'Date de délivrance',
-            //     'label_attr' => [
-            //         'class' => 'form-label mt-2 text-warning'
-            //     ]
-
-            // ])
+            // ->add('dateDeCompletude')
             // ->add('dateDeReponseAdministre')
             // ->add('numeroDossier')
-            // ->add('dateEnvoiCarte', DateType::class, [
-            //     "attr" => [
-            //         "class" => "js-datepicker rounded "
-            //     ],
-            //     "widget" => "single_text",
-            //     "format" => "dd/mm/yyyy",
-            //     'html5' => false,
-            //     'required' => false,
-            //     "label" => "Date d'envoi de la carte",
-            //     "label_attr" => [
-            //         "class" => "form-label mt-2 text-warning"
-            //     ]
-            // ])
+            ->add('DateEnvoiCarte',  DateType::class, [
+                "attr" => [
+                    "class" => "js-datepicker rounded "
+                ],
+                "widget" => "single_text",
+                "format" => "dd/mm/yyyy",
+                'html5' => false,
+                'required' => false,
+                "label" => "Date d'envoi de la carte",
+                "label_attr" => [
+                    "class" => "form-label mt-2 text-warning"
+                ]
+        ])
             // ->add('changementVehicule')
-             ->add('numeroCarte')
-            //  ->add('attestationHonneur')
+            ->add('numeroCarte')
+            ->add('attestationHonneur')
             // ->add('carteSupprimee')
             ->add('adresse')
             ->add('modeReglement')
-            ->add('delivreePar')
-            ->add('montant')
+            // ->add('delivreePar')
+            // ->add('montant')
             // ->add('vehiculeVert')
             ->add('submit', SubmitType::class, [
                 "attr" => [
@@ -80,10 +79,7 @@ class RegieType extends AbstractType
                 ],
                 "label" => "Enregistrer",
             ]);
-        
     }
-        
-    
 
     public function configureOptions(OptionsResolver $resolver): void
     {

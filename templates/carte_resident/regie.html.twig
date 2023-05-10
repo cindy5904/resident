@@ -1,13 +1,13 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-	Enregistrement Régie
+	Bordereau pour Régie
 {% endblock %}
 
 {% block body %}
 <div class="container">
 	<div class="row mt-3">
-		<div class="col-3">
+		<div class="col-3 hidden-on-print">
 			<a href="{{ path('app_carte_resident')}}">
 				<button class="mt-4 btn btn-info rounded px-3 py-2">
 					Retour
@@ -15,9 +15,12 @@
 			</a>
 		</div>
 		<div class="col-6 text-center mr-auto">
-			<h1 class="h3 mt-4 mb-5">
-				Enregistrement Régie
+			<h1 class="h3 mt-4 mb-5 mr-5">
+				Bordereau Régie Carte Résident
 			</h1>
+		</div>
+		<div class="col-3 hidden-on-print">
+			<button class="hidden-on-print rounded mt-4 px-3 py-2 ml-3 btn-warning" onclick="window.print()" id="impression">Imprimer le bordereau</button>
 		</div>
 	</div>
 	{{ form_start(form) }}
@@ -26,7 +29,7 @@
 			{{ form_label(form.Civilite, 'Civilité', {
                     'label_attr': {'class': 'form-label text-warning'}}) }}
 			{{ form_widget(form.Civilite,  {
-                    'attr': {'class': 'form-control rounded'}}) }}
+                    'attr': {'class': 'form-control rounded hidden-on-print'}}) }}
 			<div class="form-errors">
 				{{ form_errors(form.Civilite) }}
 			</div>
@@ -34,11 +37,11 @@
 	</div>
 	<div class='w-100 mt-3'>
 		<div class="d-flex justify-content-around w-100">
-			<div class='form-group w-50 mr-2'>
+			<div class='form-group w-50 mr-2 hide-input-on-print'>
 				{{ form_label(form.nom, 'Nom', {
                     'label_attr': {'class': 'form-label text-warning'}}) }}
 				{{ form_widget(form.nom,  {
-                    'attr': {'class': 'form-control rounded'}}) }}
+                    'attr': {'class': 'form-control rounded hidden-on-print'}}) }}
 				<div class="form-errors">
 					{{ form_errors(form.nom) }}
 				</div>
@@ -47,7 +50,7 @@
 				{{ form_label(form.prenom,  'Prénom', {
                     'label_attr': {'class': 'form-label text-warning'}}) }}
 				{{ form_widget(form.prenom,  {
-                    'attr': {'class': 'form-control rounded'}}) }}
+                    'attr': {'class': 'form-control rounded hidden-on-print'}}) }}
 				<div class="form-errors">
 					{{ form_errors(form.prenom) }}
 				</div>
@@ -117,38 +120,40 @@
 				{{ form_widget(form.modeReglement,  {
                     'attr': {'class': 'form-control rounded'}}) }}
 			</div>
+			
 		</div>
 	</div>
 	<div class="d-flex justify-content-center align-items-center w-100">
-    <div class='form-group w-50'>
-        {{ form_label(form.dateEnvoiCarte) }}
-        <div class="input-group date" id="datepicker3">
-            {{ form_widget(form.dateEnvoiCarte) }}
-            <span class="input-group-append">
-                <span class="input-group-text bg-light d-block">
-                    <i class="fa fa-calendar"></i>
-                </span>
-            </span>
-        </div>
-        <div class="form-errors">
-            {{ form_errors(form.dateEnvoiCarte) }}
-        </div>
-    </div>
+		<div class='form-group w-50 ml-2'>
+				{{ form_label(form.montant,  'Montant (€) :', {
+                    'label_attr': {'class': 'form-label text-warning'}}) }}
+				{{ form_widget(form.montant,  {
+                    'attr': {'class': 'form-control rounded hidden-on-print'}}) }}
+			</div>
 
-    <div class='form-group w-50 ml-5 mt-5'>
-        {{ form_label(form.attestationHonneur, 'Attestation sur l\'honneur', {
-        'label_attr': {'class': 'form-label text-warning'}}) }}
-        {{ form_widget(form.attestationHonneur) }}
-    </div>
-</div>
+		<div class='form-group w-50 ml-2'>
+			{{ form_label(form.delivreePar, 'Attestation sur l\'honneur', {
+			'label_attr': {'class': 'form-label text-warning'}}) }}
+			{{ form_widget(form.delivreePar, {
+						'attr': {'class': 'form-control rounded'}}) }}
+		</div>
+	</div>
+	 <div class=" w-100">
+			<div class='form-group w-50 ml-2'>  
+			<form action="">
+			<label for="">Date de délivrance : </label>
+			<input type="text" class="form-control rounded">
+			</form>
+			</div>
+		</div>
 
          <div class="d-flex justify-content-center">
-            <div class="form-group">
+            <div class="form-group hidden-on-print">
                 {{ form_row(form.submit) }}
             </div>
         </div> 
-          
-
+       
         {{ form_end(form) }}
+		
 </div>                
 {% endblock %}

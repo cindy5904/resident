@@ -1,21 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if carte %}
-    <table class="table table-hover mt-4">
-    <thead class="h-100 w-100">
-        <tr class="h-100 text-center">
-        <th scope="col" class="text-capitalize text-warning h5">Numéro</th>
-        <th scope="col" class="text-capitalize text-warning h5">Civilité</th>
-        <th scope="col" class="text-capitalize text-warning h5">Nom</th>
-        <th scope="col" class="text-capitalize text-warning h5">Prénom</th>
-        <th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
-        <th scope="col" class="text-capitalize text-warning h5">modifier</th>
-        </tr>
-    </thead>
-    <tbody class="h-100">
-        <tr class="table-success h-100 text-center align-items-center">
-        <th scope="row">{{carte.id}}</th>
+	<form class="form-inline mt-5 d-flex justify-content-center mb-5" method="get" action="{{ path('carte_provisoire_recherche') }}">
+    <div class="form-group">
+        <input class="form-control" type="text" name="nom" value="{{ searchTerm }}" placeholder="Rechercher par nom">
+    </div>
+    <button class="btn btn-info" type="submit">Rechercher</button>
+	</form>
+    {% if searchTerm is not empty %}
+        {% if cartes is not empty %}
+        <table class="table table-hover mt-5">
+        <thead class="h-100 w-100">
+            <tr class="h-100 text-center">
+            <th class="align-middle" scope="col" class="text-capitalize text-warning h5">Civilité</th>
+            <th class="align-middle" scope="col" class="text-capitalize text-warning h5">Nom</th>
+            <th class="align-middle" scope="col" class="text-capitalize text-warning h5">Prénom</th>
+            <th class="align-middle" scope="col" class="text-capitalize text-warning h5">Voir détails</th>
+            <th class="align-middle" scope="col" class="text-capitalize text-warning h5">modifier</th>
+            <th class="align-middle" scope="col" class="text-capitalize text-warning h5">régie</th>
+            </tr>
+        </thead>
+        <tbody class="h-100">
+        {% for carte in cartes %}
+        <tr class="table-light h-100 text-center align-items-center">
+        {# <th scope="row">{{carte.id}}</th> #}
         <td>{{carte.civilite}}</td>
         <td>{{carte.nom}}</td>
         <td>{{carte.prenom}}</td>
@@ -25,8 +33,13 @@
         <td>
             <a href="{{ path("carte_provisoire.edit", { id: carte.id }) }}" class="btn btn-warning rounded">Modifier</a>
         </td>
+        <td>
+            <a href="{{ path("app_regie_register", { id: carte.id }) }}" class="btn btn-info rounded px-4">Régie</a>
+        </td>
         </tr>
-        </form>
+           {% endfor %}
+            </tbody>
+        </table>
     {% else %}
         <h1>Carte Provisoire non trouvée</h1>
         <p>Aucune carte provisoire correspondant à ce nom n'a été trouvée.</p>
@@ -37,4 +50,10 @@
             <button type="submit">Annuler</button>
         </form>
     {% endif %}
+        
+{% endif %}
+<div class="d-flex w-50 ml-5 mt-5">
+        <a href="{{ path('app_choice')}}"><button class="mt-4 btn btn-outline-info rounded"> Retour à la liste</button></a>
+    </div>
+
 {% endblock %}

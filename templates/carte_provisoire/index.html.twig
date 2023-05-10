@@ -5,13 +5,9 @@
 
 {% block body %}
 	<div class="d-flex justify-content-between">
-		<form
-			method="get" class="mt-4 ml-4">
-			{# <label for="nomFilter">Filtrer par nom:</label> #}
-			<input type="text" name="nomFilter" id="nomFilter" value="{{ app.request.query.get('nomFilter') }}" placeholder="Recherche nom..." class="rounded px-2 py-1 ">
-			<button type="submit" class="px-2 py-1 rounded">Rechercher</button>
-		</form>
-
+		<button>
+		<a href="{{path('carte_provisoire_recherche')}}">rechercher</a> </button>
+	
 		<div class="d-flex justify-content-end mt-4 mr-4">
 			<a href="{{ path("carte_provisoire.new") }}" class="btn btn-info rounded">Créer une nouvelle carte provisoire</a>
 		</div>
@@ -32,33 +28,18 @@
 					<th scope="col" class="text-capitalize text-warning h5">Civilité</th>
 					<th scope="col" class="text-capitalize text-warning h5">Nom</th>
 					<th scope="col" class="text-capitalize text-warning h5">Prénom</th>
-					{# <th scope="col" class="text-capitalize text-warning">Numéro adresse</th>
-					        <th scope="col" class="text-capitalize text-warning">Adresse</th>
-					        <th scope="col" class="text-capitalize text-warning">Immatriculation</th>
-					        <th scope="col" class="text-capitalize text-warning">Carte grise</th>
-					        <th scope="col" class="text-capitalize text-warning">Justificatif de moins de 3 mois</th>
-					        <th scope="col" class="text-capitalize text-warning">Commentaires</th>
-					        <th scope="col" class="text-capitalize text-warning">Délivrée par</th>
-					        <th scope="col" class="text-capitalize text-warning">Date de création</th> #}
 					<th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
 					<th scope="col" class="text-capitalize text-warning h5">modifier</th>
 				</tr>
 			</thead>
 			<tbody class="h-100">
 				{% for CarteProvisoire in CarteProvisoires %}
-					<tr class="table-success h-100 text-center align-items-center">
+					<tr class="table-light h-100 text-center align-items-center">
 						<th scope="row">{{CarteProvisoire.id}}</th>
 						<td>{{CarteProvisoire.civilite}}</td>
 						<td>{{CarteProvisoire.nom}}</td>
 						<td>{{CarteProvisoire.prenom}}</td>
-						{# <td>{{CarteProvisoire.numeroAdresse}}</td>
-						        <td>{{CarteProvisoire.adresse}}</td>
-						        <td>{{CarteProvisoire.immatriculation}}</td>
-						        <td>{{CarteProvisoire.carteGrise == 1 ? "Pièce fournie" : "Pièce non fournie"}}</td>
-						        <td>{{CarteProvisoire.justificatifMoins3mois == 1 ? "Pièce fournie" : "Pièce non fournie"}}</td>
-						        <td>{{CarteProvisoire.commentaires is not null ? CarteProvisoire.commentaires : "Non renseigné"}}</td>
-						        <td>{{CarteProvisoire.delivreePar is not null ? CarteProvisoire.delivreePar : "Non renseigné"}}</td>
-						        <td>{{CarteProvisoire.dateCreation|date('d/m/Y')}}</td> #}
+						
 						<td>
 							<a href="{{ path("carte_provisoire.show", { id: CarteProvisoire.id }) }}" class="btn btn-info rounded">Afficher détails</a>
 						</td>
@@ -73,5 +54,5 @@
 			{{ knp_pagination_render(CarteProvisoires) }}
 		</div>
 	</div>
-
+	
 {% endblock %}

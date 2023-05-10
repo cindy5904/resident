@@ -19,11 +19,11 @@
     <table class="table table-hover mt-4">
     <thead class="h-100 w-100">
         <tr class="h-100 text-center">
-        <th scope="col" class="text-capitalize text-warning h5">Civilité</th>
-        <th scope="col" class="text-capitalize text-warning h5">Nom</th>
-        <th scope="col" class="text-capitalize text-warning h5">Prénom</th>
-        <th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
-        <th scope="col" class="text-capitalize text-warning h5">modifier</th>
+        <th class="align-middle" scope="col" class="text-capitalize text-warning h5">Civilité</th>
+        <th class="align-middle" scope="col" class="text-capitalize text-warning h5">Nom</th>
+        <th class="align-middle" scope="col" class="text-capitalize text-warning h5">Prénom</th>
+        <th class="align-middle" scope="col" class="text-capitalize text-warning h5">Voir détails</th>
+        <th class="align-middle" scope="col" class="text-capitalize text-warning h5">modifier</th>
         </tr>
     </thead>
     <tbody class="h-100">
@@ -37,6 +37,9 @@
         </td>
         <td>
             <a href="{{ path("app_resident_edit", { id: resident.id }) }}" class="btn btn-warning rounded">Modifier</a>
+        </td>
+        <td>
+            <a href="{{ path("app_resident_regie", { id: resident.id }) }}" class="btn btn-primary rounded">Regie</a>
         </td>
         </tr>
     {% endfor %} 

@@ -107,10 +107,19 @@ public function searchName(ResidentsRepository $repository, Request $request): R
         ]);
     }
 
-    #[Route('/resident/regie', name: 'app_resident_regie', methods: ["GET", "POST"])]
-    public function regie(Request $request, EntityManagerInterface $manager): Response
+    #[Route('/resident/{id}', name: 'app_resident_show')]
+    public function show(Residents $resident): Response
     {
-        $resident = new Residents;
+
+        return $this->render('carte_resident/show.html.twig', [
+            'resident' => $resident,
+        ]);
+    }
+
+    #[Route('/resident/regie/{id}', name: 'app_resident_regie', methods: ["GET", "POST"])]
+    public function regie(Request $request, EntityManagerInterface $manager, Residents $resident): Response
+    {
+        
         $resident->setDateCreation(new DateTime());
         $form = $this->createForm(RegieType::class, $resident);
         $form->handleRequest($request);
@@ -120,25 +129,12 @@ public function searchName(ResidentsRepository $repository, Request $request): R
             $manager->persist($resident);
             $manager->flush();
 
-            $this->addFlash(
-                "success",
-                "Le résident a été créé avec succès !!!"
-            );
 
             return $this->redirectToRoute("app_carte_resident");
         }
 
         return $this->render("carte_resident/regie.html.twig", [
-            "form" => $form->createView()
-        ]);
-    }
-
-    #[Route('/resident/{id}', name: 'app_resident_show')]
-    public function show(Residents $resident): Response
-    {
-
-        return $this->render('carte_resident/show.html.twig', [
-            'resident' => $resident,
+            "form" => $form->createView(), "resident" => $resident
         ]);
     }
     
