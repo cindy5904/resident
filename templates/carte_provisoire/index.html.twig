@@ -3,13 +3,19 @@
 {% block title %}Liste des cartes provisoires
 {% endblock %}
 
+{% block contenu %}
+
+{% endblock %}
+
+
 {% block body %}
+{% include "_nav.html.twig" %}
 	<div class="d-flex justify-content-between">
-		<button>
-		<a href="{{path('carte_provisoire_recherche')}}">rechercher</a> </button>
-	
+		<div class="mt-4 ml-5">
+		<a href="{{path('carte_provisoire_recherche')}}" class="btn btn-outline-info">rechercher une carte provisoire</a>
+		</div>
 		<div class="d-flex justify-content-end mt-4 mr-4">
-			<a href="{{ path("carte_provisoire.new") }}" class="btn btn-info rounded">Créer une nouvelle carte provisoire</a>
+			<a href="{{ path("carte_provisoire.new") }}" class="btn btn-outline-info rounded">Créer une nouvelle carte provisoire</a>
 		</div>
 	</div>
 	<div class="container mt-4">
@@ -21,10 +27,9 @@
 				</div>
 			{% endfor %}
 		</div>
-		<table class="table table-hover mt-4">
+		<table class="table table-hover mt-4 mb-5">
 			<thead class="h-100 w-100">
 				<tr class="h-100 text-center">
-					<th scope="col" class="text-capitalize text-warning h5">Numéro</th>
 					<th scope="col" class="text-capitalize text-warning h5">Civilité</th>
 					<th scope="col" class="text-capitalize text-warning h5">Nom</th>
 					<th scope="col" class="text-capitalize text-warning h5">Prénom</th>
@@ -35,10 +40,9 @@
 			<tbody class="h-100">
 				{% for CarteProvisoire in CarteProvisoires %}
 					<tr class="table-light h-100 text-center align-items-center">
-						<th scope="row">{{CarteProvisoire.id}}</th>
-						<td>{{CarteProvisoire.civilite}}</td>
-						<td>{{CarteProvisoire.nom}}</td>
-						<td>{{CarteProvisoire.prenom}}</td>
+						<td class="align-middle">{{CarteProvisoire.civilite}}</td>
+						<td class="align-middle">{{CarteProvisoire.nom}}</td>
+						<td class="align-middle">{{CarteProvisoire.prenom}}</td>
 						
 						<td>
 							<a href="{{ path("carte_provisoire.show", { id: CarteProvisoire.id }) }}" class="btn btn-info rounded">Afficher détails</a>

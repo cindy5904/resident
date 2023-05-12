@@ -24,7 +24,7 @@ class CarteProvisoireController extends AbstractController
         {
 
             $carteProvisoires = $paginator->paginate(
-                $repository->findAll(),
+                $repository->findById(),
                 $request->query->getInt('page', 1),
                 10
         );
@@ -90,6 +90,11 @@ class CarteProvisoireController extends AbstractController
             $carteProvisoire = $form->getData();
             $manager->persist($carteProvisoire);
             $manager->flush();
+
+            $this->addFlash(
+                "success",
+                "La carte provisoire a été créée avec succès !!!"
+            );
 
             return $this->redirectToRoute("carte_provisoire.index");
         }

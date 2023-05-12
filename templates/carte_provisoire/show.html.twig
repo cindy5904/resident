@@ -2,6 +2,12 @@
 
 {% block title %} Carte provisoire - {{ carteProvisoire.nom }} {% endblock %}
 {% block body %}
+    <div class="d-flex w-50 mt-4" id="btn-retour">
+            <div class="form-group">
+                <a href="{{path('carte_provisoire.index')}}" class="btn btn-primary mt-4 rounded px-4 py-2 ">Retour</a>
+            </div>
+            
+        </div>
     <div class="container mt-4">
     <div class="card border-primary h-100 mb-3 " >
         <div class="card-header d-flex align-items-center"><h1 class=""> Carte provisoire </h1></div>
@@ -45,5 +51,6 @@
         {% endif %}
         </div>
     </div>
-    </div>
+    </div>  
+
 {% endblock %}

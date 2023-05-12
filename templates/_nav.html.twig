@@ -1,0 +1,42 @@
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id='nav'>
+  <div class="container-fluid">
+    <a href="{{ path('app_home') }}"> 
+      <img src="{{ asset('/images/accueil.png')}}" alt="logo accueil" width="30px">
+    </a>
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="item navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item ml-3 align-middle mt-1">
+          <a class="nav-link active h5" id="bold" href="{{ path('app_justif') }}">Carte résident</a>
+        </li>
+        <li class="nav-item ml-3 mt-1">
+          <a class="nav-link h5" id="bold" href="{{ path('carte_provisoire') }}">Carte provisoire</a>
+        </li>
+        <li class="nav-item ml-3 mt-1">
+          <a class="nav-link h5" id="bold" href="{{path('app_justif_travaux')}}">Carte travaux</a>
+        </li>
+        <li class="nav-item ml-3 mt-1">
+          <a class="nav-link h5" id="bold" href="{{ path('app_changement_vehicule') }}">Changement de véhicule</a>
+        </li>
+        <li class="nav-item ml-3 mt-1">
+          <a class="nav-link h5" id="bold" href="{{ path('app_regie_register')}}">Enregistrement régie</a>
+        </li>
+        <li class="nav-item dropdown ml-3 mt-1">
+          <a class="nav-link dropdown-toggle h5" data-bs-toggle="dropdown" href="#" id="bold" role="button" aria-haspopup="true" aria-expanded="false">Recherche</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" id="hove" href="{{path('app_immatriculation')}}">par immatriculation</a>
+            <a class="dropdown-item" id="hove" href="{{ path('app_numero_carte') }}">par numéro de carte</a>
+          </div>
+        </li>
+      </ul>      
+    </div>
+  </div>
+</nav>
+
+
+{% endblock %}

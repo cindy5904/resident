@@ -2,45 +2,29 @@
 
 namespace App\Form;
 
-use App\Entity\CarteProvisoire;
+use App\Entity\CarteTravaux;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Test\AssertingContextualValidator;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-
-class CarteProvisoireType extends AbstractType
+class CarteTravauxType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('civilite', ChoiceType::class, [
-                'choices'  => [
-                    'Monsieur' => 'Monsieur',
-                    'Madame' => 'Madame',
-                    'Mademoiselle' => 'Mademoiselle',
-                ],
-                "attr" => [
-                    "class" => "form-control rounded"
-                ],
-                "label" => "Civilité",
-                "label_attr" => [
-                    "class" => "form-label mt-4 text-warning"
-                ]
-            ])
-            ->add('nom', TextType::class, [
+            ->add('nomEntrepriseTravaux', TextType::class, [
                 "attr" => [
                     "class" => "form-control rounded",
                     "minLength" => "2",
                     "maxLength" => "255"
                 ],
-                "label" => "Nom",
+                "label" => "Nom de l'entreprise",
                 "label_attr" => [
                     "class" => "form-label mt-4 text-warning"
                 ],
@@ -48,19 +32,31 @@ class CarteProvisoireType extends AbstractType
                     new Assert\Length(["min" => 2, "max" => 255])
                 ]
             ])
-            ->add('prenom', TextType::class, [
+            ->add('dateDebutTravaux', DateType::class, [
                 "attr" => [
-                    "class" => "form-control rounded",
-                    "minLength" => "2",
-                    "maxLength" => "255"
+                    "class" => "js-datepicker rounded"
                 ],
-                "label" => "Prénom",
+                "widget" => "single_text",
+                "format" => "dd/MM/yyyy",
+                'html5' => false,
+                'empty_data' => null,
+                "label" => "Date de début des travaux",
                 "label_attr" => [
                     "class" => "form-label mt-4 text-warning"
                 ],
-                "constraints" =>  [
-                    new Assert\Length(["min" => 2, "max" => 255])
+            ])
+            ->add('dateFinTravaux', DateType::class, [
+                "attr" => [
+                    "class" => "js-datepicker rounded"
                 ],
+                "widget" => "single_text",
+                "format" => "dd/MM/yyyy",
+                'html5' => false,
+                'empty_data' => null,
+                "label" => "Date de fin des travaux",
+                "label_attr" => [
+                    "class" => "form-label mt-4 text-warning"
+                ]
             ])
             ->add('adresse')
             ->add('delivreePar') 
@@ -94,25 +90,25 @@ class CarteProvisoireType extends AbstractType
             ])
             ->add('carteGrise', CheckboxType::class, [
                 'attr' => [
-                    'class' => 'form-check'
+                    'class' => 'form-check-input'
                 ],
                 'required' => false,
                 'label' => 'Carte grise (cochez la case si pièce fourni)',
                 'label_attr' => [
-                    'class' => 'form-label mt-4 text-warning'
+                    'class' => 'form-check-label text-warning'
                 ],
                 'constraints' => [
                     new Assert\NotNull()
                 ],
             ])
-            ->add('justificatifMoins3Mois', CheckboxType::class, [
+            ->add('devis', CheckboxType::class, [
                 'attr' => [
-                    'class' => 'form-check'
+                    'class' => 'form-check-input'
                 ],
                 'required' => false,
-                'label' => 'Justificatif de moins de 3 mois (cochez la case si pièce fourni)',
+                'label' => 'Devis (cochez la case si pièce fourni)',
                 'label_attr' => [
-                    'class' => 'form-label mt-4 text-warning'
+                    'class' => 'form-check-label text-warning'
                 ],
                 'constraints' => [
                     new Assert\NotNull()
@@ -125,25 +121,26 @@ class CarteProvisoireType extends AbstractType
                     "maxLength" => "255"
                 ],
                 "label" => "Commentaires",
+                "required" => false,
                 "label_attr" => [
                     "class" => "form-label mt-4 text-warning"
                 ],
                 "constraints" =>  [
                     new Assert\Length(["min" => 2, "max" => 255])
                 ]
-                ])
+            ])
             ->add('submit', SubmitType::class, [
                 "attr" => [
                     "class" => "btn btn-primary mt-4 rounded"
                 ],
-                "label" => "Enregistrer",
+                "label" => "Enregistrer carte travaux",
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => CarteProvisoire::class,
+            'data_class' => CarteTravaux::class,
         ]);
     }
 }

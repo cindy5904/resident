@@ -1,37 +1,51 @@
 {% extends "base.html.twig" %}
 
-{% block title %} Carte provisoire n°{{ carteProvisoire.id }} {% endblock %}
+{% block title %} Création d'une nouvelle carte travaux {% endblock %}
 
 {% block body %}
 {% include "_nav.html.twig" %}
+    <div class="d-flex justify-content-end mr-4">
+        <a href="{{ path('carte_travaux.index')}}"><button class="mt-4 mr-5 btn btn-outline-info rounded"> Retour à la liste des cartes travaux</button></a>
+    </div>
 
-<div>
-    <a href="{{ path('carte_provisoire.index')}}"><button class="mt-4 btn btn-outline-info rounded ml-5"> Retour à la liste des cartes provisoires</button></a>
-</div>
-<div class="container">
-    <h1 class="mt-4 text-center"> Carte provisoire {{ carteProvisoire.nom }} {{ carteProvisoire.prenom }}</h1>
+    <div class="container">
+    <h1 class="mt-4 text-center"> Créer une nouvelle carte travaux</h1>
     {{ form_start(form) }}
         
         <div class='form-group'>
-            {{ form_label(form.civilite) }}
-            {{ form_widget(form.civilite) }}
+            {{ form_label(form.nomEntrepriseTravaux) }}
+            {{ form_widget(form.nomEntrepriseTravaux) }}
             <div class="form-errors">
-                {{ form_errors(form.civilite) }}
+                {{ form_errors(form.nomEntrepriseTravaux) }}
             </div>
         </div>
         <div class="d-flex justify-content-around w-100">
-            <div class='form-group w-50 mr-2'>
-                {{ form_label(form.nom) }}
-                {{ form_widget(form.nom) }}
+            <div class='form-group w-100'>
+                {{ form_label(form.dateDebutTravaux) }}
+                <div class="input-group date" id="datepicker">
+                    {{ form_widget(form.dateDebutTravaux) }}
+                    <span class="input-group-append">
+                        <span class="input-group-text bg-light d-block">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </span>
+                </div>
                 <div class="form-errors">
-                    {{ form_errors(form.nom) }}
+                    {{ form_errors(form.dateDebutTravaux) }}
                 </div>
             </div>
-            <div class='form-group w-50 ml-2'>
-                {{ form_label(form.prenom) }}
-                {{ form_widget(form.prenom) }}
+            <div class='form-group w-100 ml-4'>
+                {{ form_label(form.dateFinTravaux) }}
+                <div class="input-group date" id="datepicker1">
+                    {{ form_widget(form.dateFinTravaux) }}
+                    <span class="input-group-append">
+                        <span class="input-group-text bg-light d-block">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </span>
+                </div>
                 <div class="form-errors">
-                    {{ form_errors(form.prenom) }}
+                    {{ form_errors(form.dateFinTravaux) }}
                 </div>
             </div>
         </div>
@@ -41,7 +55,7 @@
                     'label_attr': {'class': 'form-label mt-4 text-warning'}})
                 }}
                 {{ form_widget(form.adresse, {
-                    'attr': {'class': 'form-control rounded'}})
+                    'attr': {'class': 'form-control rounded', 'required': true}})
                 }}
                 <div class="form-errors">
                     {{ form_errors(form.adresse) }}
@@ -68,26 +82,26 @@
                     'label_attr': {'class': 'form-label mt-4 text-warning'}})
                 }}
                 {{ form_widget(form.delivreePar, {
-                    'attr': {'class': 'form-control rounded'}})
+                    'attr': {'class': 'form-control rounded', 'required': true}})
                 }}
                 <div class="form-errors">
-                    {{ form_errors(form.adresse) }}
+                    {{ form_errors(form.delivreePar) }}
                 </div>
             </div>
         </div>
         <div class="d-flex justify-content-around">
-        <div class='form-group'>
-            {{ form_label(form.carteGrise) }}
+        <div class='form-check form-check-inline mt-4'>
             {{ form_widget(form.carteGrise) }}
+            {{ form_label(form.carteGrise) }}
             <div class="form-errors">
                 {{ form_errors(form.carteGrise) }}
             </div>
         </div>
-        <div class='form-group'>
-            {{ form_label(form.justificatifMoins3Mois) }}
-            {{ form_widget(form.justificatifMoins3Mois) }}
+        <div class='form-check form-check-inline mt-4'>
+            {{ form_widget(form.devis) }}
+            {{ form_label(form.devis) }}
             <div class="form-errors">
-                {{ form_errors(form.justificatifMoins3Mois) }}
+                {{ form_errors(form.devis) }}
             </div>
         </div>
         </div>
@@ -98,16 +112,14 @@
                 {{ form_errors(form.commentaires) }}
             </div>
         </div>
-        <div class="d-flex justify-content-center w-100 mt-4">
+        <div class="d-flex justify-content-center w-100">
             <div class="form-group">
-                <button type="submit" class="btn btn-primary mt-4 rounded px-4 py-2 ">Modifier</button>
+                {{ form_row(form.submit) }}
             </div>
             
         </div>
 
 
         {{ form_end(form) }}
-        
-        
     </div>
 {% endblock %}

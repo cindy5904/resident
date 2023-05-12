@@ -3,9 +3,10 @@
 {% block title %} Carte provisoire n° {% endblock %}
 
 {% block body %}
+{% include "_nav.html.twig" %}
 <div class="d-flex justify-content-between">
-    <div>
-        <a href="{{ path('carte_provisoire.index')}}"><button class="mt-4 btn rounded-lg text-lowercase btn-cp" style=""> Retour à la liste des cartes provisoires</button></a>
+    <div class="ml-5">
+        <a href="{{ path('carte_provisoire')}}"><button class="mt-5 ml-4 btn btn-info rounded text-lowercase btn-cp"> Retour</button></a>
     </div>
 
     <div class="text-end mr-5">
@@ -22,7 +23,7 @@
 </div>
 
 <div class="container">
-    <h1 class="mt-4"> Créer une nouvelle carte provisoire</h1>
+    <h1 class="mt-4 text-center"> Créer une nouvelle carte provisoire</h1>
     {{ form_start(form) }}
         
         <div class='form-group'>
@@ -121,8 +122,6 @@
 
         {{ form_end(form) }}
         
-        <div>
-            <a href="{{ path('carte_provisoire.index')}}"><button class="mt-4 btn btn-outline-info rounded-pill"> Retour à la liste des cartes provisoires</button></a>
-        </div>
+       
     </div>
 {% endblock %}

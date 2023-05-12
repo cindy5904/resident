@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ResidentsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
 
 #[ORM\Entity(repositoryClass: ResidentsRepository::class)]
 class Residents
@@ -54,19 +56,19 @@ class Residents
     #[ORM\Column(nullable: true)]
     private ?bool $voiePostale = null;
 
-    #[ORM\Column(type: 'date', nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateDeMiseEnIncomplet = null;
 
-    #[ORM\Column(type: 'date', nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateDeCompletude = null;
 
-    #[ORM\Column(type: 'date', nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateDeReponseAdministre = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $numeroDossier = null;
 
-    #[ORM\Column(type: 'date', nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $DateEnvoiCarte = null;
 
     #[ORM\Column(length: 50, nullable: true)]
@@ -424,4 +426,25 @@ class Residents
 
         return $this;
     }
+
 }
+
+        /**
+     * @Annotation
+     */
+    class NumericCharacters extends Constraint
+    {
+        public $message = 'Le numéro d\'appartement doit contenir uniquement des caractères numériques.';
+    }
+    
+
+    class NumericCharactersValidator extends ConstraintValidator
+    {
+        public function validate($value, Constraint $constraint)
+        {
+            if (!is_numeric($value)) {
+                $this->context->buildViolation($constraint->message)
+                    ->addViolation();
+            }
+        }
+    }

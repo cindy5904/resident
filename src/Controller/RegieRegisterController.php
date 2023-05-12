@@ -32,8 +32,14 @@ class RegieRegisterController extends AbstractController
             $manager->persist($residents);
             $manager->flush();
 
-            return $this->redirectToRoute('app_choice');
+            $this->addFlash(
+                "success",
+                "Les informations complémentaires ont bien été ajoutées !!!"
+            );
+
+            return $this->redirectToRoute("app_carte_resident");
         }
+        
 
         return $this->render('regie_register/index.html.twig', [
             'searchTerm' => $searchTerm,

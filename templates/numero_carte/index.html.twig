@@ -3,11 +3,12 @@
 {% block title %}Recherche numéro carte{% endblock %}
 
 {% block body %}
+{% include "_nav.html.twig" %}
 <form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('app_numero_carte') }}">
     <div class="form-group">
-        <input class="form-control" type="text" name="numeroCarte" value="{{ searchTerm }}" placeholder="Rechercher un numéro de carte">
+        <input class="form-control" id="recherche" type="text" name="numeroCarte" value="{{ searchTerm }}" placeholder="Rechercher un numéro de carte">
     </div>
-    <button class="btn btn-info" type="submit">Rechercher</button>
+    <button class="btn btn-info" id ="btn-recherche"type="submit">Rechercher</button>
 </form>
 
 {% if searchTerm is not empty %}

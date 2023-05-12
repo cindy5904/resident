@@ -75,7 +75,7 @@ public function searchName(ResidentsRepository $repository, Request $request): R
 
             $this->addFlash(
                 "success",
-                "Le résident a été créée avec succès !!!"
+                "Le résident a été créé avec succès !!!"
             );
 
             return $this->redirectToRoute("app_carte_resident");

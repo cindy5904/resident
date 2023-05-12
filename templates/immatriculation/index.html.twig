@@ -5,7 +5,7 @@
 {% block body %}
 <form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('app_immatriculation') }}">
     <div class="form-group">
-        <input class="form-control" type="text" name="immatriculation" value="{{ searchTerm }}" placeholder="Rechercher par immatriculation">
+        <input class="form-control text-light" id="recherche" type="text" name="immatriculation" value="{{ searchTerm }}" placeholder="Rechercher par immatriculation">
     </div>
     <button class="btn btn-info" type="submit">Rechercher</button>
 </form>

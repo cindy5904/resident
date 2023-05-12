@@ -35,7 +35,7 @@ class RegisterRegieType extends AbstractType
                          "class" => "js-datepicker rounded "
                      ],
                      "widget" => "single_text",
-                     "format" => "dd/mm/yyyy",
+                     "format" => "dd/MM/yyyy",
                      'html5' => false,
                      'required' => false,
                      "label" => "Date de création",
@@ -55,7 +55,7 @@ class RegisterRegieType extends AbstractType
                     "class" => "js-datepicker rounded "
                 ],
                 "widget" => "single_text",
-                "format" => "dd/mm/yyyy",
+                "format" => "dd/MM/yyyy",
                 'html5' => false,
                 'required' => false,
                 "label" => "Date d'envoi de la carte",

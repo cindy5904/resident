@@ -18,8 +18,11 @@ class CarteTravaux
     private ?string $nomEntrepriseTravaux = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateTravaux = null;
+    private ?\DateTimeInterface $dateDebutTravaux = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateFinTravaux = null;
+    
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $numeroAdresse = null;
 
@@ -61,14 +64,25 @@ class CarteTravaux
         return $this;
     }
 
-    public function getDateTravaux(): ?\DateTimeInterface
+    public function getDateDebutTravaux(): ?\DateTimeInterface
     {
-        return $this->dateTravaux;
+        return $this->dateDebutTravaux;
     }
 
-    public function setDateTravaux(?\DateTimeInterface $dateTravaux): self
+    public function setDateDebutTravaux(?\DateTimeInterface $dateDebutTravaux): self
     {
-        $this->dateTravaux = $dateTravaux;
+        $this->dateDebutTravaux = $dateDebutTravaux;
+
+        return $this;
+    }
+    public function getDateFinTravaux(): ?\DateTimeInterface
+    {
+        return $this->dateFinTravaux;
+    }
+
+    public function setDateFinTravaux(?\DateTimeInterface $dateFinTravaux): self
+    {
+        $this->dateFinTravaux = $dateFinTravaux;
 
         return $this;
     }

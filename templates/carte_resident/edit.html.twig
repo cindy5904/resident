@@ -3,7 +3,7 @@
 {% block title %} Modifier résident  {{ resident.nom }} {{ resident.prenom }}{% endblock %}
 
 {% block body %}
-
+{% include "_nav.html.twig" %}
 <div class="container h-100 w-100">
     <div class="d-flex justify-content-end">
         <a href="{{ path('app_carte_resident')}}"><button class="mt-4 btn btn-outline-info rounded-pill"> Retour à la liste des résidents</button></a>
@@ -12,9 +12,9 @@
     {{ form_start(form) }}
     <div class="container h-100 w-100 d-flex mt-4">
         <div class="container w-100">
-            <div class='form-group w-50'>
+            <div class='form-group'>
                 {{ form_label(form.Civilite) }}
-                {{ form_widget(form.Civilite, { 'attr': {'class': 'form-control rounded'}} ) }}
+                {{ form_widget(form.Civilite) }}
                 <div class="form-errors">
                     {{ form_errors(form.Civilite) }}
                 </div>
@@ -22,7 +22,7 @@
             <div class="d-flex justify-content-around w-100">
                 <div class='form-group w-50 mr-2'>
                     {{ form_label(form.nom) }}
-                    {{ form_widget(form.nom)}}
+                    {{ form_widget(form.nom) }}
                     <div class="form-errors">
                         {{ form_errors(form.nom) }}
                     </div>
@@ -173,7 +173,7 @@
                 </div>
             </div>
         </div>
-        <hr style=" border-left: 1px solid lightgray; height: 1050px; width: 1px;">
+        <hr style=" border-left: 1px solid lightgray; height: 800px; width: 1px;">
 
         <div class="container w-50">
             <h2 class="text-primary mt-4 text-center">Suivi de dossier</h2>
@@ -264,9 +264,9 @@
                     <div class="form-errors">
                         {{ form_errors(form.dateEnvoiCarte) }}
                     </div>
-                </div>
+                </div> #}
             </div>    
-             #}
+            
         </div>
 
         </div>

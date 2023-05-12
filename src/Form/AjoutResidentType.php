@@ -2,18 +2,22 @@
 
 namespace App\Form;
 
+use App\Entity\NumericCharacters;
 use App\Entity\Residents;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\DateType as TypeDateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AjoutResidentType extends AbstractType
 {
@@ -31,16 +35,33 @@ class AjoutResidentType extends AbstractType
             ->add('prenom')
             ->add('numeroAdresse')
             ->add('adresse')
-            ->add('numeroAppartement', null, [
-                'required' => false, 
+            // ->add('numeroAppartement', null, [
+            //     'required' => false, 
+            //     'attr' => ['placeholder' => 'Veuillez saisir le numéro d\'appartement si disponible'],
+            //     'constraints' => [
+            //         new Regex([
+            //             'pattern' => '/^\d*$/', 
+            //             'message' => 'Le numéro d\'appartement doit contenir uniquement des chiffres positifs.',
+            //         ]),
+            //     ],
+            // ])
+            ->add('numeroAppartement', IntegerType::class, [
+                'required' => false,
                 'attr' => ['placeholder' => 'Veuillez saisir le numéro d\'appartement si disponible'],
                 'constraints' => [
-                    new Regex([
-                        'pattern' => '/^\d*$/', 
-                        'message' => 'Le numéro d\'appartement doit contenir uniquement des chiffres positifs.',
+                    new Assert\Regex([
+                        'pattern' => '/^\d*$/',
+                        'message' => 'Le numéro d\'appartement doit contenir uniquement des caractères numériques.',
+                        'groups' => ['numeric_validation'],
+                    ]),
+                    new Assert\NotBlank([
+                        'message' => 'Le numéro d\'appartement ne peut pas être vide.',
+                        'groups' => ['numeric_validation'],
                     ]),
                 ],
+                
             ])
+           
             ->add('marqueVehicule')
             ->add('modele')
             ->add('immatriculation')
@@ -55,7 +76,7 @@ class AjoutResidentType extends AbstractType
                     "class" => "js-datepicker rounded "
                 ],
                 "widget" => "single_text",
-                "format" => "dd/mm/yyyy",
+                "format" => "dd/MM/yyyy",
                 'html5' => false,
                 'required' => false,
                 "label" => "Date de mise en incomplet",
@@ -69,10 +90,9 @@ class AjoutResidentType extends AbstractType
                     "valueDefault" => "00/00/0000"
                 ],
                 "widget" => "single_text",
-                "format" => "dd/mm/yyyy",
+                "format" => "dd/MM/yyyy",
                 'html5' => false,
                 'required' => false,
-                // 'empty_data' => null,
                 "label" => "Date de complétude",
                 "label_attr" => [
                     "class" => "form-label mt-2 text-warning"
@@ -83,7 +103,7 @@ class AjoutResidentType extends AbstractType
                     "class" => "js-datepicker rounded"
                 ],
                 "widget" => "single_text",
-                "format" => "dd/mm/yyyy",
+                "format" => "dd/MM/yyyy",
                 'html5' => false,
                 'required' => false,
                 "label" => "Date de réponse à l'administré",
@@ -104,7 +124,7 @@ class AjoutResidentType extends AbstractType
                     "class" => "btn btn-primary mt-4 rounded",
                     "novalidate" => true,
                 ],
-                "label" => "Ajouter résident",
+                "label" => "Enregistrer",
             ]);
         ;
     }
@@ -115,4 +135,12 @@ class AjoutResidentType extends AbstractType
             'data_class' => Residents::class,
         ]);
     }
+    public function validateForm(FormInterface $form, ValidatorInterface $validator)
+{
+    $validator->validate($form, null, ['numeric_validation']);
+
+    if (!$form->isValid()) {
+        $form->addError(new FormError('Veuillez corriger les erreurs dans le formulaire.'));
+    }
+}
 }

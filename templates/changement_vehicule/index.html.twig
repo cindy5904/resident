@@ -3,6 +3,7 @@
 {% block title %}Recherche immatriculation{% endblock %}
 
 {% block body %}
+{% include "_nav.html.twig" %}
 {# <form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('app_changement_vehicule') }}">
     <div class="form-group">
         <input class="form-control" type="text" name="immatriculation" value="{{ searchTerm }}" placeholder="Rechercher par nom">
@@ -95,7 +96,9 @@
     {% endif %}
 {% endif %}
 
-
+ <div class="d-flex justify-content-start ml-5">
+        <a href="{{ path('app_choice')}}"><button class="mt-4 mr-5 btn btn-outline-info rounded"> Retour</button></a>
+    </div>
 
 {% endblock %}
 

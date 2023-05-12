@@ -1,20 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CarteTravauxController!{% endblock %}
+{% block title %}Liste des cartes travaux{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/resident/src/Controller/CarteTravauxController.php'|file_link(0) }}">src/Controller/CarteTravauxController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/resident/templates/carte_travaux/index.html.twig'|file_link(0) }}">templates/carte_travaux/index.html.twig</a></code></li>
-    </ul>
+{% include "_nav.html.twig" %}
+<div class="d-flex justify-content-end mt-4 mr-4">
+    <a href="{{ path("carte_travaux.new") }}" class="btn btn-info rounded">Créer une nouvelle carte travaux</a>
+</div>
+<div class="container mt-4">
+    <div>
+        <h1 class="mt-4 text-warning text-center">Listes des cartes travaux</h1>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4 rounded">
+                {{ message }}
+            </div>
+        {% endfor %}        
+    </div>
+    <table class="table table-hover mt-4">
+    <thead class="h-100 w-100">
+        <tr class="h-100 text-center">
+        <th scope="col" class="text-warning h5">Nom de l'entreprise</th>
+        <th scope="col" class="text-warning h5">Date de debut des travaux</th>
+        <th scope="col" class="text-warning h5">Date de fin des travaux</th>
+        <th scope="col" class="text-warning h5">Voir détails</th>
+        <th scope="col" class="text-warning h5">modifier</th>
+        </tr>
+    </thead>
+    <tbody class="h-100">
+    {% for carteTravail in carteTravaux %}
+        <tr class="table-light h-100 text-center align-items-center">
+        <td class="align-middle">{{carteTravail.nomEntrepriseTravaux}}</td>
+        <td class="align-middle">{{carteTravail.dateDebutTravaux|date('d/m/Y')}}</td>
+        <td class="align-middle">{{carteTravail.dateFinTravaux|date('d/m/Y')}}</td>
+        <td class="align-middle">
+            <a href="{{ path("carte_travaux.show", { id: carteTravail.id }) }}" class="btn btn-info rounded">Afficher détails</a>
+        </td>
+        <td class="align-middle">
+            <a href="{{ path("carte_travaux.edit", { id: carteTravail.id }) }}" class="btn btn-warning rounded">Modifier</a>
+        </td>
+        </tr>
+    {% endfor %} 
+    </tbody>
+    </table>
+    <div class="navigation d-flex justify-content-center mt-4">
+        {{ knp_pagination_render(carteTravaux) }}
+    </div>
 </div>
 {% endblock %}

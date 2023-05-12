@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Carte travaux - {{ carteTravaux.id }} {% endblock %}
+{% block body %}
+    <div class="d-flex justify-content-end mr-4" >
+        <a href="{{ path('carte_travaux.index')}}"><button class="mt-4 btn btn-outline-info rounded-pill"> Retour à la liste des cartes travaux</button></a>
+    </div>
+    <div class="container mt-4">
+    <div class="card border-primary h-100 mb-3 " >
+        <div class="card-header d-flex align-items-center"><h1 class=""> Carte travaux </h1></div>
+        <div class="card-body">
+            <h4 class="card-title">{% if carteTravaux.nomEntrepriseTravaux %}  {{ carteTravaux.nomEntrepriseTravaux }} {% endif %}</h4>
+
+            <p class="mt-4"><strong class="h5"> Adresse :  </strong> {{carteTravaux.numeroAdresse}} {{carteTravaux.adresse}}</p>
+      
+        <p class="mt-4"><strong class="h5"> Immatriculation du véhicule :  </strong> {{carteTravaux.immatriculation}}  </p>
+        
+        <div>
+        {% if carteTravaux.dateDebutTravaux %}
+            <p class="mt-4"><strong class="h5"> Date de début de travaux : </strong> {{carteTravaux.dateDebutTravaux|date("d/m/Y")}} </p>
+        {% else %}
+            <p class="mt-4"><strong class="h5"> Date de début de travaux : </strong> Non renseigné </p>
+        {% endif %}
+
+        {% if carteTravaux.dateFinTravaux %}
+            <p class="mt-4"><strong class="h5"> Date de fin de travaux : </strong> {{carteTravaux.dateFinTravaux|date("d/m/Y")}} </p>
+        {% else %}
+            <p class="mt-4"><strong class="h5"> Date de fin de travaux : </strong> Non renseigné </p>
+        {% endif %}
+        
+        </div>
+        <p class="mt-4"><strong class="h5"> Pièces justificatives :  </strong>
+            {% if carteTravaux.carteGrise == 1 %}
+                <p class="mt-4 ml-4"><strong class="h5"> -> Carte grise : </strong> document fourni </p>
+            {% else %}
+                <p class="mt-4 ml-4"><strong class="h5"> -> Carte grise : </strong> document non fourni </p>
+            {% endif %} 
+            {% if carteTravaux.devis == 1 %}
+                <p class="mt-4 ml-4"><strong class="h5"> -> Devis :  </strong> document fourni </p>
+            {% else %}
+                <p class="mt-4 ml-4"><strong class="h5"> -> Devis : </strong> document non fourni </p>
+            {% endif %}            
+        </p>
+
+
+        {% if carteTravaux.commentaires %}
+            <p class="mt-4"><strong class="h5"> Commentaires :  </strong> {{carteTravaux.commentaires}} </p>
+        {% else %}
+            <p class="mt-4"><strong class="h5"> Commentaires : </strong> Non renseigné </p>
+        {% endif %}
+
+        {% if carteTravaux.dateCreation %}
+            <p class="mt-4"><strong class="h5"> Date de création : </strong> {{carteTravaux.dateCreation|date("d/m/Y")}} </p>
+        {% else %}
+            <p class="mt-4"><strong class="h5"> Date de création : </strong> Non renseigné </p>
+        {% endif %}
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

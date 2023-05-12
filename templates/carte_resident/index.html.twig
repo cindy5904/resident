@@ -3,7 +3,7 @@
 {% block title %}Liste des résidents{% endblock %}
 
 {% block body %}
-
+{% include "_nav.html.twig" %}
 <div class="d-flex justify-content-end mt-4 mr-4">
     <a href="{{ path("app_resident_new") }}" class="btn btn-info rounded">Créer un nouveau résident</a>
 </div>
@@ -23,15 +23,16 @@
         <th class="align-middle" scope="col" class="text-capitalize text-warning h5">Nom</th>
         <th class="align-middle" scope="col" class="text-capitalize text-warning h5">Prénom</th>
         <th class="align-middle" scope="col" class="text-capitalize text-warning h5">Voir détails</th>
-        <th class="align-middle" scope="col" class="text-capitalize text-warning h5">modifier</th>
+        <th class="align-middle" scope="col" class="text-capitalize text-warning h5">Modifier</th>
+        <th class="align-middle" scope="col" class="text-capitalize text-warning h5">Régie</th>
         </tr>
     </thead>
     <tbody class="h-100">
     {% for resident in residents %}
         <tr class="table-light h-100 text-center align-items-center">
-        <td>{{resident.civilite}}</td>
-        <td>{{resident.nom}}</td>
-        <td>{{resident.prenom}}</td>
+        <td class="align-middle">{{resident.civilite}}</td>
+        <td class="align-middle">{{resident.nom}}</td>
+        <td class="align-middle">{{resident.prenom}}</td>
         <td>
             <a href="{{ path("app_resident_show", { id: resident.id }) }}" class="btn btn-info rounded">Afficher détails</a>
         </td>
@@ -39,14 +40,15 @@
             <a href="{{ path("app_resident_edit", { id: resident.id }) }}" class="btn btn-warning rounded">Modifier</a>
         </td>
         <td>
-            <a href="{{ path("app_resident_regie", { id: resident.id }) }}" class="btn btn-primary rounded">Regie</a>
+            <a href="{{ path("app_resident_regie", { id: resident.id }) }}" class="btn btn-info rounded">Regie</a>
         </td>
         </tr>
     {% endfor %} 
     </tbody>
     </table>
-    <div class="navigation d-flex justify-content-center mt-4">
+    <div class="navigation d-flex justify-content-center mt-4" id="paginate">
         {{ knp_pagination_render(residents) }}
     </div>
+    
 </div>
 {% endblock %}
