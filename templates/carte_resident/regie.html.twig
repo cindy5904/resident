@@ -1,56 +1,100 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Bordereau pour Régie
+	Bordereau pour Régie
 {% endblock %}
 
 {% block body %}
-
-    <div class="d-flex justify-content-between mb-5">
-        <div class="col-3 hidden-on-print w-50 ml-5">
-            <button class="hidden-on-print rounded mt-4 px-3 py-2 ml-3 btn-warning" onclick="window.print()" id="impression">Imprimer le bordereau</button>
+<div class="container mt-4">    
+	<div class="d-flex justify-content-between mb-5">
+		<div class="col-3 hidden-on-print w-50">
+			<button class="hidden-on-print rounded mt-4 px-3 py-2 btn-warning" onclick="window.print()" id="impression">Imprimer le bordereau</button>
+		</div>
+        <div class="d-flex justify-content-end w-50">
+            <a href="{{ path('app_carte_resident')}}" class="hidden-on-print">
+                <button class="mt-4 btn btn-outline-info rounded hidden-on-print rounded">
+                    Retour à la liste des résidents</button>
+            </a>
         </div>
-    <div class="d-flex justify-content-end mr-5 w-50" >
-        <a href="{{ path('app_carte_resident')}}" class="hidden-on-print"><button class="mt-4 btn btn-outline-info rounded hidden-on-print rounded"> Retour à la liste des résidents</button></a>
-    </div>
-    </div>
-    <div class="card border-primary h-100 mb-3 mt-4" >
-        <div class="card-header d-flex align-items-center"><h1 class=""> Résident </h1></div>
-        <div class="card-body">
-            <h4 class="card-title">
-            {% if resident.civilite %}  
-                {{ resident.civilite }} 
-            {% endif %}
-            {% if resident.nom %} 
-                {{ resident.nom }}
-            {% endif %}
-            {% if resident.prenom %}
-                {{ resident.prenom }}
-            {% endif %}
-            {% if resident.numeroAppartement %}
-                {{resident.numeroAppartement}}
-            {% endif %}</p>
-      
-            <p class="mt-4"><strong class="h5"> Marque du véhicule :  </strong> {{resident.marqueVehicule}}  </p>
-            <p class="mt-4"><strong class="h5"> Modèle :  </strong> {{resident.modele}}  </p>
-            <p class="mt-4"><strong class="h5"> Immatriculation du véhicule :  </strong> {{resident.immatriculation}}  </p>
-            
-            <p class="mt-4"><strong class="h5"> Montant :  </strong> {{resident.montant}} € </p>
-            <p class="mt-4"><strong class="h5"> Mode de réglement :  </strong> {{resident.modeReglement}}  </p>
+	</div>
+	<div class="card border-primary h-100 mb-3 mt-4">
+		<div class="card-header d-flex align-items-center"><h1 class="">Résident</h1></div>
+		<div class="card-body">
+			<h4 class="card-title">
+				{% if resident.civilite %}
+					{{ resident.civilite }}
+				{% endif %}
+				{% if resident.nom %}
+					{{ resident.nom }}
+				{% endif %}
+				{% if resident.prenom %}
+					{{ resident.prenom }}
+				{% endif %}
+				{% if resident.numeroAppartement %}
+					{{resident.numeroAppartement}}
+				{% endif %}
+            </h4>
+			
 
-            <p class="mt-4"><strong class="h5"> Numéro de carte :  </strong> 
-            {% if resident.numeroCarte %} 
-                {{resident.numeroCarte}}
-            {% else %}
-                Non renseigné
-            {% endif %}
-            </p>
-            {% if resident.delivreePar %}
-                <p class="mt-4"><strong class="h5"> Délivrée par : </strong> {{resident.delivreePar}} </p>
-            {% else %}
-                <p class="mt-4"><strong class="h5"> Délivrée par : </strong> Non renseigné </p>
-            {% endif %}
-  </div>        
- </div>
-    </div>
+			<p class="mt-4">
+				<strong class="h5">
+					Marque du véhicule :
+				</strong>
+				{{resident.marqueVehicule}}
+			</p>
+			<p class="mt-4">
+				<strong class="h5">
+					Modèle :
+				</strong>
+				{{resident.modele}}
+			</p>
+			<p class="mt-4">
+				<strong class="h5">
+					Immatriculation du véhicule :
+				</strong>
+				{{resident.immatriculation}}
+			</p>
+
+			<p class="mt-4">
+				<strong class="h5">
+					Montant :
+				</strong>
+				{{resident.montant}}
+				€
+			</p>
+			<p class="mt-4">
+				<strong class="h5">
+					Mode de réglement :
+				</strong>
+				{{resident.modeReglement}}
+			</p>
+
+			<p class="mt-4">
+				<strong class="h5">
+					Numéro de carte :
+				</strong>
+				{% if resident.numeroCarte %}
+					{{resident.numeroCarte}}
+				{% else %}
+					Non renseigné
+				{% endif %}
+			</p>
+			{% if resident.delivreePar %}
+				<p class="mt-4">
+					<strong class="h5">
+						Délivrée par :
+					</strong>
+					{{resident.delivreePar}}
+				</p>
+			{% else %}
+				<p class="mt-4">
+					<strong class="h5">
+						Délivrée par :
+					</strong>
+					Non renseigné
+				</p>
+			{% endif %}
+		</div>
+	</div>
+</div>
 {% endblock %}

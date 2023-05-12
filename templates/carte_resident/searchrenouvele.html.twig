@@ -1,18 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+{% include "_nav.html.twig" %}
 <form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('app_resident_search') }}">
   <div class="form-group">
     <input class="form-control" type="text" name="search" value="{{ searchTerm }}" placeholder="Rechercher par nom">
   </div>
   <button class="btn btn-info" type="submit">Rechercher</button>
 </form>
-{% if resident %}
+{% if residents %} 
     <h4 class='text-center mt-3 mb-5'>Résultat trouvé pour "{{ searchTerm }}" :</h4>
+    {% for resident in residents %}
      <table class="table table-hover mt-4">
     <thead class="h-100 w-100">
         <tr class="h-100 text-center">
-        <th scope="col" class="text-capitalize text-warning h5">Numéro</th>
         <th scope="col" class="text-capitalize text-warning h5">Civilité</th>
         <th scope="col" class="text-capitalize text-warning h5">Nom</th>
         <th scope="col" class="text-capitalize text-warning h5">Prénom</th>
@@ -22,7 +23,6 @@
     </thead>
         <tbody class="h-100">
             <tr class="table-light h-100 text-center align-items-center">
-                <th scope="row" class="align-middle">{{ resident.id }}</th>
                 <td class="align-middle">{{ resident.civilite }}</td>
                 <td class="align-middle">{{ resident.nom }}</td>
                 <td class="align-middle">{{ resident.prenom }}</td>
@@ -35,10 +35,11 @@
             </tr>
         </tbody>
     </table>
+    {% endfor %}
 {% elseif searchTerm %}
     <div class='text-center mt-5'>
         <p>Aucun résident trouvé pour "{{ searchTerm }}".</p>
-        <a href="{{path('app_home')}}" class="btn btn-info">Revenir à la page d'accueil</a>
+        <a href="{{path('app_carte_resident')}}" class="btn btn-info">Revenir à la page d'accueil</a>
     </div>
     
 {% endif %}

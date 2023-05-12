@@ -26,7 +26,7 @@ class CarteResidentController extends AbstractController
             $resident = null;
         
             if ($searchTerm) {
-                $resident = $repository->findOneBy(['nom' => $searchTerm]);
+                $resident = $repository->findBy(['nom' => $searchTerm]);
             }
     
             $residents = $paginator->paginate(
@@ -48,14 +48,14 @@ public function searchName(ResidentsRepository $repository, Request $request): R
 {
     {
         $searchTerm = $request->query->get('search');
-        $resident = null;
+        $residents = null;
     
         if ($searchTerm) {
-            $resident = $repository->findOneBy(['nom' => $searchTerm]);
+            $residents = $repository->findBy(['nom' => $searchTerm]);
         }
         return $this->render('carte_resident/searchrenouvele.html.twig', [
             'searchTerm' => $searchTerm,
-            'resident' => $resident
+            'residents' => $residents
         ]);
 }
 }

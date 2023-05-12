@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\ListeEntrepriseRepository;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: ListeEntrepriseRepository::class)]
+class ListeEntreprise
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $denomination = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $activite = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $totalSalarie = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $commentaires = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getDenomination(): ?string
+    {
+        return $this->denomination;
+    }
+
+    public function setDenomination(?string $denomination): self
+    {
+        $this->denomination = $denomination;
+
+        return $this;
+    }
+
+    public function getActivite(): ?string
+    {
+        return $this->activite;
+    }
+
+    public function setActivite(?string $activite): self
+    {
+        $this->activite = $activite;
+
+        return $this;
+    }
+
+    public function getTotalSalarie(): ?int
+    {
+        return $this->totalSalarie;
+    }
+
+    public function setTotalSalarie(?int $totalSalarie): self
+    {
+        $this->totalSalarie = $totalSalarie;
+
+        return $this;
+    }
+
+    public function getCommentaires(): ?string
+    {
+        return $this->commentaires;
+    }
+
+    public function setCommentaires(?string $commentaires): self
+    {
+        $this->commentaires = $commentaires;
+
+        return $this;
+    }
+}

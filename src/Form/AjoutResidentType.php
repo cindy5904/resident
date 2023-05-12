@@ -35,32 +35,33 @@ class AjoutResidentType extends AbstractType
             ->add('prenom')
             ->add('numeroAdresse')
             ->add('adresse')
-            // ->add('numeroAppartement', null, [
-            //     'required' => false, 
-            //     'attr' => ['placeholder' => 'Veuillez saisir le numéro d\'appartement si disponible'],
-            //     'constraints' => [
-            //         new Regex([
-            //             'pattern' => '/^\d*$/', 
-            //             'message' => 'Le numéro d\'appartement doit contenir uniquement des chiffres positifs.',
-            //         ]),
-            //     ],
-            // ])
-            ->add('numeroAppartement', IntegerType::class, [
-                'required' => false,
+            ->add('numeroAppartement', null, [
+                'required' => false, 
                 'attr' => ['placeholder' => 'Veuillez saisir le numéro d\'appartement si disponible'],
                 'constraints' => [
-                    new Assert\Regex([
-                        'pattern' => '/^\d*$/',
-                        'message' => 'Le numéro d\'appartement doit contenir uniquement des caractères numériques.',
-                        'groups' => ['numeric_validation'],
-                    ]),
-                    new Assert\NotBlank([
-                        'message' => 'Le numéro d\'appartement ne peut pas être vide.',
-                        'groups' => ['numeric_validation'],
+                    new Regex([
+                        'pattern' => '/^\d*$/', 
+                        'message' => 'Le numéro d\'appartement doit contenir uniquement des chiffres positifs.',
                     ]),
                 ],
-                
             ])
+            // ce code permet de bloqué le numero appartement au type numérique
+            // ->add('numeroAppartement', IntegerType::class, [
+            //     'required' => false,
+            //     'attr' => ['placeholder' => 'Veuillez saisir le numéro d\'appartement si disponible'],
+            //     'constraints' => [
+            //         new Assert\Regex([
+            //             'pattern' => '/^\d*$/',
+            //             'message' => 'Le numéro d\'appartement doit contenir uniquement des caractères numériques.',
+            //             'groups' => ['numeric_validation'],
+            //         ]),
+            //         new Assert\NotBlank([
+            //             'message' => 'Le numéro d\'appartement ne peut pas être vide.',
+            //             'groups' => ['numeric_validation'],
+            //         ]),
+            //     ],
+                
+            // ])
            
             ->add('marqueVehicule')
             ->add('modele')
@@ -135,12 +136,14 @@ class AjoutResidentType extends AbstractType
             'data_class' => Residents::class,
         ]);
     }
-    public function validateForm(FormInterface $form, ValidatorInterface $validator)
-{
-    $validator->validate($form, null, ['numeric_validation']);
 
-    if (!$form->isValid()) {
-        $form->addError(new FormError('Veuillez corriger les erreurs dans le formulaire.'));
-    }
-}
+     // ce code permet de bloqué le numero appartement au type numérique
+    // public function validateForm(FormInterface $form, ValidatorInterface $validator)
+    // {
+    // $validator->validate($form, null, ['numeric_validation']);
+
+    // if (!$form->isValid()) {
+    //     $form->addError(new FormError('Veuillez corriger les erreurs dans le formulaire.'));
+    // }
+    // }
 }

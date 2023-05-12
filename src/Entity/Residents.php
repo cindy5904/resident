@@ -429,22 +429,24 @@ class Residents
 
 }
 
+
+    // Cette fonction permet de bloquer le champs numéro appartement au type numérique
         /**
      * @Annotation
      */
-    class NumericCharacters extends Constraint
-    {
-        public $message = 'Le numéro d\'appartement doit contenir uniquement des caractères numériques.';
-    }
+    // class NumericCharacters extends Constraint
+    // {
+    //     public $message = 'Le numéro d\'appartement doit contenir uniquement des caractères numériques.';
+    // }
     
 
-    class NumericCharactersValidator extends ConstraintValidator
-    {
-        public function validate($value, Constraint $constraint)
-        {
-            if (!is_numeric($value)) {
-                $this->context->buildViolation($constraint->message)
-                    ->addViolation();
-            }
-        }
-    }
+    // class NumericCharactersValidator extends ConstraintValidator
+    // {
+    //     public function validate($value, Constraint $constraint)
+    //     {
+    //         if (!is_numeric($value)) {
+    //             $this->context->buildViolation($constraint->message)
+    //                 ->addViolation();
+    //         }
+    //     }
+    // }
