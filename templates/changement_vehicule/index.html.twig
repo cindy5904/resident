@@ -50,9 +50,9 @@
     {% endif %}     #}
     <form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('app_changement_vehicule') }}">
     <div class="form-group">
-        <input class="form-control" type="text" name="immatriculation" value="{{ searchTerm }}" placeholder="Rechercher par immatriculation">
+        <input class="form-control" id="recherche" type="text" name="immatriculation" value="{{ searchTerm }}" placeholder="Rechercher par immatriculation">
     </div>
-    <button class="btn btn-info" type="submit">Rechercher</button>
+    <button class="btn btn-info" id="btn-recherche" type="submit">Rechercher</button>
 </form>
 
 {% if searchTerm is not empty %}
@@ -65,7 +65,7 @@
                     <th scope="col" class="text-capitalize text-warning h5">Nom</th>
                     <th scope="col" class="text-capitalize text-warning h5">Prénom</th>
                     <th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
-                    <th scope="col" class="text-capitalize text-warning h5">modifier</th>
+                    <th scope="col" class="text-capitalize text-warning h5">Changement véhicule</th>
                     <th scope="col" class="text-capitalize text-warning h5">régie</th>
                 </tr>
             </thead>
@@ -79,7 +79,7 @@
                             <a href="{{ path("app_resident_show", { id: resident.id }) }}" class="btn btn-info rounded">Afficher détails</a>
                         </td>
                         <td>
-                            <a href="{{ path("app_resident_edit", { id: resident.id }) }}" class="btn btn-warning rounded">Modifier</a>
+                            <a href="{{ path("app_vehicule_edit", { id: resident.id }) }}" class="btn btn-warning rounded">Changement véhicule</a>
                         </td>
                         <td>
                             <a href="{{ path("app_regie_register", { id: resident.id }) }}" class="btn btn-info rounded px-4">Régie</a>

@@ -98,6 +98,9 @@ class Residents
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $carteSupprimee = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateAnDernier = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -423,6 +426,18 @@ class Residents
     public function setCarteSupprimee(?string $carteSupprimee): self
     {
         $this->carteSupprimee = $carteSupprimee;
+
+        return $this;
+    }
+
+    public function getDateAnDernier(): ?\DateTimeInterface
+    {
+        return $this->dateAnDernier;
+    }
+
+    public function setDateAnDernier(?\DateTimeInterface $dateAnDernier): self
+    {
+        $this->dateAnDernier = $dateAnDernier;
 
         return $this;
     }

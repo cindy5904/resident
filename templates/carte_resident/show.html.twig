@@ -79,6 +79,12 @@
             {% else %}
                 <p class="mt-4"><strong class="h5"> Date de création : </strong> Non renseigné </p>
             {% endif %}
+            {% if resident.dateAnDernier %}
+                 <p class="mt-4"><strong class="h5"> Date de création (année précédente) : </strong> {{resident.dateAnDernier|date("d/m/y")}}</p>
+            {% else %}
+                <p class="mt-4"><strong class="h5"> Date de création (année précédente) : </strong></p>
+            {% endif %}
+            
 
             <h2 class="text-primary">Suivi dossier</h2>
             <p class="mt-4"><strong class="h5"> Dates d'évolutions du dossier :  </strong>

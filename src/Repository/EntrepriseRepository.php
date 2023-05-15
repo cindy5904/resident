@@ -39,6 +39,12 @@ class EntrepriseRepository extends ServiceEntityRepository
         }
     }
 
+    public function findById()
+    {
+        return $this->createQueryBuilder("c")
+                        ->orderBy("c.id", "DESC");
+    }
+
 //    /**
 //     * @return Entreprise[] Returns an array of Entreprise objects
 //     */

@@ -20,7 +20,7 @@ class ImmatriculationController extends AbstractController
         $residents = $repository->findBy(['immatriculation' => $searchTerm]);
 
 
-        return $this->render('changement_vehicule/index.html.twig', [
+        return $this->render('immatriculation/index.html.twig', [
             'searchTerm' => $searchTerm,
             'residents' => $residents,
         ]);

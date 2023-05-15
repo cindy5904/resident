@@ -1,20 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TravailleurDomicileController!{% endblock %}
+{% block title %}Liste Travailleurs à domicile{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/resident/src/Controller/TravailleurDomicileController.php'|file_link(0) }}">src/Controller/TravailleurDomicileController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/resident/templates/travailleur_domicile/index.html.twig'|file_link(0) }}">templates/travailleur_domicile/index.html.twig</a></code></li>
-    </ul>
+{% include "_navPro.html.twig" %}
+<div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-end mt-4 mr-4">
+        <a href="{{path('travailleur_domicile.new')}}" class="btn btn-outline-info rounded">Créer une nouvelle carte travailleur à domicile</a>
+    </div>
+</div>    
+    <div class="container mt-4">
+        <div>
+			<h1 class="mt-4 text-warning text-center">Listes des travailleurs à domicile</h1>
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success mt-4 rounded">
+					{{ message }}
+				</div>
+			{% endfor %}
+		</div>
+        <table class="table table-hover mt-4 mb-5">
+			<thead class="h-100 w-100">
+				<tr class="h-100 text-center">
+					<th scope="col" class="text-capitalize text-warning h5">Civilité</th>
+					<th scope="col" class="text-capitalize text-warning h5">Nom</th>
+					<th scope="col" class="text-capitalize text-warning h5">Prénom</th>
+					<th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
+					<th scope="col" class="text-capitalize text-warning h5">modifier</th>
+					<th scope="col" class="text-capitalize text-warning h5">Régie</th>
+				</tr>
+			</thead>
+            <tbody>
+                {% for travailleurDom in travailleursDoms %}
+                    <tr class="table-light h-100 text-center align-items-center">
+                    <td class="align-middle">{{travailleurDom.civilite}}</td>
+                    <td class="align-middle">{{travailleurDom.nom}}</td>
+                    <td class="align-middle">{{travailleurDom.prenom}}</td>
+                    <td>
+						<a href="" class="btn btn-info rounded">Afficher détails</a>
+                    </td>
+                    <td>
+                        <a href="" class="btn btn-warning rounded">Modifier</a>
+                    </td>
+                    <td>
+                        <a href="" class="btn btn-info rounded">Régie</a>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <div class="navigation d-flex justify-content-center mt-4">
+			{{ knp_pagination_render(travailleursDoms) }}
+	
+    </div>
+    
 </div>
 {% endblock %}

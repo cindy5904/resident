@@ -3,11 +3,12 @@
 {% block title %}Recherche par Immatriculation{% endblock %}
 
 {% block body %}
+{% include "_nav.html.twig" %}
 <form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('app_immatriculation') }}">
     <div class="form-group">
         <input class="form-control text-light" id="recherche" type="text" name="immatriculation" value="{{ searchTerm }}" placeholder="Rechercher par immatriculation">
     </div>
-    <button class="btn btn-info" type="submit">Rechercher</button>
+    <button class="btn btn-info" id="btn-recherche" type="submit">Rechercher</button>
 </form>
 {% if searchTerm is not empty %}
     {% if residents is not empty %}

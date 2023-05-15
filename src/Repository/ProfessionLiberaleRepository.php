@@ -39,6 +39,12 @@ class ProfessionLiberaleRepository extends ServiceEntityRepository
         }
     }
 
+    public function findById()
+    {
+        return $this->createQueryBuilder("c")
+                        ->orderBy("c.id", "DESC");
+    }
+
 //    /**
 //     * @return ProfessionLiberale[] Returns an array of ProfessionLiberale objects
 //     */

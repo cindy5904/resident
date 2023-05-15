@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Residents;
+use App\Form\ChangementVehiculeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,31 @@ class ChangementVehiculeController extends AbstractController
         return $this->render('changement_vehicule/index.html.twig', [
             'searchTerm' => $searchTerm,
             'residents' => $residents,
+        ]);
+    }
+
+    #[Route('/changement/vehicule/edit/{id}', name: 'app_vehicule_edit')]
+    public function edit(Request $request, EntityManagerInterface $manager, Residents $resident): Response
+    {
+        $form = $this->createForm(ChangementVehiculeType::class, $resident);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $resident = $form->getData();
+            $manager->persist($resident);
+            $manager->flush();
+
+            $this->addFlash(
+                "success",
+                "L'immatriculation a été modifiée avec succès !!!"
+            );
+
+            return $this->redirectToRoute("app_carte_resident");
+        }
+
+        return $this->render("changement_vehicule/edit.html.twig", [
+            "form" => $form->createView(), "resident" => $resident
         ]);
     }
 }

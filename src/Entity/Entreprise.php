@@ -42,13 +42,22 @@ class Entreprise
     private ?string $carteSupprimee = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateCreation2022 = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateCreation2023 = null;
+    private ?\DateTimeInterface $dateCreation = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $numeroDeCarte = null;
+    private ?int $numeroCarte = null;
+
+    #[ORM\ManyToOne]
+    private ?ListeEntreprise $denomination = null;
+
+    #[ORM\ManyToOne]
+    private ?ModeReglement $modeReglement = null;
+
+    #[ORM\ManyToOne]
+    private ?VehiculeVert $vehiculeVert = null;
+
+    #[ORM\ManyToOne]
+    private ?MontantPro $montant = null;
 
     public function getId(): ?int
     {
@@ -163,38 +172,74 @@ class Entreprise
         return $this;
     }
 
-    public function getDateCreation2022(): ?\DateTimeInterface
+    public function getDateCreation(): ?\DateTimeInterface
     {
-        return $this->dateCreation2022;
+        return $this->dateCreation;
     }
 
-    public function setDateCreation2022(?\DateTimeInterface $dateCreation2022): self
+    public function setDateCreation(?\DateTimeInterface $dateCreation): self
     {
-        $this->dateCreation2022 = $dateCreation2022;
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }
 
-    public function getDateCreation2023(): ?\DateTimeInterface
+    public function getNumeroCarte(): ?int
     {
-        return $this->dateCreation2023;
+        return $this->numeroCarte;
     }
 
-    public function setDateCreation2023(?\DateTimeInterface $dateCreation2023): self
+    public function setNumeroCarte(?int $numeroCarte): self
     {
-        $this->dateCreation2023 = $dateCreation2023;
+        $this->numeroCarte = $numeroCarte;
 
         return $this;
     }
 
-    public function getNumeroDeCarte(): ?int
+    public function getDenomination(): ?ListeEntreprise
     {
-        return $this->numeroDeCarte;
+        return $this->denomination;
     }
 
-    public function setNumeroDeCarte(?int $numeroDeCarte): self
+    public function setDenomination(?ListeEntreprise $denomination): self
     {
-        $this->numeroDeCarte = $numeroDeCarte;
+        $this->denomination = $denomination;
+
+        return $this;
+    }
+
+    public function getModeReglement(): ?ModeReglement
+    {
+        return $this->modeReglement;
+    }
+
+    public function setModeReglement(?ModeReglement $modeReglement): self
+    {
+        $this->modeReglement = $modeReglement;
+
+        return $this;
+    }
+
+    public function getVehiculeVert(): ?VehiculeVert
+    {
+        return $this->vehiculeVert;
+    }
+
+    public function setVehiculeVert(?VehiculeVert $vehiculeVert): self
+    {
+        $this->vehiculeVert = $vehiculeVert;
+
+        return $this;
+    }
+
+    public function getMontant(): ?MontantPro
+    {
+        return $this->montant;
+    }
+
+    public function setMontant(?MontantPro $montant): self
+    {
+        $this->montant = $montant;
 
         return $this;
     }

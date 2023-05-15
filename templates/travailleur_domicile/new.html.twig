@@ -1,0 +1,151 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Nouveau Travailleur à Domicile {% endblock %}
+
+{% block body %}
+{% include "_navPro.html.twig" %}
+<div class="d-flex justify-content-between">
+    <div class="ml-5">
+        <a href="{{ path('travailleur_domicile.index')}}"><button class="mt-5 ml-4 btn btn-info rounded text-lowercase btn-cp"> Retour</button></a>
+    </div>
+</div>
+<div class="container">
+    <h1 class="mt-4 text-center h2"> Créer une nouvelle carte travailleur à domicile</h1>
+    {{ form_start(form) }}
+     <div class='form-group'>
+            {{ form_label(form.civilite, 'Civilité', {
+                    'label_attr': {'class': 'form-label text-warning'}}) }}
+            {{ form_widget(form.civilite) }}
+            <div class="form-errors">
+                {{ form_errors(form.civilite) }}
+            </div>
+        </div>
+        <div class="d-flex justify-content-around w-100">
+            <div class='form-group w-50 mr-2'>
+                {{ form_label(form.nom, 'Nom', {
+                    'label_attr': {'class': 'form-label text-warning'}}) }}
+                {{ form_widget(form.nom) }}
+                <div class="form-errors">
+                    {{ form_errors(form.nom) }}
+                </div>
+            </div>
+            <div class='form-group w-50 ml-2'>
+                {{ form_label(form.prenom, 'Prénom', {
+                    'label_attr': {'class': 'form-label text-warning'}}) }}
+                {{ form_widget(form.prenom) }}
+                <div class="form-errors">
+                    {{ form_errors(form.prenom) }}
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around w-100">
+           
+            <div class='form-group w-50 mr-2'>
+                {{ form_label(form.numeroAdresse, 'Numéro Adresse', {
+                    'label_attr': {'class': 'form-label text-warning'}}) }}
+                {{ form_widget(form.numeroAdresse) }}
+                <div class="form-errors">
+                    {{ form_errors(form.numeroAdresse) }}
+                </div>
+            </div>
+             <div class='form-group w-50 ml-2'>
+                {{ form_label(form.adresse, 'Adresse', {
+                    'label_attr': {'class': 'form-label text-warning'}})
+                }}
+                {{ form_widget(form.adresse, {
+                    'attr': {'class': 'form-control rounded'}})
+                }}
+                <div class="form-errors">
+                    {{ form_errors(form.adresse) }}
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around w-100">
+             <div class='form-group w-50 mr-2'>
+                {{ form_label(form.marqueVehicule, 'Marque Véhicule', {
+                    'label_attr': {'class': 'form-label text-warning'}}) }}
+                {{ form_widget(form.marqueVehicule) }}
+                <div class="form-errors">
+                    {{ form_errors(form.marqueVehicule) }}
+                </div>
+            </div>
+             <div class='form-group w-50 mr-2'>
+                {{ form_label(form.modele, 'Modèle', {
+                    'label_attr': {'class': 'form-label text-warning'}}) }}
+                {{ form_widget(form.modele) }}
+                <div class="form-errors">
+                    {{ form_errors(form.modele) }}
+                </div>
+            </div>
+             <div class='form-group w-50 mr-2'>
+                {{ form_label(form.immatriculation, 'Immatriculation', {
+                    'label_attr': {'class': 'form-label text-warning'}}) }}
+                {{ form_widget(form.immatriculation) }}
+                <div class="form-errors">
+                    {{ form_errors(form.immatriculation) }}
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around w-100">
+            <div class='form-group w-50 mr-2'>
+                    {{ form_label(form.dateCreation, 'Date de création', {
+                    'label_attr': {'class': 'form-label text-warning'}}) }}
+                    <div class="input-group date" id="datepicker3">
+                        {{ form_widget(form.dateCreation) }}
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-light d-block">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-errors">
+                        {{ form_errors(form.dateCreation) }}
+                    </div>
+            </div>
+            <div class='form-group w-50 ml-2'>
+                {{ form_label(form.delivreePar, 'Délivrée par', {
+                    'label_attr': {'class': 'form-label text-warning'}})
+                }}
+                {{ form_widget(form.delivreePar, {
+                    'attr': {'class': 'form-control rounded'}})
+                }}
+                <div class="form-errors">
+                    {{ form_errors(form.delivreePar) }}
+                </div>
+            </div>
+        </div>
+
+        
+             <div class='form-group'>
+                {{ form_label(form.montant, 'Montant', {
+                    'label_attr': {'class': 'form-label text-warning'}}) }}
+                {{ form_widget(form.montant) }}
+                <p style="color: #d58490;">Le tarif "véhicule vert à 30€ est à appliquer si :
+					<ol>
+						<li style="color: #d58490;">en P3, il y a la présence des abbréviations répertoriées dans la liste déroulante ci-contre</li>
+						<li style="color: #d58490;">En V7, une émission inférieure ou égale à 60 est mentionnée.</li>
+					</ol>
+				</p>
+                <div class="form-errors">
+                    {{ form_errors(form.montant) }}
+                </div>
+            </div>
+        
+        <div class='form-group'>
+            {{ form_label(form.commentaires, 'Commentaires', {
+                    'label_attr': {'class': 'form-label text-warning'}}) }}
+            {{ form_widget(form.commentaires) }}
+            <div class="form-errors">
+                {{ form_errors(form.commentaires) }}
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center w-100">
+            <div class="form-group">
+                {{ form_row(form.submit) }}
+            </div>
+            
+        </div>
+        {{ form_end(form) }}
+</div>
+{% endblock %}

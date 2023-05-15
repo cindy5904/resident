@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Residents;
 use App\Form\AjoutResidentType;
 use App\Form\RegieType;
+use App\Form\RenouvellementResidentType;
 use App\Repository\ResidentsRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -103,6 +104,29 @@ public function searchName(ResidentsRepository $repository, Request $request): R
         }
 
         return $this->render("carte_resident/edit.html.twig", [
+            "form" => $form->createView(), "resident" => $resident
+        ]);
+    }
+    #[Route('/resident/renouvellement/{id}', name: 'app_resident_renouvellement')]
+    public function renouvellement(Request $request, EntityManagerInterface $manager, Residents $resident): Response
+    {
+        $form = $this->createForm(RenouvellementResidentType::class, $resident);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $resident = $form->getData();
+            $manager->persist($resident);
+            $manager->flush();
+
+            $this->addFlash(
+                "success",
+                "Le résident a été renouvelé avec succès !!!"
+            );
+
+            return $this->redirectToRoute("app_carte_resident");
+        }
+
+        return $this->render("carte_resident/renouvellement.html.twig", [
             "form" => $form->createView(), "resident" => $resident
         ]);
     }

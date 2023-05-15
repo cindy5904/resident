@@ -33,4 +33,10 @@ class HomeController extends AbstractController
     {
         return $this->render('home/choixResident.html.twig');
     }
+
+    #[Route('/choix/pro', name: 'app_choix_pro')]
+    public function choicePro(): Response
+    {
+        return $this->render('home/choixpro.html.twig');
+    }
 }

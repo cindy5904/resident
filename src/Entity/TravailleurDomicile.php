@@ -35,9 +35,6 @@ class TravailleurDomicile
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $immatriculation = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateCreation2022 = null;
-
     #[ORM\Column(nullable: true)]
     private ?int $numeroCarte = null;
 
@@ -51,7 +48,19 @@ class TravailleurDomicile
     private ?int $carteSupprimee = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $DateCreation2023 = null;
+    private ?\DateTimeInterface $DateCreation = null;
+
+    #[ORM\ManyToOne]
+    private ?ModeReglement $modeReglement = null;
+
+    #[ORM\ManyToOne]
+    private ?MontantPro $montant = null;
+
+    #[ORM\ManyToOne]
+    private ?ListeRueZoneBleue $adresse = null;
+
+    #[ORM\ManyToOne]
+    private ?PersonneQuiDelivre $delivreePar = null;
 
     public function getId(): ?int
     {
@@ -142,18 +151,6 @@ class TravailleurDomicile
         return $this;
     }
 
-    public function getDateCreation2022(): ?\DateTimeInterface
-    {
-        return $this->dateCreation2022;
-    }
-
-    public function setDateCreation2022(?\DateTimeInterface $dateCreation2022): self
-    {
-        $this->dateCreation2022 = $dateCreation2022;
-
-        return $this;
-    }
-
     public function getNumeroCarte(): ?int
     {
         return $this->numeroCarte;
@@ -202,14 +199,62 @@ class TravailleurDomicile
         return $this;
     }
 
-    public function getDateCreation2023(): ?\DateTimeInterface
+    public function getDateCreation(): ?\DateTimeInterface
     {
-        return $this->DateCreation2023;
+        return $this->DateCreation;
     }
 
-    public function setDateCreation2023(?\DateTimeInterface $DateCreation2023): self
+    public function setDateCreation(?\DateTimeInterface $DateCreation): self
     {
-        $this->DateCreation2023 = $DateCreation2023;
+        $this->DateCreation = $DateCreation;
+
+        return $this;
+    }
+
+    public function getModeReglement(): ?ModeReglement
+    {
+        return $this->modeReglement;
+    }
+
+    public function setModeReglement(?ModeReglement $modeReglement): self
+    {
+        $this->modeReglement = $modeReglement;
+
+        return $this;
+    }
+
+    public function getMontant(): ?MontantPro
+    {
+        return $this->montant;
+    }
+
+    public function setMontant(?MontantPro $montant): self
+    {
+        $this->montant = $montant;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?ListeRueZoneBleue
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?ListeRueZoneBleue $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getDelivreePar(): ?PersonneQuiDelivre
+    {
+        return $this->delivreePar;
+    }
+
+    public function setDelivreePar(?PersonneQuiDelivre $delivreePar): self
+    {
+        $this->delivreePar = $delivreePar;
 
         return $this;
     }

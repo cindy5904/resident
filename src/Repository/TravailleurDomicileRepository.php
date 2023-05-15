@@ -39,6 +39,12 @@ class TravailleurDomicileRepository extends ServiceEntityRepository
         }
     }
 
+    public function findById()
+    {
+        return $this->createQueryBuilder("c")
+                        ->orderBy("c.id", "DESC");
+    }
+
 //    /**
 //     * @return TravailleurDomicile[] Returns an array of TravailleurDomicile objects
 //     */

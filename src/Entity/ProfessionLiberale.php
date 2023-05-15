@@ -50,6 +50,21 @@ class ProfessionLiberale
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateCreation = null;
 
+    #[ORM\ManyToOne]
+    private ?ListeRueZoneBleue $adresse = null;
+
+    #[ORM\ManyToOne]
+    private ?ModeReglement $modeReglement = null;
+
+    #[ORM\ManyToOne]
+    private ?VehiculeVert $vehiculeVert = null;
+
+    #[ORM\ManyToOne]
+    private ?MontantPro $montant = null;
+
+    #[ORM\ManyToOne]
+    private ?PersonneQuiDelivre $delivreePar = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -195,6 +210,66 @@ class ProfessionLiberale
     public function setDateCreation(?\DateTimeInterface $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?ListeRueZoneBleue
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?ListeRueZoneBleue $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getModeReglement(): ?ModeReglement
+    {
+        return $this->modeReglement;
+    }
+
+    public function setModeReglement(?ModeReglement $modeReglement): self
+    {
+        $this->modeReglement = $modeReglement;
+
+        return $this;
+    }
+
+    public function getVehiculeVert(): ?VehiculeVert
+    {
+        return $this->vehiculeVert;
+    }
+
+    public function setVehiculeVert(?VehiculeVert $vehiculeVert): self
+    {
+        $this->vehiculeVert = $vehiculeVert;
+
+        return $this;
+    }
+
+    public function getMontant(): ?MontantPro
+    {
+        return $this->montant;
+    }
+
+    public function setMontant(?MontantPro $montant): self
+    {
+        $this->montant = $montant;
+
+        return $this;
+    }
+
+    public function getDelivreePar(): ?PersonneQuiDelivre
+    {
+        return $this->delivreePar;
+    }
+
+    public function setDelivreePar(?PersonneQuiDelivre $delivreePar): self
+    {
+        $this->delivreePar = $delivreePar;
 
         return $this;
     }
