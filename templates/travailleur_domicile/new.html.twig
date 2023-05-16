@@ -4,12 +4,13 @@
 
 {% block body %}
 {% include "_navPro.html.twig" %}
-<div class="d-flex justify-content-between">
-    <div class="ml-5">
-        <a href="{{ path('travailleur_domicile.index')}}"><button class="mt-5 ml-4 btn btn-info rounded text-lowercase btn-cp"> Retour</button></a>
-    </div>
-</div>
+
 <div class="container">
+    <div class="d-flex justify-content-between">
+        <div class="">
+            <a href="{{ path('travailleur_domicile.index')}}"><button class="mt-5 ml-4 btn btn-info rounded text-lowercase btn-cp"> Retour</button></a>
+        </div>
+    </div>
     <h1 class="mt-4 text-center h2"> Créer une nouvelle carte travailleur à domicile</h1>
     {{ form_start(form) }}
      <div class='form-group'>
@@ -120,7 +121,7 @@
                 {{ form_label(form.montant, 'Montant', {
                     'label_attr': {'class': 'form-label text-warning'}}) }}
                 {{ form_widget(form.montant) }}
-                <p style="color: #d58490;">Le tarif "véhicule vert à 30€ est à appliquer si :
+                <p style="color: #d58490;">Le tarif "véhicule vert à 15€ est à appliquer si :
 					<ol>
 						<li style="color: #d58490;">en P3, il y a la présence des abbréviations répertoriées dans la liste déroulante ci-contre</li>
 						<li style="color: #d58490;">En V7, une émission inférieure ou égale à 60 est mentionnée.</li>

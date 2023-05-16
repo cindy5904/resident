@@ -1,20 +1,59 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfessionLiberaleController!{% endblock %}
+{% block title %}Liste Professions libérales
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	{% include "_navPro.html.twig" %}
+    <div class="container mt-4">
+		<div class="d-flex justify-content-between">
+			<div class="d-flex justify-content-end mt-4 mb-2">
+				<a href="{{path('profession_liberale.new')}}" class="btn btn-outline-info rounded">Créer une nouvelle carte travailleur à domicile</a>
+			</div>
+		</div>
+		<div>
+			<h1 class="mt-4 text-warning text-center">Listes des professions libérales</h1>
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success mt-4 rounded">
+					{{ message }}
+				</div>
+			{% endfor %}
+		</div>
+		<table class="table table-hover mt-4 mb-5">
+			<thead class="h-100 w-100">
+				<tr class="h-100 text-center">
+					<th scope="col" class="text-capitalize text-warning h5">Civilité</th>
+					<th scope="col" class="text-capitalize text-warning h5">Nom</th>
+					<th scope="col" class="text-capitalize text-warning h5">Prénom</th>
+					<th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
+					<th scope="col" class="text-capitalize text-warning h5">modifier</th>
+					<th scope="col" class="text-capitalize text-warning h5">Régie</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for profession in professions %}
+					<tr class="table-light h-100 text-center align-items-center">
+						<td class="align-middle">{{profession.civilite}}</td>
+						<td class="align-middle">{{profession.nom}}</td>
+						<td class="align-middle">{{profession.prenom}}</td>
+						<td>
+							<a href="{{ path('profession_liberale.show', {id: profession.id}) }}" class="btn btn-info rounded">Afficher détails</a>
+						</td>
+						<td>
+							<a href="{{ path('profession_liberale.edit', { id: profession.id }) }}" class="btn btn-warning rounded">Modifier</a>
+						</td>
+						<td>
+							<a href="{{ path('travailleur_domicile.regie', { id: profession.id }) }}" class="btn btn-info rounded">Régie</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="navigation d-flex justify-content-center mt-4">
+			{{ knp_pagination_render(professions) }}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+		</div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/resident/src/Controller/ProfessionLiberaleController.php'|file_link(0) }}">src/Controller/ProfessionLiberaleController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/resident/templates/profession_liberale/index.html.twig'|file_link(0) }}">templates/profession_liberale/index.html.twig</a></code></li>
-    </ul>
-</div>
+	</div>
 {% endblock %}
+

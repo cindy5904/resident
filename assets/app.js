@@ -12,3 +12,17 @@ import './styles/app.css';
 import './bootstrap';
 
 
+  // Récupérer la date actuelle
+  var date = new Date();
+
+  // Obtenir les composantes de la date
+  var jour = date.getDate();
+  var mois = date.getMonth() + 1; // Les mois commencent à partir de 0 (janvier=0)
+  var annee = date.getFullYear();
+
+  // Mettre à jour l'élément avec la date du jour
+  document.getElementById("dateDuJour").innerHTML = jour + "/" + mois + "/" + annee;
+
+
+
+

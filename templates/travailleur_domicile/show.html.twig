@@ -1,0 +1,73 @@
+{% extends "base.html.twig" %}
+
+{% block title %} travailleur à domicile {% endblock %}
+{% block body %}
+<div class='container mt-4'>
+     <div class="d-flex justify-content-end" >
+        <a href="{{ path('travailleur_domicile.index')}}"><button class="mt-2 btn btn-outline-info rounded-pill"> Retour à la liste</button></a>
+    </div>
+    <div class="card border-primary h-100 mb-3 mt-4">
+        <div class="card-header d-flex align-items-center"><h1 class=""> Travailleur à domicile </h1></div>
+            <div class="card-body">
+                <h4 class="card-title text-capitalize">
+                {% if travailleur.civilite %}  
+                {{ travailleur.civilite }} 
+                {% endif %}
+                {% if travailleur.nom %} 
+                    {{ travailleur.nom }}
+                {% endif %}
+                {% if travailleur.prenom %}
+                    {{ travailleur.prenom }}
+                {% endif %}
+                </h4>
+                <p class="mt-4"><strong class="h5"> Domiciliation :  </strong> {{travailleur.numeroAdresse}} {{travailleur.adresse}}</p>
+                <h2 class="text-primary">Véhicule</h2>
+                <p class="mt-4"><strong class="h5"> Marque du véhicule :  </strong> {{travailleur.marqueVehicule}}  </p>
+                <p class="mt-4"><strong class="h5"> Modèle :  </strong> {{travailleur.modele}}  </p>
+                <p class="mt-4"><strong class="h5"> Immatriculation du véhicule :  </strong> {{travailleur.immatriculation}} </p>
+
+                <h2 class="text-primary">Paiement</h2>
+                <p class="mt-4"><strong class="h5"> Montant :  </strong> {{travailleur.montant}} € </p>
+                <p class="mt-4"><strong class="h5"> Moyen de paiment :  </strong> {{travailleur.modeReglement}}  </p>
+
+                <h2 class="text-primary">Informations dossier</h2>
+                <p class="mt-4"><strong class="h5"> Numéro de carte :  </strong> 
+                {% if travailleur.numeroCarte %} 
+                    {{travailleur.numeroCarte}}
+                {% else %}
+                    Non renseigné
+                {% endif %}
+                </p>
+
+                {% if travailleur.carteSupprimee %}
+                    <p class="mt-4"><strong class="h5"> Carte supprimée n° :  </strong> {{travailleur.carteSupprimee}}  </p>
+                {% endif %}
+                {% if travailleur.changementVehicule %}
+                    <p class="mt-4"><strong class="h5"> Immatriculation de l'ancien véhicule :  </strong> {{travailleur.changementVehicule}}  </p>
+                {% endif %}
+                {% if travailleur.commentaires %}
+                    <p class="mt-4"><strong class="h5"> Commentaires :  </strong> {{travailleur.commentaires}} </p>
+                {% else %}
+                    <p class="mt-4"><strong class="h5"> Commentaires : </strong> Non renseigné </p>
+                {% endif %}
+
+                {% if travailleur.delivreePar %}
+                    <p class="mt-4"><strong class="h5"> Délivrée par : </strong> {{travailleur.delivreePar}} </p>
+                {% else %}
+                    <p class="mt-4"><strong class="h5"> Délivrée par : </strong> Non renseigné </p>
+                {% endif %}
+                {% if travailleur.dateCreation %}
+                    <p class="mt-4"><strong class="h5"> Date de création : </strong> {{travailleur.dateCreation|date("d/m/Y")}} </p>
+                {% else %}
+                    <p class="mt-4"><strong class="h5"> Date de création : </strong> Non renseigné </p>
+                {% endif %}
+                {% if travailleur.dateAnDernier %}
+                    <p class="mt-4"><strong class="h5"> Date de création (année précédente) : </strong> {{travailleur.dateAnDernier|date("d/m/y")}}</p>
+                {% else %}
+                    <p class="mt-4"><strong class="h5"> Date de création (année précédente) : </strong></p>
+                {% endif %}
+            </div>
+    
+    </div>
+</div>
+{% endblock %}

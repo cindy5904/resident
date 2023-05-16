@@ -1,0 +1,80 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Profession Libérale {% endblock %}
+{% block body %}
+<div class='container mt-4'>
+     <div class="d-flex justify-content-end" >
+        <a href="{{ path('profession_liberale.index')}}"><button class="mt-2 btn btn-outline-info rounded-pill"> Retour à la liste</button></a>
+    </div>
+    <div class="card border-primary h-100 mb-3 mt-4">
+        <div class="card-header d-flex align-items-center"><h1 class=""> Profession Libérale </h1></div>
+            <div class="card-body">
+                <h4 class="card-title text-capitalize">
+                {% if profession.civilite %}  
+                {{ profession.civilite }} 
+                {% endif %}
+                {% if profession.nom %} 
+                    {{ profession.nom }}
+                {% endif %}
+                {% if profession.prenom %}
+                    {{ profession.prenom }}
+                {% endif %}
+                </h4>
+                <p class="mt-4"><strong class="h5"> Domiciliation :  </strong> {{profession.numeroAdresse}} {{profession.adresse}}</p>
+                <h2 class="text-primary">Véhicule</h2>
+                <p class="mt-4"><strong class="h5"> Marque du véhicule :  </strong> {{profession.marqueVehicule}}  </p>
+                <p class="mt-4"><strong class="h5"> Modèle :  </strong> {{profession.modele}}  </p>
+                <p class="mt-4"><strong class="h5"> Immatriculation du véhicule :  </strong> {{profession.immatriculation}} </p>
+                <p class="mt-4"><strong class="h5"> Type de véhicule vert :  </strong>
+                {% if profession.vehiculeVert %}  
+                    {{ profession.vehiculeVert }}
+                {% else %}
+                    Non renseigné
+                {% endif %}  
+                </p>
+
+                <h2 class="text-primary">Paiement</h2>
+                <p class="mt-4"><strong class="h5"> Montant :  </strong> {{profession.montant}} € </p>
+                <p class="mt-4"><strong class="h5"> Moyen de paiment :  </strong> {{profession.modeReglement}}  </p>
+
+                <h2 class="text-primary">Informations dossier</h2>
+                <p class="mt-4"><strong class="h5"> Numéro de carte :  </strong> 
+                {% if profession.numeroCarte %} 
+                    {{profession.numeroCarte}}
+                {% else %}
+                    Non renseigné
+                {% endif %}
+                </p>
+
+                {% if profession.carteSupprimee %}
+                    <p class="mt-4"><strong class="h5"> Carte supprimée n° :  </strong> {{profession.carteSupprimee}}  </p>
+                {% endif %}
+                {% if profession.changementVehicule %}
+                    <p class="mt-4"><strong class="h5"> Immatriculation de l'ancien véhicule :  </strong> {{profession.changementVehicule}}  </p>
+                {% endif %}
+                {% if profession.commentaires %}
+                    <p class="mt-4"><strong class="h5"> Commentaires :  </strong> {{profession.commentaires}} </p>
+                {% else %}
+                    <p class="mt-4"><strong class="h5"> Commentaires : </strong> Non renseigné </p>
+                {% endif %}
+
+                {% if profession.delivreePar %}
+                    <p class="mt-4"><strong class="h5"> Délivrée par : </strong> {{profession.delivreePar}} </p>
+                {% else %}
+                    <p class="mt-4"><strong class="h5"> Délivrée par : </strong> Non renseigné </p>
+                {% endif %}
+                {% if profession.dateCreation %}
+                    <p class="mt-4"><strong class="h5"> Date de création : </strong> {{profession.dateCreation|date("d/m/Y")}} </p>
+                {% else %}
+                    <p class="mt-4"><strong class="h5"> Date de création : </strong> Non renseigné </p>
+                {% endif %}
+                {% if profession.dateAnDernier %}
+                    <p class="mt-4"><strong class="h5"> Date de création (année précédente) : </strong> {{profession.dateAnDernier|date("d/m/y")}}</p>
+                {% else %}
+                    <p class="mt-4"><strong class="h5"> Date de création (année précédente) : </strong></p>
+                {% endif %}
+            </div>
+    
+    </div>
+</div>
+{% endblock %}

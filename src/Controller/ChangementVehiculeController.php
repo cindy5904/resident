@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Residents;
+use App\Entity\TravailleurDomicile;
 use App\Form\ChangementVehiculeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -51,5 +52,24 @@ class ChangementVehiculeController extends AbstractController
             "form" => $form->createView(), "resident" => $resident
         ]);
     }
+
+    #[Route('/changement/vehicule/travailleur/search', name: 'changement_vehicule.travailleursearch')]
+    public function travailleur(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $searchTerm = $request->query->get('immatriculation');
+
+        $repository = $entityManager->getRepository(TravailleurDomicile::class);
+        $travailleurs = $repository->findBy(['immatriculation' => $searchTerm]);
+
+
+        return $this->render('changement_vehicule/travailleurdomSearch.html.twig', [
+            'searchTerm' => $searchTerm,
+            'travailleurs' => $travailleurs,
+        ]);
+    }
+    
+
+
+
 }
 

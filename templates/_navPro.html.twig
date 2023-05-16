@@ -10,11 +10,10 @@
     </button>
     <div class="collapse navbar-collapse justify-content-center" id="item navbarColor02">
       <ul class="navbar-nav me-auto">
-       
         <li class="nav-item dropdown ml-3 mt-1">
           <a class="nav-link dropdown-toggle h5" data-bs-toggle="dropdown" href="" id="bold" role="button" aria-haspopup="true" aria-expanded="false">Profession Libérale</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" id="hove" href="">Nouveau</a>
+            <a class="dropdown-item" id="hove" href="{{path('profession_liberale.new')}}">Nouveau</a>
             <a class="dropdown-item" id="hove" href="">Renouvellement</a>
             <a class="dropdown-item" id="hove" href="">Enregistrement Régie</a>
             <a class="dropdown-item" id="hove" href="">Recherche par Carte</a>
@@ -33,11 +32,11 @@
         <li class="nav-item dropdown ml-3 mt-1">
           <a class="nav-link dropdown-toggle h5" data-bs-toggle="dropdown" href="#" id="bold" role="button" aria-haspopup="true" aria-expanded="false">Travailleur à domicile</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" id="hove" href="">Nouveau</a>
-            <a class="dropdown-item" id="hove" href="">Renouvellement</a>
-            <a class="dropdown-item" id="hove" href="">Enregistrement Régie</a>
-            <a class="dropdown-item" id="hove" href="">Recherche par Carte</a>
-            <a class="dropdown-item" id="hove" href="">Changement de véhicule</a>
+            <a class="dropdown-item" id="hove" href="{{ path('travailleur_domicile.new')}}">Nouveau</a>
+            <a class="dropdown-item" id="hove" href="{{path('travailleur_domicile.searchname')}}">Renouvellement</a>
+            <a class="dropdown-item" id="hove" href="{{path('regie_register.travailleur')}}">Enregistrement Régie</a>
+            <a class="dropdown-item" id="hove" href="{{path('travailleur_carte.search')}}">Recherche par Carte</a>
+            <a class="dropdown-item" id="hove" href="{{path('changement_vehicule.travailleursearch')}}">Changement de véhicule</a>
           </div>
         </li>
       </ul>      

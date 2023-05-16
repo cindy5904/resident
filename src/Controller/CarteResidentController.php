@@ -44,22 +44,22 @@ class CarteResidentController extends AbstractController
     }
 }
 
-#[Route('/resident/search', name: 'app_resident_search')]
-public function searchName(ResidentsRepository $repository, Request $request): Response
-{
+    #[Route('/resident/search', name: 'app_resident_search')]
+    public function searchName(ResidentsRepository $repository, Request $request): Response
     {
-        $searchTerm = $request->query->get('search');
-        $residents = null;
-    
-        if ($searchTerm) {
-            $residents = $repository->findBy(['nom' => $searchTerm]);
-        }
-        return $this->render('carte_resident/searchrenouvele.html.twig', [
-            'searchTerm' => $searchTerm,
-            'residents' => $residents
-        ]);
-}
-}
+        {
+            $searchTerm = $request->query->get('search');
+            $residents = null;
+        
+            if ($searchTerm) {
+                $residents = $repository->findBy(['nom' => $searchTerm]);
+            }
+            return $this->render('carte_resident/searchrenouvele.html.twig', [
+                'searchTerm' => $searchTerm,
+                'residents' => $residents
+            ]);
+    }
+    }
 
 
     #[Route('/resident/creation', name: 'app_resident_new', methods: ["GET", "POST"])]
@@ -144,7 +144,7 @@ public function searchName(ResidentsRepository $repository, Request $request): R
     public function regie(Request $request, EntityManagerInterface $manager, Residents $resident): Response
     {
         
-        $resident->setDateCreation(new DateTime());
+        
         $form = $this->createForm(RegieType::class, $resident);
         $form->handleRequest($request);
 

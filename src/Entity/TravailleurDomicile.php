@@ -62,6 +62,9 @@ class TravailleurDomicile
     #[ORM\ManyToOne]
     private ?PersonneQuiDelivre $delivreePar = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateAnDernier = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -255,6 +258,18 @@ class TravailleurDomicile
     public function setDelivreePar(?PersonneQuiDelivre $delivreePar): self
     {
         $this->delivreePar = $delivreePar;
+
+        return $this;
+    }
+
+    public function getDateAnDernier(): ?\DateTimeInterface
+    {
+        return $this->dateAnDernier;
+    }
+
+    public function setDateAnDernier(?\DateTimeInterface $dateAnDernier): self
+    {
+        $this->dateAnDernier = $dateAnDernier;
 
         return $this;
     }

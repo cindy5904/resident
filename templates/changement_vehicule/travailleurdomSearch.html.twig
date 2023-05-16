@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche immatriculation (travailleur dom){% endblock %}
+
+{% block body %}
+{% include "_navPro.html.twig" %}
+<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('changement_vehicule.travailleursearch') }}">
+    <div class="form-group">
+        <input class="form-control" id="recherche" type="text" name="immatriculation" value="{{ searchTerm }}" placeholder="Rechercher par immatriculation">
+    </div>
+    <button class="btn btn-info" id="btn-recherche" type="submit">Rechercher</button>
+</form>
+
+{% if searchTerm is not empty %}
+    {% if travailleurs is not empty %}
+        <h4 class='text-center mt-3 mb-5'>Résultat trouvé pour "{{ searchTerm }}" :</h4>
+        <table class="table table-hover mt-4">
+            <thead class="h-100 w-100">
+                <tr class="h-100 text-center">
+                    <th scope="col" class="text-capitalize text-warning h5">Immatriculation</th>
+                    <th scope="col" class="text-capitalize text-warning h5">Nom</th>
+                    <th scope="col" class="text-capitalize text-warning h5">Prénom</th>
+                    <th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
+                    <th scope="col" class="text-capitalize text-warning h5">Changement véhicule</th>
+                    <th scope="col" class="text-capitalize text-warning h5">régie</th>
+                </tr>
+            </thead>
+            <tbody class="h-100">
+                {% for travailleur in travailleurs %}
+                    <tr class="table-light h-100 text-center align-items-center">
+                        <td class="align-middle">{{ travailleur.immatriculation }}</td>
+                        <td class="align-middle">{{ travailleur.nom }}</td>
+                        <td class="align-middle">{{ travailleur.prenom }}</td>
+                        <td>
+                            <a href="{{ path("travailleur_domicile.show", { id: travailleur.id }) }}" class="btn btn-info rounded">Afficher détails</a>
+                        </td>
+                        <td>
+                            <a href="{{ path("travailleur_domicile.edit", { id: travailleur.id }) }}" class="btn btn-warning rounded">Changement véhicule</a>
+                        </td>
+                        <td>
+                            <a href="{{ path("travailleur_domicile.regie", { id: travailleur.id }) }}" class="btn btn-info rounded px-4">Régie</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class='text-center mt-5'>
+            <p>Aucune immatriculation trouvée pour "{{ searchTerm }}".</p>
+            <a href="{{ path('app_choix_pro') }}" class="btn btn-info">Revenir à la page d'accueil</a>
+        </div>
+    {% endif %}
+{% endif %}
+
+ <div class="d-flex justify-content-start ml-5">
+        <a href="{{ path('app_choix_pro')}}"><button class="mt-4 mr-5 btn btn-outline-info rounded"> Retour</button></a>
+    </div>
+
+{% endblock %}

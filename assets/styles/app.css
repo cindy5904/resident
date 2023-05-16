@@ -115,3 +115,15 @@ li#liste {
     margin-top: 15px;
     height: 50px;
 }
+
+
+.hidden-on-screen {
+    display: none;
+}
+
+@media print {
+.hidden-on-screen {
+    display: inline;
+}
+}
+
