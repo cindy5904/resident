@@ -67,32 +67,18 @@
                 <p class="mt-4"><strong class="h5"> Commentaires : </strong> Non renseigné </p>
             {% endif %}
 
-            {# {% if resident.delivreePar %}
-                <p class="mt-4"><strong class="h5"> Délivrée par : </strong> {{resident.delivreePar}} </p>
-            {% else %}
-                <p class="mt-4"><strong class="h5"> Délivrée par : </strong> Non renseigné </p>
-            {% endif %} #}
             {% if entreprise.dateCreation %}
                 <p class="mt-4"><strong class="h5"> Date de création : </strong> {{entreprise.dateCreation|date("d/m/Y")}} </p>
             {% else %}
                 <p class="mt-4"><strong class="h5"> Date de création : </strong> Non renseigné </p>
             {% endif %}
+            {% if entreprise.dateAnDernier %}
+                <p class="mt-4"><strong class="h5"> Date de création : </strong> {{entreprise.dateAnDernier|date("d/m/Y")}} </p>
+            {% else %}
+                <p class="mt-4"><strong class="h5"> Date d'année précédente : </strong> Non renseigné </p>
+            {% endif %}
 
-            {# <h2 class="text-primary">Suivi dossier</h2>
-            <p class="mt-4"><strong class="h5"> Dates d'évolutions du dossier :  </strong>
-                {% if resident.dateMiseIncomplet %}
-                    <p class="mt-4 ml-4"><strong class="h5"> -> Date de mise en incomplet :  </strong> {{resident.dateMiseIncomplet|date("d/m/Y")}} </p>
-                {% endif %}
-                {% if resident.dateComplet %}
-                    <p class="mt-4 ml-4"><strong class="h5"> -> Date de complétude : </strong> {{resident.dateComplet|date("d/m/Y")}} </p>
-                {% endif %}
-                {% if resident.dateReponseAdministre %}
-                    <p class="mt-4 ml-4"><strong class="h5"> -> Date de réponse à l'administré : </strong> {{resident.dateReponseAdministre|date("d/m/Y")}} </p>
-                {% endif %}
-                {% if resident.dateEnvoiCarte %}
-                    <p class="mt-4 ml-4"><strong class="h5"> -> Date d'envoi de la carte : </strong> {{resident.dateEnvoiCarte|date("d/m/Y")}} </p>
-                {% endif %}
-            </p> #}
+  
             <p class="mt-4"><strong class="h5"> Pièces justificatives :  </strong>
                 {% if entreprise.carteGrise == 1 %}
                     <p class="mt-4 ml-4"><strong class="h5"> -> Carte grise : </strong> document fourni </p>

@@ -15,29 +15,46 @@ class ListeEntreprise
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    private ?string $typeEntreprise = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $denomination = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $numeroAdresse = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $activite = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $totalSalarie = null;
+    private ?int $totalSalaries = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $commentaires = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $typeEntreprise = null;
-
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $numeroAdresse = null;
-
     #[ORM\ManyToOne]
     private ?ListeRueZoneBleue $adresse = null;
+
+    public function __toString()
+    {
+        return $this->denomination;
+    }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTypeEntreprise(): ?string
+    {
+        return $this->typeEntreprise;
+    }
+
+    public function setTypeEntreprise(?string $typeEntreprise): self
+    {
+        $this->typeEntreprise = $typeEntreprise;
+
+        return $this;
     }
 
     public function getDenomination(): ?string
@@ -48,6 +65,18 @@ class ListeEntreprise
     public function setDenomination(?string $denomination): self
     {
         $this->denomination = $denomination;
+
+        return $this;
+    }
+
+    public function getNumeroAdresse(): ?string
+    {
+        return $this->numeroAdresse;
+    }
+
+    public function setNumeroAdresse(?string $numeroAdresse): self
+    {
+        $this->numeroAdresse = $numeroAdresse;
 
         return $this;
     }
@@ -64,14 +93,14 @@ class ListeEntreprise
         return $this;
     }
 
-    public function getTotalSalarie(): ?int
+    public function getTotalSalaries(): ?int
     {
-        return $this->totalSalarie;
+        return $this->totalSalaries;
     }
 
-    public function setTotalSalarie(?int $totalSalarie): self
+    public function setTotalSalaries(?int $totalSalaries): self
     {
-        $this->totalSalarie = $totalSalarie;
+        $this->totalSalaries = $totalSalaries;
 
         return $this;
     }
@@ -84,30 +113,6 @@ class ListeEntreprise
     public function setCommentaires(?string $commentaires): self
     {
         $this->commentaires = $commentaires;
-
-        return $this;
-    }
-
-    public function getTypeEntreprise(): ?string
-    {
-        return $this->typeEntreprise;
-    }
-
-    public function setTypeEntreprise(?string $typeEntreprise): self
-    {
-        $this->typeEntreprise = $typeEntreprise;
-
-        return $this;
-    }
-
-    public function getNumeroAdresse(): ?string
-    {
-        return $this->numeroAdresse;
-    }
-
-    public function setNumeroAdresse(?string $numeroAdresse): self
-    {
-        $this->numeroAdresse = $numeroAdresse;
 
         return $this;
     }

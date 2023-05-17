@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\TravailleurDomicile;
+use App\Entity\ProfessionLiberale;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -10,25 +10,25 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ChangementVehiculeTravailleurdomType extends AbstractType
+class ChangementVehiculeProfessionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('civilite', ChoiceType::class, [
-            'choices' => [
-                'Monsieur' =>'Monsieur',
-                'Madame' => 'Madame',
-                'Mademoiselle' => 'Mademoiselle',
-            ]
-        ])
+            ->add('numeroCarte')
+            ->add('civilite', ChoiceType::class, [
+                'choices' => [
+                    'Monsieur' =>'Monsieur',
+                    'Madame' => 'Madame',
+                    'Mademoiselle' => 'Mademoiselle',
+                ]
+            ])
             ->add('nom')
             ->add('prenom')
             ->add('numeroAdresse')
             ->add('marqueVehicule')
             ->add('modele')
             ->add('immatriculation')
-            ->add('numeroCarte')
             ->add('commentaires')
             ->add('changementVehicule')
             ->add('carteSupprimee')
@@ -58,9 +58,10 @@ class ChangementVehiculeTravailleurdomType extends AbstractType
                     "class" => "form-label mt-2 text-warning"
                 ]
             ])
-            ->add('modeReglement')
-            ->add('montant')
             ->add('adresse')
+            ->add('modeReglement')
+            ->add('vehiculeVert')
+            ->add('montant')
             ->add('delivreePar')
             ->add('submit', SubmitType::class, [
                 "attr" => [
@@ -75,7 +76,7 @@ class ChangementVehiculeTravailleurdomType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => TravailleurDomicile::class,
+            'data_class' => ProfessionLiberale::class,
         ]);
     }
 }

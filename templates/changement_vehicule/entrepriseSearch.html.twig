@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recherche immatriculation (travailleur dom){% endblock %}
+{% block title %}Recherche immatriculation (profession libérale){% endblock %}
 
 {% block body %}
 {% include "_navPro.html.twig" %}
-<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('changement_vehicule.travailleursearch') }}">
+<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('changement_vehicule.entreprisesearch') }}">
     <div class="form-group">
         <input class="form-control" id="recherche" type="text" name="immatriculation" value="{{ searchTerm }}" placeholder="Rechercher par immatriculation">
     </div>
@@ -12,33 +12,34 @@
 </form>
 
 {% if searchTerm is not empty %}
-    {% if travailleurs is not empty %}
+    {% if entreprises is not empty %}
         <h4 class='text-center mt-3 mb-5'>Résultat trouvé pour "{{ searchTerm }}" :</h4>
         <table class="table table-hover mt-4">
             <thead class="h-100 w-100">
                 <tr class="h-100 text-center">
                     <th scope="col" class="text-capitalize text-warning h5">Immatriculation</th>
+                    <th scope="col" class="text-capitalize text-warning h5">Dénomination</th>
                     <th scope="col" class="text-capitalize text-warning h5">Nom</th>
-                    <th scope="col" class="text-capitalize text-warning h5">Prénom</th>
                     <th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
                     <th scope="col" class="text-capitalize text-warning h5">Changement véhicule</th>
                     <th scope="col" class="text-capitalize text-warning h5">régie</th>
                 </tr>
             </thead>
             <tbody class="h-100">
-                {% for travailleur in travailleurs %}
+                {% for entreprise in entreprises %}
                     <tr class="table-light h-100 text-center align-items-center">
-                        <td class="align-middle">{{ travailleur.immatriculation }}</td>
-                        <td class="align-middle">{{ travailleur.nom }}</td>
-                        <td class="align-middle">{{ travailleur.prenom }}</td>
+                        <td class="align-middle">{{ entreprise.immatriculation }}</td>
+                        <td class="align-middle">{{ entreprise.denomination }}</td>
+                        <td class="align-middle">{{ entreprise.nom }}</td>
+                        
                         <td>
-                            <a href="{{ path("travailleur_domicile.show", { id: travailleur.id }) }}" class="btn btn-info rounded">Afficher détails</a>
+                            <a href="{{ path("entreprise.show", { id: entreprise.id }) }}" class="btn btn-info rounded">Afficher détails</a>
                         </td>
                         <td>
-                            <a href="{{ path("changement_vehicule.travailleur", { id: travailleur.id }) }}" class="btn btn-warning rounded">Changement véhicule</a>
+                            <a href="{{ path("changement_vehicule.entreprise", { id: entreprise.id }) }}" class="btn btn-warning rounded">Changement véhicule</a>
                         </td>
                         <td>
-                            <a href="{{ path("travailleur_domicile.regie", { id: travailleur.id }) }}" class="btn btn-info rounded px-4">Régie</a>
+                            <a href="{{ path("entreprise.regie", { id: entreprise.id }) }}" class="btn btn-info rounded px-4">Régie</a>
                         </td>
                     </tr>
                 {% endfor %}

@@ -137,19 +137,19 @@ class EntrepriseType extends AbstractType
         //         new Assert\Length(["min" => 2, "max" => 255])
         //     ]
         // ])
-        // ->add('carteGrise', CheckboxType::class, [
-        //     'attr' => [
-        //         'class' => 'form-check-input mr-2'
-        //     ],
-        //     'required' => false,
-        //     'label' => 'Carte grise',
-        //     'label_attr' => [
-        //         'class' => 'form-check-label text-warning'
-        //     ],
-        //     'constraints' => [
-        //         new Assert\NotNull()
-        //     ],
-        // ])
+        ->add('carteGrise', CheckboxType::class, [
+            'attr' => [
+                'class' => 'form-check-input mr-2'
+            ],
+            'required' => false,
+            'label' => 'Carte grise',
+            'label_attr' => [
+                'class' => 'form-check-label text-warning'
+            ],
+            'constraints' => [
+                new Assert\NotNull()
+            ],
+        ])
         ->add('commentaires', TextareaType::class, [
             "attr" => [
                 "class" => "form-control rounded",
@@ -195,7 +195,7 @@ class EntrepriseType extends AbstractType
             "attr" => [
                 "class" => "btn btn-primary mt-2 rounded"
             ],
-            "label" => "Enregistrer carte entreprise",
+            "label" => "Enregistrer",
         ]);
     }
 

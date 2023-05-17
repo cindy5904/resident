@@ -3,6 +3,7 @@
 {% block title %} Création d'une nouvelle carte entreprise {% endblock %}
 
 {% block body %}
+{% include "_navPro.html.twig" %}
     <div class="d-flex justify-content-end mr-4">
         <a href="{{ path('entreprise.index')}}"><button class="mt-4 btn btn-outline-info rounded-pill"> Retour à la liste des cartes entreprises</button></a>
     </div>
@@ -15,7 +16,7 @@
                 'label_attr': {'class': 'form-label mt-4 text-warning'}})
             }}
             {{ form_widget(form.denomination, {
-                'attr': {'class': 'form-control rounded', 'required': true}})
+                'attr': {'class': 'form-control rounded'}})
             }}
             <div class="form-errors">
                 {{ form_errors(form.denomination) }}
@@ -45,41 +46,29 @@
                 {{ form_errors(form.marqueVehicule) }}
             </div>
         </div>
-        <div class='form-group w-50 ml-2'>
+        <div class='form-group w-50 ml-2 mr-2'>
             {{ form_label(form.modele) }}
             {{ form_widget(form.modele) }}
             <div class="form-errors">
                 {{ form_errors(form.modele) }}
             </div>
         </div>
-        </div>
-        <div class="d-flex justify-content-around w-100">
-            <div class='form-group w-50 mr-2'>
+        <div class='form-group w-50 ml-2'>
                 {{ form_label(form.immatriculation) }}
                 {{ form_widget(form.immatriculation) }}
                 <div class="form-errors">
                     {{ form_errors(form.immatriculation) }}
                 </div>
             </div>
-            <div class='form-group w-50 ml-2'>
-                {{ form_label(form.vehiculeVert, 'Type de véhicule vert', {
-                    'label_attr': {'class': 'form-label mt-2 text-warning'}})
-                }}
-                {{ form_widget(form.vehiculeVert, {
-                    'attr': {'class': 'form-control rounded', 'required': true}})
-                }}
-                <div class="form-errors">
-                    {{ form_errors(form.vehiculeVert) }}
-                </div>
-            </div>
         </div>
+       
         <div class="d-flex justify-content-around w-100">
             <div class='form-group w-50 mr-2'>
                 {{ form_label(form.montant, 'Montant', {
                     'label_attr': {'class': 'form-label mt-2 text-warning'}})
                 }}
                 {{ form_widget(form.montant, {
-                    'attr': {'class': 'form-control rounded', 'required': true}})
+                    'attr': {'class': 'form-control rounded'}})
                 }}
                 <div class="form-errors">
                     {{ form_errors(form.montant) }}
@@ -90,35 +79,37 @@
                     'label_attr': {'class': 'form-label mt-2 text-warning'}})
                 }}
                 {{ form_widget(form.modeReglement, {
-                    'attr': {'class': 'form-control rounded', 'required': true}})
+                    'attr': {'class': 'form-control rounded'}})
                 }}
                 <div class="form-errors">
                     {{ form_errors(form.modeReglement) }}
                 </div>
             </div>
         </div>
-        <div class='form-group w-50'>
-                    {{ form_label(form.dateCreation) }}
-                    <div class="input-group date" id="datepicker3">
-                        {{ form_widget(form.dateCreation) }}
-                        <span class="input-group-append">
-                            <span class="input-group-text bg-light d-block">
-                                <i class="fa fa-calendar"></i>
-                            </span>
-                        </span>
-                    </div>
-                    <div class="form-errors">
-                        {{ form_errors(form.dateCreation) }}
-                    </div>
-                </div>
-        
-       
-        
-            {# <div class='form-group w-50 mr-2'>
-                {{ form_label(form.numeroCarte) }}
-                {{ form_widget(form.numeroCarte) }}
+         <div class="d-flex justify-content-around w-100">
+            <div class='form-group w-50 mr-2'>
+                {{ form_label(form.vehiculeVert, 'Type de véhicule vert', {
+                    'label_attr': {'class': 'form-label mt-2 text-warning'}})
+                }}
+                {{ form_widget(form.vehiculeVert, {
+                    'attr': {'class': 'form-control rounded'}})
+                }}
                 <div class="form-errors">
-                    {{ form_errors(form.numeroCarte) }}
+                    {{ form_errors(form.vehiculeVert) }}
+                </div>
+            </div>
+            <div class='form-group w-50 ml-2'>
+                {{ form_label(form.dateCreation) }}
+                <div class="input-group date" id="datepicker3">
+                    {{ form_widget(form.dateCreation) }}
+                    <span class="input-group-append">
+                        <span class="input-group-text bg-light d-block">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </span>
+                </div>
+                <div class="form-errors">
+                    {{ form_errors(form.dateCreation) }}
                 </div>
             </div>
             <div class='form-check w-50 form-check-inline ml-4 mt-4'>
@@ -127,9 +118,8 @@
                 <div class="form-errors">
                     {{ form_errors(form.carteGrise) }}
                 </div>
-            </div> #}
-    
-        
+         </div>
+        </div>
         <div class='form-group'>
             {{ form_label(form.commentaires) }}
             {{ form_widget(form.commentaires) }}

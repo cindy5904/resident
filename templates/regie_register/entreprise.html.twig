@@ -2,34 +2,35 @@
 
 {% block body %}
 {% include "_navPro.html.twig" %}
-<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('regie_register.travailleur') }}">
+<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('regie_register.entreprise') }}">
     <div class="form-group">
         <input class="form-control" type="text" name="search" value="{{ searchTerm }}" placeholder="Rechercher par nom">
     </div>
     <button class="btn btn-info" type="submit">Rechercher</button>
 </form>
-{% if travailleurs %}
+{% if entreprises %}
     <div class="container h-100 w-100">
         <div class="d-flex justify-content-end">
-            <a href="{{ path('travailleur_domicile.index')}}">
+            <a href="{{ path('profession_liberale.index')}}">
                 <button class="mt-4 btn btn-outline-info rounded-pill">
                     Retour à la liste</button>
             </a>
 		</div>
-        <h1 class="mt-4 text-center">
-				Regie travailleur à domicile
-				{{ travailleurs.nom }}
-				{{ travailleurs.prenom }}</h1>
+        <h1 class="mt-4 text-center h3">
+				Regie Entreprise
+                {{ entreprises.denomination }}
+				{{ entreprises.nom }}
+				{{ entreprises.prenom }}</h1>
 			{{ form_start(form) }}
             <div class="container h-100 w-100 d-flex mt-4">
                 <div class="container w-100">
                     <div class='form-group'>
-                        {{ form_label(form.civilite, 'Civilité', {
+                        {{ form_label(form.denomination, 'Civilité', {
                         'label_attr': {'class': 'form-label text-warning'}}) }}
-						{{ form_widget(form.civilite, { 'attr': {'class': 'form-control rounded'}}
+						{{ form_widget(form.denomination, { 'attr': {'class': 'form-control rounded'}}
 						) }}
 						<div class="form-errors">
-							{{ form_errors(form.civilite) }}
+							{{ form_errors(form.denomination) }}
 						</div>
                     </div>
                     <div class="d-flex justify-content-around w-100">
@@ -50,27 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-around w-100">
-                <div class='form-group w-50 mr-2'>
-                    {{ form_label(form.numeroAdresse, "Numéro Adresse",  {
-                        'label_attr': {'class': 'form-label text-warning'}}) }}
-                    {{ form_widget(form.numeroAdresse) }}
-                    <div class="form-errors">
-                        {{ form_errors(form.numeroAdresse) }}
-                    </div>
-                </div>
-                <div class='form-group w-50 ml-2'>
-                    {{ form_label(form.adresse, 'Adresse', {
-                        'label_attr': {'class': 'form-label text-warning'}})
-                    }}
-                    {{ form_widget(form.adresse, {
-                        'attr': {'class': 'form-control rounded', 'required': true}})
-                    }}
-                    <div class="form-errors">
-                        {{ form_errors(form.adresse) }}
-                    </div>
-                </div>
-            </div>
+
              <div class="d-flex justify-content-around w-100">
                 <div class='form-group w-50 mr-2'>
                     {{ form_label(form.marqueVehicule, 'Marque du Véhicule',  {
@@ -98,7 +79,16 @@
                 </div>
             </div>
         </div> 
-             <div class="d-flex justify-content-around w-100">
+
+        <div class="d-flex justify-content-around w-100">
+                <div class='form-group w-50 mr-2'>
+                    {{ form_label(form.montant, 'Montant',  {
+                        'label_attr': {'class': 'form-label text-warning'}}) }}
+                    {{ form_widget(form.montant) }}
+                    <div class="form-errors">
+                        {{ form_errors(form.montant) }}
+                    </div>
+                </div>
                 <div class='form-group w-50 mr-2'>
                     {{ form_label(form.modeReglement, 'Mode de réglement',  {
                         'label_attr': {'class': 'form-label text-warning'}}) }}
@@ -107,6 +97,8 @@
                         {{ form_errors(form.modeReglement) }}
                     </div>
                 </div>
+        </div>
+             <div class="d-flex justify-content-around w-100">
                 <div class='form-group w-50 ml-2 mr-2'>
                     {{ form_label(form.numeroCarte, 'Numéro de carte',  {
                         'label_attr': {'class': 'form-label text-warning'}}) }}

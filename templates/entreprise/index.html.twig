@@ -3,6 +3,7 @@
 {% block title %}Liste des entreprises{% endblock %}
 
 {% block body %}
+{% include "_navPro.html.twig" %}
 <div class="d-flex justify-content-end mt-4 mr-4">
     <a href="{{ path("entreprise.new") }}" class="btn btn-info rounded">Créer une nouvelle entreprise</a>
 </div>
@@ -24,6 +25,7 @@
         <th scope="col" class="text-capitalize text-warning h5">Prénom</th>
         <th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
         <th scope="col" class="text-capitalize text-warning h5">modifier</th>
+        <th scope="col" class="text-capitalize text-warning h5">Régie</th>
         </tr>
     </thead>
     <tbody class="h-100">
@@ -37,6 +39,9 @@
         </td>
         <td>
             <a href="{{ path("entreprise.edit", { id: entreprise.id }) }}" class="btn btn-warning rounded">Modifier</a>
+        </td>
+        <td>
+            <a href="{{ path("entreprise.regie", { id: entreprise.id }) }}" class="btn btn-info rounded">Régie</a>
         </td>
         </tr>
     {% endfor %} 

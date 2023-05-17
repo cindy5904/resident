@@ -14,18 +14,18 @@
           <a class="nav-link dropdown-toggle h5" data-bs-toggle="dropdown" href="" id="bold" role="button" aria-haspopup="true" aria-expanded="false">Profession Libérale</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" id="hove" href="{{path('profession_liberale.new')}}">Nouveau</a>
-            <a class="dropdown-item" id="hove" href="">Renouvellement</a>
-            <a class="dropdown-item" id="hove" href="">Enregistrement Régie</a>
-            <a class="dropdown-item" id="hove" href="">Recherche par Carte</a>
-            <a class="dropdown-item" id="hove" href="">Changement de véhicule</a>
+            <a class="dropdown-item" id="hove" href="{{path('profession_liberale.searchname')}}">Renouvellement</a>
+            <a class="dropdown-item" id="hove" href="{{path('regie_register.profession')}}">Enregistrement Régie</a>
+            <a class="dropdown-item" id="hove" href="{{path('numero_carte.profession')}}">Recherche par Carte</a>
+            <a class="dropdown-item" id="hove" href="{{path('changement_vehicule.professionsearch')}}">Changement de véhicule</a>
           </div>
         </li>
         <li class="nav-item dropdown ml-3 mt-1">
           <a class="nav-link dropdown-toggle h5" data-bs-toggle="dropdown" href="{{ path('entreprise.index')}}" id="bold" role="button" aria-haspopup="true" aria-expanded="false">Entreprise</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" id="hove" href="{{ path('entreprise.new')}}">Nouveau</a>
-            <a class="dropdown-item" id="hove" href="">Enregistrement Régie</a>
-            <a class="dropdown-item" id="hove" href="">Recherche par Carte</a>
+            <a class="dropdown-item" id="hove" href="{{ path('regie_register.entreprise')}}">Enregistrement Régie</a>
+            <a class="dropdown-item" id="hove" href=" {{ path('numero_carte.entreprise')}}">Recherche par Carte</a>
             <a class="dropdown-item" id="hove" href="">Changement de véhicule</a>
           </div>
         </li>

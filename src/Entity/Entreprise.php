@@ -47,8 +47,6 @@ class Entreprise
     #[ORM\Column(nullable: true)]
     private ?int $numeroCarte = null;
 
-    #[ORM\ManyToOne]
-    private ?ListeEntreprise $denomination = null;
 
     #[ORM\ManyToOne]
     private ?ModeReglement $modeReglement = null;
@@ -58,6 +56,12 @@ class Entreprise
 
     #[ORM\ManyToOne]
     private ?MontantPro $montant = null;
+
+    #[ORM\ManyToOne]
+    private ?ListeEntreprise $denomination = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateAnDernier = null;
 
     public function getId(): ?int
     {
@@ -196,18 +200,6 @@ class Entreprise
         return $this;
     }
 
-    public function getDenomination(): ?ListeEntreprise
-    {
-        return $this->denomination;
-    }
-
-    public function setDenomination(?ListeEntreprise $denomination): self
-    {
-        $this->denomination = $denomination;
-
-        return $this;
-    }
-
     public function getModeReglement(): ?ModeReglement
     {
         return $this->modeReglement;
@@ -243,4 +235,29 @@ class Entreprise
 
         return $this;
     }
+
+    public function getDenomination(): ?ListeEntreprise
+    {
+        return $this->denomination;
+    }
+
+    public function setDenomination(?ListeEntreprise $denomination): self
+    {
+        $this->denomination = $denomination;
+
+        return $this;
+    }
+
+    public function getDateAnDernier(): ?\DateTimeInterface
+    {
+        return $this->dateAnDernier;
+    }
+
+    public function setDateAnDernier(?\DateTimeInterface $dateAnDernier): self
+    {
+        $this->dateAnDernier = $dateAnDernier;
+
+        return $this;
+    }
+
 }

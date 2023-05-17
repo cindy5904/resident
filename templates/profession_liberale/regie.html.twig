@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Bordereau pour Régie
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between mb-5">
+		<div class="col-3 hidden-on-print w-50">
+			<button class="hidden-on-print rounded mt-4 px-3 py-2 btn-warning" onclick="window.print()" id="impression" onload="window.print()">Imprimer le bordereau</button>
+		</div>
+        <div class="d-flex justify-content-end w-50">
+            <a href="{{ path('profession_liberale.index')}}" class="hidden-on-print">
+                <button class="mt-4 btn btn-outline-info rounded hidden-on-print rounded">
+                    Retour à la liste</button>
+            </a>
+        </div>
+	</div>
+    <span id="dateDuJour" class="hidden-on-screen"></span>
+    <div class="card border-primary h-100 mb-3 mt-4">
+        <div class="card-header d-flex align-items-center"><h1 class="">Profession libérale</h1></div>
+            <div class="card-body">
+                <h4 class="card-title">
+                    {% if profession.civilite %}
+					{{ profession.civilite }}
+                    {% endif %}
+                    {% if profession.nom %}
+                        {{ profession.nom }}
+                    {% endif %}
+                    {% if profession.prenom %}
+                        {{ profession.prenom }}
+                    {% endif %}
+                </h4>
+                <p class="mt-4"><strong class="h5"> Domiciliation :  </strong> {{profession.numeroAdresse}} {{profession.adresse}}</p>
+                <p class="mt-4"><strong class="h5"> Marque du véhicule :  </strong> {{profession.marqueVehicule}}  </p>
+                <p class="mt-4"><strong class="h5"> Modèle :  </strong> {{profession.modele}}  </p>
+                <p class="mt-4"><strong class="h5"> Immatriculation du véhicule :  </strong> {{profession.immatriculation}} </p>
+                <p class="mt-4"><strong class="h5"> Montant :  </strong> {{profession.montant}} € </p>
+                <p class="mt-4"><strong class="h5"> Délivrée par : </strong> {{profession.delivreePar}} </p>
+                <p class="mt-4"><strong class="h5"> Commentaire : </strong> {{profession.commentaires}} </p>
+
+
+                <p class="mt-4"><strong class="h5"> Moyen de paiment :  </strong>   </p>
+                <p class="mt-4"><strong class="h5"> Numéro de carte :  </strong> 
+                <p class="mt-4"><strong class="h5"> Date de création : </strong> </p>
+
+            </div>
+    </div>
+</div>
+
+{% endblock %}

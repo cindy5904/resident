@@ -2,36 +2,29 @@
 
 namespace App\Form;
 
-use App\Entity\TravailleurDomicile;
+use App\Entity\ProfessionLiberale;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ChangementVehiculeTravailleurdomType extends AbstractType
+class RegieProfessionLiberaleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('civilite', ChoiceType::class, [
-            'choices' => [
-                'Monsieur' =>'Monsieur',
-                'Madame' => 'Madame',
-                'Mademoiselle' => 'Mademoiselle',
-            ]
-        ])
+            ->add('numeroCarte')
+            ->add('civilite')
             ->add('nom')
             ->add('prenom')
             ->add('numeroAdresse')
             ->add('marqueVehicule')
             ->add('modele')
             ->add('immatriculation')
-            ->add('numeroCarte')
             ->add('commentaires')
-            ->add('changementVehicule')
-            ->add('carteSupprimee')
+            // ->add('changementVehicule')
+            // ->add('carteSupprimee')
             ->add('dateCreation', DateType::class, [
                 "attr" => [
                     "class" => "js-datepicker rounded "
@@ -45,23 +38,12 @@ class ChangementVehiculeTravailleurdomType extends AbstractType
                     "class" => "form-label mt-2 text-warning"
                 ]
             ])
-            ->add('dateAnDernier', DateType::class, [
-                "attr" => [
-                    "class" => "js-datepicker rounded"
-                ],
-                "widget" => "single_text",
-                "format" => "dd/MM/yyyy",
-                'html5' => false,
-                'required' => false,
-                "label" => "Date de l'année précédente",
-                "label_attr" => [
-                    "class" => "form-label mt-2 text-warning"
-                ]
-            ])
-            ->add('modeReglement')
-            ->add('montant')
+            // ->add('dateAnDernier')
             ->add('adresse')
-            ->add('delivreePar')
+            ->add('modeReglement')
+            // ->add('vehiculeVert')
+            // ->add('montant')
+            // ->add('delivreePar')
             ->add('submit', SubmitType::class, [
                 "attr" => [
                     "class" => "btn btn-primary mt-4 rounded",
@@ -75,7 +57,7 @@ class ChangementVehiculeTravailleurdomType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => TravailleurDomicile::class,
+            'data_class' => ProfessionLiberale::class,
         ]);
     }
 }

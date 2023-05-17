@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recherche numéro carte Travailleur à domicile{% endblock %}
+{% block title %}Recherche numéro carte Profession libérale{% endblock %}
 
 {% block body %}
 {% include "_navPro.html.twig" %}
-<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('travailleur_carte.search') }}">
+<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('numero_carte.profession') }}">
     <div class="form-group">
         <input class="form-control" id="recherche" type="text" name="numeroCarte" value="{{ searchTerm }}" placeholder="Rechercher un numéro de carte">
     </div>
@@ -12,7 +12,7 @@
 </form>
 
 {% if searchTerm is not empty %}
-    {% if travailleurs is not empty %}
+    {% if professions is not empty %}
         <h4 class='text-center mt-3 mb-5'>Résultat trouvé pour "{{ searchTerm }}" :</h4>
         <table class="table table-hover mt-4">
             <thead class="h-100 w-100">
@@ -26,19 +26,19 @@
                 </tr>
             </thead>
             <tbody class="h-100">
-                {% for travailleur in travailleurs %}
+                {% for profession in professions %}
                     <tr class="table-light h-100 text-center align-items-center">
-                        <td class="align-middle">{{ travailleur.numeroCarte }}</td>
-                        <td class="align-middle">{{ travailleur.nom }}</td>
-                        <td class="align-middle">{{ travailleur.prenom }}</td>
+                        <td class="align-middle">{{ profession.numeroCarte }}</td>
+                        <td class="align-middle">{{ profession.nom }}</td>
+                        <td class="align-middle">{{ profession.prenom }}</td>
                         <td>
-                            <a href="{{ path("travailleur_domicile.show", { id: travailleur.id }) }}" class="btn btn-info rounded">Afficher détails</a>
+                            <a href="{{ path("profession_liberale.show", { id: profession.id }) }}" class="btn btn-info rounded">Afficher détails</a>
                         </td>
                         <td>
-                            <a href="{{ path("travailleur_domicile.edit", { id: travailleur.id }) }}" class="btn btn-warning rounded">Modifier</a>
+                            <a href="{{ path("profession_liberale.edit", { id: profession.id }) }}" class="btn btn-warning rounded">Modifier</a>
                         </td>
                         <td>
-                            <a href="{{ path("travailleur_domicile.regie", { id: travailleur.id }) }}" class="btn btn-info rounded px-4">Régie</a>
+                            <a href="{{ path("profession_liberale.regie", { id: profession.id }) }}" class="btn btn-info rounded px-4">Régie</a>
                         </td>
                     </tr>
                 {% endfor %}

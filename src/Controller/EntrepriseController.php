@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Entreprise;
 use App\Form\EntrepriseType;
+use App\Form\RegieImpressionEntrepriseType;
 use App\Form\SearchType;
 use App\Model\SearchData;
 use Doctrine\ORM\EntityManagerInterface;
@@ -99,6 +100,26 @@ class EntrepriseController extends AbstractController
     {
         return $this->render('entreprise/show.html.twig', [
             'entreprise' => $entreprise,
+        ]);
+    }
+
+    #[Route('/entreprise/regie/{id}', name: 'entreprise.regie')]
+    public function regie(Request $request, EntityManagerInterface $manager, Entreprise $entreprise): Response
+    {
+        $form = $this->createForm(RegieImpressionEntrepriseType::class, $entreprise);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entreprise = $form->getData();
+            $manager->persist($entreprise);
+            $manager->flush();
+
+
+            return $this->redirectToRoute("entreprise.index");
+        }
+
+        return $this->render("entreprise/regie.html.twig", [
+            'form' => $form->createView(), 'entreprise' => $entreprise
         ]);
     }
 

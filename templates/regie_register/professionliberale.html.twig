@@ -2,24 +2,24 @@
 
 {% block body %}
 {% include "_navPro.html.twig" %}
-<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('regie_register.travailleur') }}">
+<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('regie_register.profession') }}">
     <div class="form-group">
         <input class="form-control" type="text" name="search" value="{{ searchTerm }}" placeholder="Rechercher par nom">
     </div>
     <button class="btn btn-info" type="submit">Rechercher</button>
 </form>
-{% if travailleurs %}
+{% if professions %}
     <div class="container h-100 w-100">
         <div class="d-flex justify-content-end">
-            <a href="{{ path('travailleur_domicile.index')}}">
+            <a href="{{ path('profession_liberale.index')}}">
                 <button class="mt-4 btn btn-outline-info rounded-pill">
                     Retour à la liste</button>
             </a>
 		</div>
         <h1 class="mt-4 text-center">
-				Regie travailleur à domicile
-				{{ travailleurs.nom }}
-				{{ travailleurs.prenom }}</h1>
+				Regie profession liberale
+				{{ professions.nom }}
+				{{ professions.prenom }}</h1>
 			{{ form_start(form) }}
             <div class="container h-100 w-100 d-flex mt-4">
                 <div class="container w-100">

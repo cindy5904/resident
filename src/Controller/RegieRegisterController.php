@@ -4,8 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Residents;
 use App\Entity\TravailleurDomicile;
+use App\Form\RegieEntrepriseType;
+use App\Form\RegieProfessionLiberaleType;
 use App\Form\RegieRegisterTravailleurType;
 use App\Form\RegisterRegieType;
+use App\Repository\EntrepriseRepository;
+use App\Repository\ProfessionLiberaleRepository;
 use App\Repository\ResidentsRepository;
 use App\Repository\TravailleurDomicileRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -84,6 +88,74 @@ class RegieRegisterController extends AbstractController
             'nom' => $nom,
             'form' => $form->createView(),
             'travailleurs' => $travailleurs
+        ]);
+    }
+    #[Route('/regie/register/professionliberale', name: 'regie_register.profession')]
+    public function profession(Request $request, ProfessionLiberaleRepository $repository, EntityManagerInterface $manager): Response
+    {
+        $searchTerm = $request->query->get('search');
+        $nom = null;
+        $professions = null;
+
+        if ($searchTerm) {
+            $professions = $repository->findOneBy(['nom' => $searchTerm]);
+        }
+
+        $form = $this->createForm(RegieProfessionLiberaleType::class, $professions);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($professions);
+            $manager->flush();
+
+            $this->addFlash(
+                "success",
+                "Les informations complémentaires ont bien été ajoutées !!!"
+            );
+
+            return $this->redirectToRoute("profession_liberale.index");
+        }
+        
+
+        return $this->render('regie_register/professionliberale.html.twig', [
+            'searchTerm' => $searchTerm,
+            'nom' => $nom,
+            'form' => $form->createView(),
+            'professions' => $professions
+        ]);
+    }
+    #[Route('/regie/register/entreprise', name: 'regie_register.entreprise')]
+    public function entreprise(Request $request, EntrepriseRepository $repository, EntityManagerInterface $manager): Response
+    {
+        $searchTerm = $request->query->get('search');
+        $nom = null;
+        $entreprises = null;
+
+        if ($searchTerm) {
+            $entreprises = $repository->findOneBy(['nom' => $searchTerm]);
+        }
+
+        $form = $this->createForm(RegieEntrepriseType::class, $entreprises);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($entreprises);
+            $manager->flush();
+
+            $this->addFlash(
+                "success",
+                "Les informations complémentaires ont bien été ajoutées !!!"
+            );
+
+            return $this->redirectToRoute("entreprise.index");
+        }
+        
+
+        return $this->render('regie_register/entreprise.html.twig', [
+            'searchTerm' => $searchTerm,
+            'nom' => $nom,
+            'form' => $form->createView(),
+            'entreprises' => $entreprises
         ]);
     }
 }

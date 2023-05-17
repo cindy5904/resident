@@ -131,7 +131,7 @@ class TravailleurDomicileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $resident = $form->getData();
+            $travailleur = $form->getData();
             $manager->persist($travailleur);
             $manager->flush();
 

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Entreprise;
+use App\Entity\ProfessionLiberale;
 use App\Entity\Residents;
 use App\Entity\TravailleurDomicile;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,6 +38,33 @@ class NumeroCarteController extends AbstractController
         return $this->render('numero_carte/travailleurSearch.html.twig', [
             'searchTerm' => $searchTerm,
             'travailleurs' => $travailleurs,
+        ]);
+
+    }
+
+    #[Route('/numero/carte/profession', name: 'numero_carte.profession')]
+    public function profession(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $searchTerm = $request->query->get('numeroCarte');
+        $repository = $entityManager->getRepository(ProfessionLiberale::class);
+        $professions = $repository->findBy(['numeroCarte' => $searchTerm]);
+
+        return $this->render('numero_carte/travailleurSearch.html.twig', [
+            'searchTerm' => $searchTerm,
+            'professions' => $professions,
+        ]);
+
+    }
+    #[Route('/numero/carte/entreprise', name: 'numero_carte.entreprise')]
+    public function entreprise(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $searchTerm = $request->query->get('numeroCarte');
+        $repository = $entityManager->getRepository(Entreprise::class);
+        $entreprises = $repository->findBy(['numeroCarte' => $searchTerm]);
+
+        return $this->render('numero_carte/entreprise.html.twig', [
+            'searchTerm' => $searchTerm,
+            'entreprises' => $entreprises,
         ]);
 
     }

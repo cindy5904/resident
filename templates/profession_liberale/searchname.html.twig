@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% include "_navPro.html.twig" %}
+<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('profession_liberale.searchname') }}">
+  <div class="form-group">
+    <input class="form-control" type="text" name="search" value="{{ searchTerm }}" placeholder="Rechercher par nom">
+  </div>
+  <button class="btn btn-info" type="submit">Rechercher</button>
+</form>
+{% if professions %}
+<h4 class='text-center mt-3 mb-5'>Résultat trouvé pour "{{ searchTerm }}" :</h4>
+    {% for profession in professions %}
+    <table class="table table-hover mt-4">
+    <thead class="h-100 w-100">
+        <tr class="h-100 text-center">
+        <th scope="col" class="text-capitalize text-warning h5">Civilité</th>
+        <th scope="col" class="text-capitalize text-warning h5">Nom</th>
+        <th scope="col" class="text-capitalize text-warning h5">Prénom</th>
+        <th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
+        <th scope="col" class="text-capitalize text-warning h5">Renouveler</th>
+        </tr>
+    </thead>
+    <tbody class="h-100">
+            <tr class="table-light h-100 text-center align-items-center">
+                <td class="align-middle">{{ profession.civilite }}</td>
+                <td class="align-middle">{{ profession.nom }}</td>
+                <td class="align-middle">{{ profession.prenom }}</td>
+                <td>
+                    <a href="{{ path('profession_liberale.show', { id: profession.id }) }}" class="btn btn-info rounded">Afficher détails</a>
+                </td>
+                <td>
+                    <a href="{{ path('profession_liberale.renouvellement', { id: profession.id }) }}" class="btn btn-warning rounded">Renouveler</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+        
+    {% endfor %}
+    {% elseif searchTerm %}
+    <div class='text-center mt-5'>
+        <p>Aucun résultat trouvé pour "{{ searchTerm }}".</p>
+        <a href="{{path('app_choix_pro')}}" class="btn btn-info">Revenir à la page d'accueil</a>
+    </div>
+    
+{% endif %}
+{% endblock %}

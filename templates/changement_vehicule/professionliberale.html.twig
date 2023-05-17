@@ -1,14 +1,14 @@
 {% extends "base.html.twig" %}
 
-{% block title %} Modifier Immatriculation  {{ travailleur.nom }} {{ travailleur.prenom }}{% endblock %}
+{% block title %} Modifier Immatriculation  {{ profession.nom }} {{ profession.prenom }}{% endblock %}
 
 {% block body %}
 {% include "_navPro.html.twig" %}
 <div class="container h-100 w-100">
     <div class="d-flex justify-content-end">
-        <a href="{{ path('travailleur_domicile.index')}}"><button class="mt-4 btn btn-outline-info rounded-pill"> Retour à la liste</button></a>
+        <a href="{{ path('profession_liberale.index')}}"><button class="mt-4 btn btn-outline-info rounded-pill"> Retour à la liste</button></a>
     </div>
-    <h1 class="mt-4 text-center h3"> Changement de véhicule  {{ travailleur.nom }} {{ travailleur.prenom }}</h1>
+    <h1 class="mt-4 text-center h3"> Changement de véhicule  {{ profession.nom }} {{ profession.prenom }}</h1>
     {{ form_start(form) }}
     <div class="container h-100 w-100 d-flex mt-4">
         <div class="container w-100">

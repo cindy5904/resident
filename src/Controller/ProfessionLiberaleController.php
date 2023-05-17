@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\ProfessionLiberale;
 use App\Form\ProfessionLiberaleType;
+use App\Form\RegieImpressionProfessionType;
+use App\Form\RenouvellementProfessionLiberaleType;
 use App\Repository\ProfessionLiberaleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -80,6 +82,67 @@ class ProfessionLiberaleController extends AbstractController
     {
         return $this->render('profession_liberale/show.html.twig', [
             'profession' => $profession,
+        ]);
+    }
+
+    #[Route('/profession/liberale/regie/{id}', name: 'profession_liberale.regie')]
+    public function regie(Request $request, EntityManagerInterface $manager, ProfessionLiberale $profession): Response
+    {
+        $form = $this->createForm(RegieImpressionProfessionType::class, $profession);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $profession = $form->getData();
+            $manager->persist($profession);
+            $manager->flush();
+
+
+            return $this->redirectToRoute("profession_liberale.index");
+        }
+
+        return $this->render("profession_liberale/regie.html.twig", [
+            'form' => $form->createView(), 'profession' => $profession
+        ]);
+    }
+
+    #[Route('/profession/liberale/search', name: 'profession_liberale.searchname')]
+    public function searchName(ProfessionLiberaleRepository $repository, Request $request): Response
+    {
+        {
+            $searchTerm = $request->query->get('search');
+            $professions = null;
+        
+            if ($searchTerm) {
+                $professions = $repository->findBy(['nom' => $searchTerm]);
+            }
+            return $this->render('profession_liberale/searchname.html.twig', [
+                'searchTerm' => $searchTerm,
+                'professions' => $professions
+            ]);
+        }
+    }
+
+    #[Route('/profession/liberale/renouvellement/{id}', name: 'profession_liberale.renouvellement')]
+    public function renouvellement(Request $request, EntityManagerInterface $manager, ProfessionLiberale $profession): Response
+    {
+        $form = $this->createForm(RenouvellementProfessionLiberaleType::class, $profession);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $profession = $form->getData();
+            $manager->persist($profession);
+            $manager->flush();
+
+            $this->addFlash(
+                "success",
+                "Profession libérale a été renouvelé avec succès !!!"
+            );
+
+            return $this->redirectToRoute("profession_liberale.index");
+        }
+
+        return $this->render("profession_liberale/renouvellement.html.twig", [
+            "form" => $form->createView(), "profession" => $profession
         ]);
     }
 
