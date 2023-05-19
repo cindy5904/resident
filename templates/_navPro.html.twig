@@ -15,18 +15,20 @@
           <div class="dropdown-menu">
             <a class="dropdown-item" id="hove" href="{{path('profession_liberale.new')}}">Nouveau</a>
             <a class="dropdown-item" id="hove" href="{{path('profession_liberale.searchname')}}">Renouvellement</a>
-            <a class="dropdown-item" id="hove" href="{{path('regie_register.profession')}}">Enregistrement Régie</a>
+            <a class="dropdown-item" id="hove" href="{{path('regie_register.professionsearch')}}">Enregistrement Régie</a>
             <a class="dropdown-item" id="hove" href="{{path('numero_carte.profession')}}">Recherche par Carte</a>
             <a class="dropdown-item" id="hove" href="{{path('changement_vehicule.professionsearch')}}">Changement de véhicule</a>
+            <a class="dropdown-item" id="hove" href="{{path('profession_liberale.index')}}">Afficher la liste</a>
           </div>
         </li>
         <li class="nav-item dropdown ml-3 mt-1">
           <a class="nav-link dropdown-toggle h5" data-bs-toggle="dropdown" href="{{ path('entreprise.index')}}" id="bold" role="button" aria-haspopup="true" aria-expanded="false">Entreprise</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" id="hove" href="{{ path('entreprise.new')}}">Nouveau</a>
-            <a class="dropdown-item" id="hove" href="{{ path('regie_register.entreprise')}}">Enregistrement Régie</a>
+            <a class="dropdown-item" id="hove" href="{{ path('regie_register.entreprisesearch')}}">Enregistrement Régie</a>
             <a class="dropdown-item" id="hove" href=" {{ path('numero_carte.entreprise')}}">Recherche par Carte</a>
-            <a class="dropdown-item" id="hove" href="">Changement de véhicule</a>
+            <a class="dropdown-item" id="hove" href="{{ path('changement_vehicule.entreprisesearch')}}">Changement de véhicule</a>
+            <a class="dropdown-item" id="hove" href="{{path('entreprise.index')}}">Afficher la liste</a>
           </div>
         </li>
         <li class="nav-item dropdown ml-3 mt-1">
@@ -34,10 +36,14 @@
           <div class="dropdown-menu">
             <a class="dropdown-item" id="hove" href="{{ path('travailleur_domicile.new')}}">Nouveau</a>
             <a class="dropdown-item" id="hove" href="{{path('travailleur_domicile.searchname')}}">Renouvellement</a>
-            <a class="dropdown-item" id="hove" href="{{path('regie_register.travailleur')}}">Enregistrement Régie</a>
+            <a class="dropdown-item" id="hove" href="{{path('regie_register.travailleursearch')}}">Enregistrement Régie</a>
             <a class="dropdown-item" id="hove" href="{{path('travailleur_carte.search')}}">Recherche par Carte</a>
             <a class="dropdown-item" id="hove" href="{{path('changement_vehicule.travailleursearch')}}">Changement de véhicule</a>
+            <a class="dropdown-item" id="hove" href="{{path('travailleur_domicile.index')}}">Afficher la liste</a>
           </div>
+        </li>
+         <li class="nav-item ml-3 align-middle mt-1">
+          <a class="nav-link active h5" id="bold" href="{{ path('app_liste_entreprise') }}">Liste Entreprise</a>
         </li>
       </ul>      
     </div>

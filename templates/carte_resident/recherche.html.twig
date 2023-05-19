@@ -1,15 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{% include "_nav.html.twig" %}
-	<form class="form-inline mt-5 d-flex justify-content-center mb-5" method="get" action="{{ path('carte_provisoire_recherche') }}">
+	{# <form class="form-inline mt-5 d-flex justify-content-center mb-5" method="get" action="{{ path('resident_liste.search') }}">
     <div class="form-group">
         <input class="form-control" type="text" name="nom" value="{{ searchTerm }}" placeholder="Rechercher par nom">
     </div>
     <button class="btn btn-info" type="submit">Rechercher</button>
-	</form>
-    {% if searchTerm is not empty %}
-        {% if cartes is not empty %}
+	</form> #}
+    
+        {% if residents is not empty %}
         <table class="table table-hover mt-5">
         <thead class="h-100 w-100">
             <tr class="h-100 text-center">
@@ -22,20 +21,20 @@
             </tr>
         </thead>
         <tbody class="h-100">
-        {% for carte in cartes %}
+        {% for resident in residents %}
         <tr class="table-light h-100 text-center align-items-center">
         {# <th scope="row">{{carte.id}}</th> #}
-        <td>{{carte.civilite}}</td>
-        <td>{{carte.nom}}</td>
-        <td>{{carte.prenom}}</td>
+        <td>{{resident.civilite}}</td>
+        <td>{{resident.nom}}</td>
+        <td>{{resident.prenom}}</td>
         <td>
-            <a href="{{ path("carte_provisoire.show", { id: carte.id }) }}" class="btn btn-info rounded">Afficher détails</a>
+            <a href="{{ path("app_resident_show", { id: resident.id }) }}" class="btn btn-info rounded">Afficher détails</a>
         </td>
         <td>
-            <a href="{{ path("carte_provisoire.edit", { id: carte.id }) }}" class="btn btn-warning rounded">Modifier</a>
+            <a href="{{ path("app_resident_edit", { id: resident.id }) }}" class="btn btn-warning rounded">Modifier</a>
         </td>
         <td>
-            <a href="{{ path("app_regie_register", { id: carte.id }) }}" class="btn btn-info rounded px-4">Régie</a>
+            <a href="{{ path("app_regie_register", { id: resident.id }) }}" class="btn btn-info rounded px-4">Régie</a>
         </td>
         </tr>
            {% endfor %}
@@ -43,18 +42,18 @@
         </table>
     {% else %}
         <h1>Carte Provisoire non trouvée</h1>
-        <p>Aucune carte provisoire correspondant à ce nom n'a été trouvée.</p>
-        <form action="{{ path('carte_provisoire.new') }}">
+        <p>Aucun résident correspondant à ce nom n'a été trouvée.</p>
+        <form action="{{ path('app_carte_resident_new') }}">
             <button type="submit">Ajouter une nouvelle carte</button>
         </form>
-        <form action="{{ path('carte_provisoire.index') }}">
+        <form action="{{ path('app_carte_resident') }}">
             <button type="submit">Annuler</button>
         </form>
     {% endif %}
         
-{% endif %}
+
 <div class="d-flex w-50 ml-5 mt-5">
-        <a href="{{ path('carte_provisoire.index')}}"><button class="mt-4 btn btn-outline-info rounded"> Retour à la liste</button></a>
+        <a href="{{ path('app_carte_resident')}}"><button class="mt-4 btn btn-outline-info rounded"> Retour à la liste</button></a>
     </div>
 
 {% endblock %}

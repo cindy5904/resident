@@ -56,28 +56,6 @@ class CarteProvisoireController extends AbstractController
             return $this->render('carte_provisoire/justif.html.twig');
         }
 
-        // public function onKernelController(ControllerEvent $event)
-        // {
-        //     $request = $event->getRequest();
-        //     // Si la route correspond à celle de l'index des cartes provisoires
-        //     if ($request->attributes->get('_route') === 'carte_provisoire.index') {
-        //         $queryBuilder = $this->getDoctrine()->getRepository(CarteProvisoire::class)->createQueryBuilder('c');
-
-        //         // Récupération du filtre sur le nom (si présent)
-        //         $nomFilter = $request->query->get('nomFilter');
-        //         if ($nomFilter) {
-        //             $queryBuilder->andWhere('c.nom LIKE :nomFilter')
-        //                 ->setParameter('nomFilter', '%' . $nomFilter . '%');
-        //         }
-
-        //         // Mise à jour de la requête
-        //         $request->query->set('nomFilter', $nomFilter);
-        //         $request->attributes->set('doctrine.orm.query_builder', $queryBuilder);
-        //     }
-        // }
-       
-
-
 
     #[Route('/carte-provisoire/creation', name: 'carte_provisoire.new', methods: ["GET", "POST"])]
     public function new(Request $request, EntityManagerInterface $manager): Response

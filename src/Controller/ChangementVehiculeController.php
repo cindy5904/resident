@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Entreprise;
 use App\Entity\ProfessionLiberale;
 use App\Entity\Residents;
 use App\Entity\TravailleurDomicile;
+use App\Form\ChangementVehiculeEntrepriseType;
 use App\Form\ChangementVehiculeProfessionType;
 use App\Form\ChangementVehiculeTravailleurdomType;
 use App\Form\ChangementVehiculeType;
@@ -137,12 +139,14 @@ class ChangementVehiculeController extends AbstractController
     }
 
     #[Route('/changement/vehicule/entreprise/search', name: 'changement_vehicule.entreprisesearch')]
-    public function entreprise(Request $request, EntityManagerInterface $entityManager): Response
+    public function entreprisesearch(Request $request, EntityManagerInterface $entityManager): Response
     {
         $searchTerm = $request->query->get('immatriculation');
 
-        $repository = $entityManager->getRepository(ProfessionLiberale::class);
+        $repository = $entityManager->getRepository(Entreprise::class);
         $entreprises = $repository->findBy(['immatriculation' => $searchTerm]);
+        
+
 
 
         return $this->render('changement_vehicule/EntrepriseSearch.html.twig', [
@@ -150,6 +154,32 @@ class ChangementVehiculeController extends AbstractController
             'entreprises' => $entreprises,
         ]);
     }
+
+    #[Route('/changement/vehicule/entreprise/{id}', name: 'changement_vehicule.entreprise')]
+    public function entreprise(Request $request, EntityManagerInterface $manager, Entreprise $entreprise): Response
+    {
+        $form = $this->createForm(ChangementVehiculeEntrepriseType::class, $entreprise);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entreprise = $form->getData();
+            $manager->persist($entreprise);
+            $manager->flush();
+
+            $this->addFlash(
+                "success",
+                "L'immatriculation a été modifiée avec succès !!!"
+            );
+
+            return $this->redirectToRoute("entreprise.index");
+        }
+
+        return $this->render("changement_vehicule/entreprise.html.twig", [
+            "form" => $form->createView(), "entreprise" => $entreprise
+        ]);
+    }
+
 
 
 

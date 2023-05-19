@@ -1,20 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ListeEntrepriseController!{% endblock %}
+{% block title %}Liste des entreprises{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/resident/src/Controller/ListeEntrepriseController.php'|file_link(0) }}">src/Controller/ListeEntrepriseController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/resident/templates/liste_entreprise/index.html.twig'|file_link(0) }}">templates/liste_entreprise/index.html.twig</a></code></li>
-    </ul>
+{% include "_navPro.html.twig" %}
+<div class="container mt-4">
+    <div>
+        <h1 class="mt-4 text-warning text-center">Liste entreprises</h1>    
+    </div>
+    <table class="table table-hover mt-4">
+    <thead class="h-100 w-100">
+        <tr class="h-100 text-center">
+        <th scope="col" class="text-capitalize text-warning h5">Dénomination</th>
+        <th scope="col" class="text-capitalize text-warning h5">Numéro</th>
+        <th scope="col" class="text-capitalize text-warning h5">Adresse</th>
+        <th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
+        
+        </tr>
+    </thead>
+    <tbody class="h-100">
+    {% for listeEntreprise in listeEntreprises %}
+        <tr class="table-light h-100 text-center align-items-center">
+        <td>{{listeEntreprise.denomination}}</td>
+        <td>{{listeEntreprise.numeroAdresse}}</td>
+        <td>{{listeEntreprise.adresse}}</td>
+        <td>
+            <a href="{{ path("liste_entreprise.show", { id: listeEntreprise.id }) }}" class="btn btn-info rounded">Afficher détails</a>
+        </td>
+        </tr>
+    {% endfor %} 
+    </tbody>
+    </table>
+    <div class="navigation d-flex justify-content-center mt-4">
+        {{ knp_pagination_render(listeEntreprises) }}
+    </div>
 </div>
+
 {% endblock %}
+

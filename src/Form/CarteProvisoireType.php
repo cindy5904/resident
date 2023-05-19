@@ -40,6 +40,7 @@ class CarteProvisoireType extends AbstractType
                     "minLength" => "2",
                     "maxLength" => "255"
                 ],
+                'required' => false,
                 "label" => "Nom",
                 "label_attr" => [
                     "class" => "form-label mt-4 text-warning"
@@ -54,6 +55,7 @@ class CarteProvisoireType extends AbstractType
                     "minLength" => "2",
                     "maxLength" => "255"
                 ],
+                'required' => false,
                 "label" => "Prénom",
                 "label_attr" => [
                     "class" => "form-label mt-4 text-warning"
@@ -70,6 +72,7 @@ class CarteProvisoireType extends AbstractType
                     "minLength" => "1",
                     "maxLength" => "255"
                 ],
+                'required' => false,
                 "label" => "Numéro d'adresse",
                 "label_attr" => [
                     "class" => "form-label mt-4 text-warning"
@@ -92,38 +95,15 @@ class CarteProvisoireType extends AbstractType
                     new Assert\Length(["min" => 2, "max" => 255])
                 ]
             ])
-            ->add('carteGrise', CheckboxType::class, [
-                'attr' => [
-                    'class' => 'form-check'
-                ],
-                'required' => false,
-                'label' => 'Carte grise (cochez la case si pièce fourni)',
-                'label_attr' => [
-                    'class' => 'form-label mt-4 text-warning'
-                ],
-                'constraints' => [
-                    new Assert\NotNull()
-                ],
-            ])
-            ->add('justificatifMoins3Mois', CheckboxType::class, [
-                'attr' => [
-                    'class' => 'form-check'
-                ],
-                'required' => false,
-                'label' => 'Justificatif de moins de 3 mois (cochez la case si pièce fourni)',
-                'label_attr' => [
-                    'class' => 'form-label mt-4 text-warning'
-                ],
-                'constraints' => [
-                    new Assert\NotNull()
-                ],
-            ])
+            ->add('carteGrise')
+            ->add('justificatifMoins3Mois')
             ->add('commentaires', TextareaType::class, [
                 "attr" => [
                     "class" => "form-control rounded",
                     "minLength" => "2",
                     "maxLength" => "255"
                 ],
+                'required' => false,
                 "label" => "Commentaires",
                 "label_attr" => [
                     "class" => "form-label mt-4 text-warning"
@@ -134,7 +114,8 @@ class CarteProvisoireType extends AbstractType
                 ])
             ->add('submit', SubmitType::class, [
                 "attr" => [
-                    "class" => "btn btn-primary mt-4 rounded"
+                    "class" => "btn btn-primary mt-4 rounded",
+                    "novalidate" => true,
                 ],
                 "label" => "Enregistrer",
             ]);

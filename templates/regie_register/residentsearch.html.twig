@@ -1,45 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recherche immatriculation (entreprise){% endblock %}
+{% block title %}Recherche résident régie{% endblock %}
 
 {% block body %}
-{% include "_navPro.html.twig" %}
-<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('changement_vehicule.entreprisesearch') }}">
+{% include "_nav.html.twig" %}
+<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('app_regie_register_search') }}">
     <div class="form-group">
-        <input class="form-control" id="recherche" type="text" name="immatriculation" value="{{ searchTerm }}" placeholder="Rechercher par immatriculation">
+        <input class="form-control" id="recherche" type="text" name="search" value="{{ searchTerm }}" placeholder="Rechercher par nom">
     </div>
     <button class="btn btn-info" id="btn-recherche" type="submit">Rechercher</button>
 </form>
 
 {% if searchTerm is not empty %}
-    {% if entreprises is not empty %}
+    {% if residents is not empty %}
         <h4 class='text-center mt-3 mb-5'>Résultat trouvé pour "{{ searchTerm }}" :</h4>
         <table class="table table-hover mt-4">
             <thead class="h-100 w-100">
                 <tr class="h-100 text-center">
-                    <th scope="col" class="text-capitalize text-warning h5">Immatriculation</th>
-                    <th scope="col" class="text-capitalize text-warning h5">Dénomination</th>
+                    <th scope="col" class="text-capitalize text-warning h5">Civilité</th>
                     <th scope="col" class="text-capitalize text-warning h5">Nom</th>
+                    <th scope="col" class="text-capitalize text-warning h5">Prénom</th>
                     <th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
-                    <th scope="col" class="text-capitalize text-warning h5">Changement véhicule</th>
+                    <th scope="col" class="text-capitalize text-warning h5">Modifier</th>
                     <th scope="col" class="text-capitalize text-warning h5">régie</th>
                 </tr>
             </thead>
             <tbody class="h-100">
-                {% for entreprise in entreprises %}
+                {% for resident in residents %}
                     <tr class="table-light h-100 text-center align-items-center">
-                        <td class="align-middle">{{ entreprise.immatriculation }}</td>
-                        <td class="align-middle">{{ entreprise.denomination }}</td>
-                        <td class="align-middle">{{ entreprise.nom }}</td>
+                        <td class="align-middle">{{ resident.civilite }}</td>
+                        <td class="align-middle">{{ resident.nom }}</td>
+                        <td class="align-middle">{{ resident.prenom }}</td>
                         
                         <td>
-                            <a href="{{ path("entreprise.show", { id: entreprise.id }) }}" class="btn btn-info rounded">Afficher détails</a>
+                            <a href="{{ path("app_resident_show", { id: resident.id }) }}" class="btn btn-info rounded">Afficher détails</a>
                         </td>
                         <td>
-                            <a href="{{ path("changement_vehicule.entreprise", { id: entreprise.id }) }}" class="btn btn-warning rounded">Changement véhicule</a>
+                            <a href="{{ path("app_resident_edit", { id: resident.id }) }}" class="btn btn-warning rounded">
+                            modifier</a>
                         </td>
                         <td>
-                            <a href="{{ path("entreprise.regie", { id: entreprise.id }) }}" class="btn btn-info rounded px-4">Régie</a>
+                            <a href="{{ path("app_regie_register", { id: resident.id}) }}" class="btn btn-info rounded px-4">Régie</a>
                         </td>
                     </tr>
                 {% endfor %}

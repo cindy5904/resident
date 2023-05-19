@@ -39,6 +39,12 @@ class ListeEntrepriseRepository extends ServiceEntityRepository
         }
     }
 
+    public function findById()
+    {
+        return $this->createQueryBuilder("c")
+                        ->orderBy("c.id", "DESC");
+    }
+
 //    /**
 //     * @return ListeEntreprise[] Returns an array of ListeEntreprise objects
 //     */

@@ -1,0 +1,164 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Modifier Immatriculation  {{ entreprise.nom }} {{ entreprise.prenom }}{% endblock %}
+
+{% block body %}
+{% include "_navPro.html.twig" %}
+<div class="container h-100 w-100">
+    <div class="d-flex justify-content-end">
+        <a href="{{ path('entreprise.index')}}"><button class="mt-4 btn btn-outline-info rounded-pill"> Retour à la liste</button></a>
+    </div>
+    <h1 class="mt-4 text-center h3"> Changement de véhicule  {{ entreprise.nom }} {{ entreprise.prenom }}</h1>
+    {{ form_start(form) }}
+    <div class="container h-100 w-100 d-flex mt-4">
+        <div class="container w-100">
+            <div class='form-group w-100'>
+                {{ form_label(form.denomination, 'Dénomination', {
+                    'label_attr': {'class': 'form-label mt-2 text-warning'}}) }}
+                {{ form_widget(form.denomination) }}
+                <div class="form-errors">
+                    {{ form_errors(form.denomination) }}
+                </div>
+            </div>
+        <div class="d-flex justify-content-around w-100">
+            <div class='form-group w-50 mr-2'>
+                {{ form_label(form.nom, 'Nom', {
+                'label_attr': {'class': 'form-label mt-2 text-warning'}}) }}
+                {{ form_widget(form.nom) }}
+                <div class="form-errors">
+                    {{ form_errors(form.nom) }}
+                </div>
+            </div>
+            <div class='form-group w-50 ml-2'>
+                {{ form_label(form.prenom, 'Prénom', {
+                'label_attr': {'class': 'form-label mt-2 text-warning'}}) }}
+                {{ form_widget(form.prenom) }}
+                <div class="form-errors">
+                    {{ form_errors(form.prenom) }}
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around w-100">
+            <div class='form-group w-50 mr-2'>
+                {{ form_label(form.marqueVehicule, 'Marque du Véhicule', {
+                'label_attr': {'class': 'form-label mt-2 text-warning'}}) }}
+                {{ form_widget(form.marqueVehicule) }}
+                <div class="form-errors">
+                    {{ form_errors(form.marqueVehicule) }}
+                </div>
+            </div>
+            <div class='form-group w-50 ml-2 mr-2'>
+                {{ form_label(form.modele, 'Modèle', {
+                'label_attr': {'class': 'form-label mt-2 text-warning'}}) }}
+                {{ form_widget(form.modele) }}
+                <div class="form-errors">
+                    {{ form_errors(form.modele) }}
+                </div>
+            </div>
+                <div class='form-group w-50 mr-2'>
+                {{ form_label(form.immatriculation, 'Immatriculation', {
+                'label_attr': {'class': 'form-label mt-2 text-warning'}}) }}
+                {{ form_widget(form.immatriculation) }}
+                <div class="form-errors">
+                    {{ form_errors(form.immatriculation) }}
+                </div>
+            </div>
+        </div> 
+        <div class="d-flex justify-content-around w-100">
+            <div class='form-group w-50 mr-2'>
+                {{ form_label(form.changementVehicule, 'Changement de véhicule', {
+                'label_attr': {'class': 'form-label mt-2 text-warning'}}) }}
+                {{ form_widget(form.changementVehicule) }}
+                <div class="form-errors">
+                    {{ form_errors(form.changementVehicule) }}
+                </div>
+            </div>
+            <div class='form-group w-50 ml-2 mr-2'>
+                {{ form_label(form.numeroCarte, 'Numéro de Carte', {
+                'label_attr': {'class': 'form-label mt-2 text-warning'}}) }}
+                {{ form_widget(form.numeroCarte) }}
+                <div class="form-errors">
+                    {{ form_errors(form.numeroCarte) }}
+                </div>
+            </div>
+            <div class='form-group w-50 ml-2 mr-2'>
+                {{ form_label(form.carteSupprimee, 'Carte supprimée', {
+                'label_attr': {'class': 'form-label mt-2 text-warning'}}) }}
+                {{ form_widget(form.carteSupprimee) }}
+                <div class="form-errors">
+                    {{ form_errors(form.carteSupprimee) }}
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around w-100">
+            <div class='form-group w-50 mr-2 ml-2'>
+                {{ form_label(form.montant, 'Montant', {
+                    'label_attr': {'class': 'form-label mt-2 text-warning'}})
+                }}
+                {{ form_widget(form.montant, {
+                    'attr': {'class': 'form-control rounded'}})
+                }}
+                <div class="form-errors">
+                    {{ form_errors(form.montant) }}
+                </div>
+            </div>
+            <div class='form-group w-50 mr-2 ml-2'>
+                {{ form_label(form.modeReglement, 'Mode de réglement', {
+                    'label_attr': {'class': 'form-label mt-2 text-warning'}})
+                }}
+                {{ form_widget(form.modeReglement, {
+                    'attr': {'class': 'form-control rounded'}})
+                }}
+                <div class="form-errors">
+                    {{ form_errors(form.modeReglement) }}
+                </div>
+            </div>
+         </div>    
+        <div class="d-flex justify-content-around w-100">
+            <div class='form-group w-50 mr-2'>
+                {{ form_label(form.dateCreation) }}
+                <div class="input-group date" id="datepicker">
+                    {{ form_widget(form.dateCreation) }}
+                    <span class="input-group-append">
+                        <span class="input-group-text bg-light d-block">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </span>
+                </div>
+                <div class="form-errors">
+                    {{ form_errors(form.dateCreation) }}
+                </div>
+            </div>
+            <div class='form-group w-50 mr-2'>
+                {{ form_label(form.dateAnDernier) }}
+                <div class="input-group date" id="datepicker1">
+                    {{ form_widget(form.dateAnDernier) }}
+                    <span class="input-group-append">
+                        <span class="input-group-text bg-light d-block">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </span>
+                </div>
+                <div class="form-errors">
+                    {{ form_errors(form.dateAnDernier) }}
+                </div>
+            </div>
+        </div>
+        <div class='form-group w-100'>
+            {{ form_label(form.commentaires, 'Commentaires', {
+                'label_attr': {'class': 'form-label mt-2 text-warning'}})
+            }}
+            {{ form_widget(form.commentaires, {
+                'attr': {'class': 'form-control rounded'}})
+            }}
+        </div>
+     <div class="d-flex justify-content-center">
+        <div class="form-group">
+            {{ form_row(form.submit) }}
+        </div>
+    </div>
+       
+    {{ form_end(form) }}            
+       
+ </div>
+ {% endblock %}

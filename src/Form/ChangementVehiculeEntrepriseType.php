@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Entreprise;
+use App\Entity\ListeEntreprise;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -54,6 +56,13 @@ class ChangementVehiculeEntrepriseType extends AbstractType
             ->add('vehiculeVert')
             ->add('montant')
             ->add('denomination')
+            ->add('submit', SubmitType::class, [
+                "attr" => [
+                    "class" => "btn btn-info mt-4 rounded",
+                    "novalidate" => true,
+                ],
+                "label" => "Enregistrer",
+            ])
             ->add('submit', SubmitType::class, [
                 "attr" => [
                     "class" => "btn btn-primary mt-4 rounded",

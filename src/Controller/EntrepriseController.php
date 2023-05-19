@@ -21,7 +21,6 @@ class EntrepriseController extends AbstractController
     public function index(EntrepriseRepository $repository, Request $request, PaginatorInterface $paginator): Response
     {
     
-
         $form = $this->createForm(EntrepriseType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {

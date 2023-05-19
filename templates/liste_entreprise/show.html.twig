@@ -1,0 +1,76 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Entreprise - {{ entreprise.denomination }} {% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-end" >
+        <a href="{{ path('entreprise.index')}}"><button class="mt-2 btn btn-outline-info rounded-pill"> Retour à la liste des entreprises</button></a>
+    </div>
+    <div class="card border-primary h-100 mb-3 mt-4" >
+        <div class="card-header d-flex align-items-center"><h1 class=""> Entreprise - {{ entreprise.denomination }} </h1></div>
+        <div class="card-body">
+            <h4 class="card-title">
+            {% if entreprise.nom %} 
+                {{ entreprise.nom }}
+            {% endif %}
+            {% if entreprise.prenom %}
+                {{ entreprise.prenom }}
+            {% endif %}
+            </h4>
+      
+            <h2 class="text-primary">Véhicule</h2>
+            <p class="mt-4"><strong class="h5"> Marque du véhicule :  </strong> {{entreprise.marqueVehicule}}  </p>
+            <p class="mt-4"><strong class="h5"> Modèle :  </strong> {{entreprise.modele}}  </p>
+            <p class="mt-4"><strong class="h5"> Immatriculation du véhicule :  </strong> {{entreprise.immatriculation}}  </p>
+            <p class="mt-4"><strong class="h5"> Type de véhicule vert :  </strong>
+            {% if entreprise.vehiculeVert %}  
+                {{ entreprise.vehiculeVert }}
+            {% else %}
+                Non renseigné
+            {% endif %}  
+            </p>
+
+            <h2 class="text-primary">Paiement</h2>
+            <p class="mt-4"><strong class="h5"> Montant :  </strong> {{entreprise.montant}} € </p>
+            {% if entreprise.modeReglement %}
+            <p class="mt-4"><strong class="h5"> Moyen de paiment :  </strong> {{entreprise.modeReglement}}  </p>
+            {% endif %}
+            
+            <h2 class="text-primary">Informations dossier</h2>
+            <p class="mt-4"><strong class="h5"> Numéro de carte :  </strong> 
+            {% if entreprise.numeroCarte %} 
+                {{entreprise.numeroCarte}}
+            {% else %}
+                Non renseigné
+            {% endif %}
+            </p>
+
+            {% if entreprise.carteSupprimee %}
+                <p class="mt-4"><strong class="h5"> Carte supprimée n° :  </strong> {{entreprise.carteSupprimee}}  </p>
+            {% endif %}
+            {% if entreprise.changementVehicule %}
+                <p class="mt-4"><strong class="h5"> Immatriculation de l'ancien véhicule :  </strong> {{entreprise.changementVehicule}}  </p>
+            {% endif %}
+            {% if entreprise.commentaires %}
+                <p class="mt-4"><strong class="h5"> Commentaires :  </strong> {{entreprise.commentaires}} </p>
+            {% else %}
+                <p class="mt-4"><strong class="h5"> Commentaires : </strong> Non renseigné </p>
+            {% endif %}
+
+            {% if entreprise.dateCreation %}
+                <p class="mt-4"><strong class="h5"> Date de création : </strong> {{entreprise.dateCreation|date("d/m/Y")}} </p>
+            {% else %}
+                <p class="mt-4"><strong class="h5"> Date de création : </strong> Non renseigné </p>
+            {% endif %}
+            <p class="mt-4"><strong class="h5"> Pièces justificatives :  </strong>
+                {% if entreprise.carteGrise == 1 %}
+                    <p class="mt-4 ml-4"><strong class="h5"> -> Carte grise : </strong> document fourni </p>
+                {% else %}
+                    <p class="mt-4 ml-4"><strong class="h5"> -> Carte grise : </strong> document non fourni </p>
+                {% endif %}         
+            </p>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,45 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recherche immatriculation (entreprise){% endblock %}
+{% block title %}Recherche profession libérale{% endblock %}
 
 {% block body %}
 {% include "_navPro.html.twig" %}
-<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('changement_vehicule.entreprisesearch') }}">
+<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('regie_register.professionsearch') }}">
     <div class="form-group">
-        <input class="form-control" id="recherche" type="text" name="immatriculation" value="{{ searchTerm }}" placeholder="Rechercher par immatriculation">
+        <input class="form-control" id="recherche" type="text" name="search" value="{{ searchTerm }}" placeholder="Rechercher par nom">
     </div>
     <button class="btn btn-info" id="btn-recherche" type="submit">Rechercher</button>
 </form>
 
 {% if searchTerm is not empty %}
-    {% if entreprises is not empty %}
+    {% if professions is not empty %}
         <h4 class='text-center mt-3 mb-5'>Résultat trouvé pour "{{ searchTerm }}" :</h4>
         <table class="table table-hover mt-4">
             <thead class="h-100 w-100">
                 <tr class="h-100 text-center">
-                    <th scope="col" class="text-capitalize text-warning h5">Immatriculation</th>
-                    <th scope="col" class="text-capitalize text-warning h5">Dénomination</th>
+                    <th scope="col" class="text-capitalize text-warning h5">Civilité</th>
                     <th scope="col" class="text-capitalize text-warning h5">Nom</th>
+                    <th scope="col" class="text-capitalize text-warning h5">Prénom</th>
                     <th scope="col" class="text-capitalize text-warning h5">Voir détails</th>
-                    <th scope="col" class="text-capitalize text-warning h5">Changement véhicule</th>
+                    <th scope="col" class="text-capitalize text-warning h5">Modifier</th>
                     <th scope="col" class="text-capitalize text-warning h5">régie</th>
                 </tr>
             </thead>
             <tbody class="h-100">
-                {% for entreprise in entreprises %}
+                {% for profession in professions %}
                     <tr class="table-light h-100 text-center align-items-center">
-                        <td class="align-middle">{{ entreprise.immatriculation }}</td>
-                        <td class="align-middle">{{ entreprise.denomination }}</td>
-                        <td class="align-middle">{{ entreprise.nom }}</td>
+                        <td class="align-middle">{{ profession.civilite }}</td>
+                        <td class="align-middle">{{ profession.nom }}</td>
+                        <td class="align-middle">{{ profession.prenom }}</td>
                         
                         <td>
-                            <a href="{{ path("entreprise.show", { id: entreprise.id }) }}" class="btn btn-info rounded">Afficher détails</a>
+                            <a href="{{ path("profession_liberale.show", { id: profession.id }) }}" class="btn btn-info rounded">Afficher détails</a>
                         </td>
                         <td>
-                            <a href="{{ path("changement_vehicule.entreprise", { id: entreprise.id }) }}" class="btn btn-warning rounded">Changement véhicule</a>
+                            <a href="{{ path("profession_liberale.edit", { id: profession.id }) }}" class="btn btn-warning rounded">
+                            modifier</a>
                         </td>
                         <td>
-                            <a href="{{ path("entreprise.regie", { id: entreprise.id }) }}" class="btn btn-info rounded px-4">Régie</a>
+                            <a href="{{ path("regie_register.profession", { id: profession.id}) }}" class="btn btn-info rounded px-4">Régie</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -47,7 +48,7 @@
         </table>
     {% else %}
         <div class='text-center mt-5'>
-            <p>Aucune immatriculation trouvée pour "{{ searchTerm }}".</p>
+            <p>Aucun Nom trouvée pour "{{ searchTerm }}".</p>
             <a href="{{ path('app_choix_pro') }}" class="btn btn-info">Revenir à la page d'accueil</a>
         </div>
     {% endif %}

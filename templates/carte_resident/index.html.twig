@@ -7,6 +7,17 @@
 <div class="d-flex justify-content-end mt-4 mr-4">
     <a href="{{ path("app_resident_new") }}" class="btn btn-info rounded">Créer un nouveau résident</a>
 </div>
+ <div class="text-end mr-5">
+    <p class="mt-4" style="font-family: 'Poppins', sans-serif; color: #DC9F69;">Rechercher un résident</p>
+    <div class="d-flex justify-content-end" style="padding: 0">
+        <form method="get" action="{{ path('resident_liste.search') }}">
+            {# <label for="nom">Nom:</label> #}
+            <input class="rounded px-4 py-1 block" style="border: 2px solid #F5F4F3" type="text" id="nom" name="nom" placeholder="Entrez un nom...">
+            <button type="submit" class="rounded px-4 py-1 block" style="border: none; background-image: linear-gradient(to right top, #b1aa96, #b8af9f, #beb5a8, #c3bbb1, #c8c1ba); color: white">Rechercher</button>
+        </form>
+    </div> 
+        
+    </div>
 <div class="container mt-4">
     <div>
         <h1 class="mt-4 text-warning text-center">Listes des résidents</h1>

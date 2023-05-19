@@ -131,7 +131,8 @@ class CarteTravauxType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 "attr" => [
-                    "class" => "btn btn-primary mt-4 rounded"
+                    "class" => "btn btn-primary mt-4 rounded",
+                    "novalidate" => true,
                 ],
                 "label" => "Enregistrer carte travaux",
             ]);

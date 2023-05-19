@@ -43,6 +43,24 @@ class CarteResidentController extends AbstractController
         ]);
     }
 }
+    #[Route('/resident/liste/search', name: 'resident_liste.search')]
+    public function listesearch(Request $request, EntityManagerInterface $manager): Response
+    {
+        $nom = $request->query->get('nom');
+
+        $residents = $manager->getRepository(Residents::class)->findOneBy(['nom' => $nom]);
+
+        if (!$residents) {
+            
+            return $this->redirectToRoute('app_resident_new');
+        }
+
+    
+    return $this->render('carte_resident/recherche.html.twig', [
+        'residents' => $residents,
+    ]);
+    }
+    
 
     #[Route('/resident/search', name: 'app_resident_search')]
     public function searchName(ResidentsRepository $repository, Request $request): Response
@@ -58,7 +76,7 @@ class CarteResidentController extends AbstractController
                 'searchTerm' => $searchTerm,
                 'residents' => $residents
             ]);
-    }
+        }
     }
 
 

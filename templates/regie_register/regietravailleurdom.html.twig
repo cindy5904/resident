@@ -2,13 +2,6 @@
 
 {% block body %}
 {% include "_navPro.html.twig" %}
-<form class="form-inline mt-5 d-flex justify-content-center" method="get" action="{{ path('regie_register.travailleur') }}">
-    <div class="form-group">
-        <input class="form-control" type="text" name="search" value="{{ searchTerm }}" placeholder="Rechercher par nom">
-    </div>
-    <button class="btn btn-info" type="submit">Rechercher</button>
-</form>
-{% if travailleurs %}
     <div class="container h-100 w-100">
         <div class="d-flex justify-content-end">
             <a href="{{ path('travailleur_domicile.index')}}">
@@ -153,12 +146,6 @@
             
             
     </div>
-    {% elseif searchTerm %}
-<div class='text-center mt-5'>
-	<p>Aucun résident trouvé pour "{{ searchTerm }}".</p>
-	<a href="{{path('app_choix_pro')}}" class="btn btn-info">Revenir à la page d'accueil</a>
-</div>
-
-{% endif %}
+   
 
 {% endblock %}

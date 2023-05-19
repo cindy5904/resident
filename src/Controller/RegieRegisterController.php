@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Entreprise;
+use App\Entity\ProfessionLiberale;
 use App\Entity\Residents;
 use App\Entity\TravailleurDomicile;
 use App\Form\RegieEntrepriseType;
@@ -20,18 +22,25 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegieRegisterController extends AbstractController
 {
-    #[Route('/regie/register', name: 'app_regie_register')]
+    #[Route('/regie/register/search', name: 'app_regie_register_search')]
     public function index(Request $request, ResidentsRepository $repository, EntityManagerInterface $manager): Response
     {
-    
-        $searchTerm = $request->query->get('search');
-        $nom = null;
-        $residents = null;
+       $searchTerm = $request->query->get('search');
+       $residents = null;
 
         if ($searchTerm) {
-            $residents = $repository->findOneBy(['nom' => $searchTerm]);
+            $residents = $repository->findBy(['nom' => $searchTerm]);
         }
+        return $this->render('regie_register/residentsearch.html.twig', [
+            'searchTerm' => $searchTerm,
+            'residents' => $residents
+        ]);  
+    }
 
+    #[Route('/regie/register/{id}', name: 'app_regie_register')]
+    public function resi(Request $request, Residents $residents,  EntityManagerInterface $manager): Response
+    {
+         
         $form = $this->createForm(RegisterRegieType::class, $residents);
         $form->handleRequest($request);
 
@@ -49,24 +58,30 @@ class RegieRegisterController extends AbstractController
         
 
         return $this->render('regie_register/index.html.twig', [
-            'searchTerm' => $searchTerm,
-            'nom' => $nom,
             'form' => $form->createView(),
             'residents' => $residents
         ]);
     }
 
-    #[Route('/regie/register/travailleurdom', name: 'regie_register.travailleur')]
-    public function travailleur(Request $request, TravailleurDomicileRepository $repository, EntityManagerInterface $manager): Response
+    #[Route('/regie/register/travailleurdom/search', name: 'regie_register.travailleursearch')]
+    public function travailleursearch(Request $request, TravailleurDomicileRepository $repository, EntityManagerInterface $manager): Response
     {
-        $searchTerm = $request->query->get('search');
-        $nom = null;
-        $travailleurs = null;
+       $searchTerm = $request->query->get('search');
+       $travailleurs = null;
 
         if ($searchTerm) {
-            $travailleurs = $repository->findOneBy(['nom' => $searchTerm]);
+            $travailleurs = $repository->findBy(['nom' => $searchTerm]);
         }
+        return $this->render('regie_register/travailleurdomsearch.html.twig', [
+            'searchTerm' => $searchTerm,
+            'travailleurs' => $travailleurs
+        ]);  
+    }
 
+    #[Route('/regie/register/travailleurdom/{id}', name: 'regie_register.travailleur')]
+    public function travailleur(Request $request, TravailleurDomicile $travailleurs, EntityManagerInterface $manager): Response
+    {
+       
         $form = $this->createForm(RegieRegisterTravailleurType::class, $travailleurs);
         $form->handleRequest($request);
 
@@ -84,23 +99,30 @@ class RegieRegisterController extends AbstractController
         
 
         return $this->render('regie_register/regietravailleurdom.html.twig', [
-            'searchTerm' => $searchTerm,
-            'nom' => $nom,
             'form' => $form->createView(),
             'travailleurs' => $travailleurs
         ]);
     }
-    #[Route('/regie/register/professionliberale', name: 'regie_register.profession')]
-    public function profession(Request $request, ProfessionLiberaleRepository $repository, EntityManagerInterface $manager): Response
+
+    #[Route('/regie/register/professionliberale/search', name: 'regie_register.professionsearch')]
+    public function professionsearch(Request $request, ProfessionLiberaleRepository $repository, EntityManagerInterface $manager): Response
     {
-        $searchTerm = $request->query->get('search');
-        $nom = null;
-        $professions = null;
+       $searchTerm = $request->query->get('search');
+       $professions = null;
 
         if ($searchTerm) {
-            $professions = $repository->findOneBy(['nom' => $searchTerm]);
+            $professions = $repository->findBy(['nom' => $searchTerm]);
         }
+        return $this->render('regie_register/professionsearch.html.twig', [
+            'searchTerm' => $searchTerm,
+            'professions' => $professions
+        ]);  
+    }
 
+    #[Route('/regie/register/professionliberale/{id}', name: 'regie_register.profession')]
+    public function profession(Request $request, ProfessionLiberale $professions, EntityManagerInterface $manager): Response
+    {
+      
         $form = $this->createForm(RegieProfessionLiberaleType::class, $professions);
         $form->handleRequest($request);
 
@@ -118,23 +140,30 @@ class RegieRegisterController extends AbstractController
         
 
         return $this->render('regie_register/professionliberale.html.twig', [
-            'searchTerm' => $searchTerm,
-            'nom' => $nom,
             'form' => $form->createView(),
             'professions' => $professions
         ]);
     }
-    #[Route('/regie/register/entreprise', name: 'regie_register.entreprise')]
-    public function entreprise(Request $request, EntrepriseRepository $repository, EntityManagerInterface $manager): Response
+
+    #[Route('/regie/register/entreprise/search', name: 'regie_register.entreprisesearch')]
+    public function entreprisesearch(Request $request, EntrepriseRepository $repository, EntityManagerInterface $manager): Response
     {
-        $searchTerm = $request->query->get('search');
-        $nom = null;
-        $entreprises = null;
+       $searchTerm = $request->query->get('search');
+       $entreprises = null;
 
         if ($searchTerm) {
-            $entreprises = $repository->findOneBy(['nom' => $searchTerm]);
+            $entreprises = $repository->findBy(['nom' => $searchTerm]);
         }
+        return $this->render('regie_register/professionsearch.html.twig', [
+            'searchTerm' => $searchTerm,
+            'entreprises' => $entreprises
+        ]);  
+    }
 
+    #[Route('/regie/register/entreprise/{id}', name: 'regie_register.entreprise')]
+    public function entreprise(Request $request, Entreprise $entreprises, EntityManagerInterface $manager): Response
+    {
+        
         $form = $this->createForm(RegieEntrepriseType::class, $entreprises);
         $form->handleRequest($request);
 
@@ -152,8 +181,6 @@ class RegieRegisterController extends AbstractController
         
 
         return $this->render('regie_register/entreprise.html.twig', [
-            'searchTerm' => $searchTerm,
-            'nom' => $nom,
             'form' => $form->createView(),
             'entreprises' => $entreprises
         ]);
